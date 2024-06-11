@@ -1,0 +1,290 @@
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+ 
+body.dark-mode .spot-details,
+body.dark-mode .spot-details h1,
+body.dark-mode .spot-details p,
+body.dark-mode .spot-details .price-reviews,
+body.dark-mode .spot-details .price-reviews .price,
+body.dark-mode .spot-details .price-reviews .reviews,
+body.dark-mode .spot-details .reviews-section,
+body.dark-mode .spot-details .reviews-section h2,
+body.dark-mode .spot-details .reviews-section .review,
+body.dark-mode .spot-details .reviews-section .review .review-author,
+body.dark-mode .spot-details .reviews-section .review .review-date,
+body.dark-mode .spot-details .reviews-section .review .review-content,
+body.dark-mode .spot-link,
+body.dark-mode .spot-details .location,
+body.dark-mode .spot-details .avg-rating, 
+body.dark-mode .star-icon {
+  color: #ffffff;
+}
+
+.navbar.dark-mode {
+  background-color: #333333;
+}
+
+.dropdown-menu.dark-mode {
+  background-color: #252424;
+}
+
+/* Dark mode toggle switch */
+.dark-mode-toggle {
+  position: relative;
+  margin-left: 8px;
+  display: inline-block;
+  width: 63px;
+  height: 55px;
+  vertical-align: middle;
+}
+
+.dark-mode-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+  transform: translateY(-30%);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; 
+  width: 30px; 
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #0e0e0e;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.toggle-label {
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 900;
+  margin-top: -14px;
+  margin-bottom: 16px;
+  color: black;
+}
+
+/* Regular navbar styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f3f1f1;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  box-sizing: border-box;
+  height: 75px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand a {
+  text-decoration: none;
+  color: #343a40;
+  font-size: 1rem;
+}
+
+.navbar-logo {
+  width: 205px;
+  height: auto;
+  padding-left: 10px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+/* NavBar.css */
+
+.menu-button {
+  display: flex;
+  align-items: center;
+  background-color: #f8f5f6;
+  opacity: 0.8;
+  border-radius: 18px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.profile-button-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hamburger-button,
+.profile-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.hamburger-icon {
+  margin-bottom: 3px;
+  width: 24px;
+  height: auto;
+}
+
+.user-icon {
+  margin-left: 8px;
+  font-size: 24px;
+  color: #101111;
+}
+
+body.dark-mode .user-icon {
+  color: #161515;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #f4f1f1;
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #f4f3f3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.profile-info {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #ffffff;
+}
+
+.profile-dropdown-item {
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: #1b1c1e;
+  display: block;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+}
+
+.profile-dropdown-item:hover {
+  background-color: #fefbfb;
+}
+
+.text-link {
+  background: none;
+  border: none;
+  display: block;
+  text-align: center;
+  color: #343a40;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 16px;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.logout {
+  cursor: pointer;
+}
+
+.logout:hover {
+  text-decoration: underline;
+}
+
+.create-spot-link {
+  color: black;
+  padding: 10px;
+}
+
+/* Ensure all drop-down text remains black in light and dark mode */
+.profile-dropdown, .profile-dropdown-item, .dropdown-item, .profile-info {
+  color: black !important;
+}
+
+/* Ensure the 'Home' link is styled like other drop-down links */
+.profile-dropdown-item a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-dropdown-item a:hover {
+  background-color: #fefbfb;
+}
+
+/* Media Query for mobile screens */
+@media (max-width: 740px) {
+  .navbar-logo {
+    width: 60%; /* Adjust the logo on mobile */
+    height: auto;
+  }
+
+  .profile-button {
+    margin-left: 0; /* Reset the margin for stacked icons */
+  }
+  
+  .user-icon {
+    margin-left: -2px; /* Adjust this value as needed */
+  }
+}

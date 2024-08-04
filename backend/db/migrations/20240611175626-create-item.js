@@ -8,48 +8,61 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Items', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
-        type: Sequelize.STRING,
+      name: {
         allowNull: false,
+        type: Sequelize.STRING
       },
-      lastName: {
-        type: Sequelize.STRING,
+      description: {
         allowNull: false,
+        type: Sequelize.STRING
       },
-      username: {
-        type: Sequelize.STRING,
+      onMenu: {
         allowNull: false,
-        unique: true,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
-      email: {
-        type: Sequelize.STRING,
+      price: {
         allowNull: false,
-        unique: true,
+        type: Sequelize.DECIMAL(10,2),
       },
-      hashedPassword: {
-        type: Sequelize.STRING,
+      quantity: {
         allowNull: false,
+        type: Sequelize.DECIMAL(10,1)
       },
-      phone: {
-        type: Sequelize.STRING,
+      measure: {
         allowNull: false,
+        type: Sequelize.STRING
       },
-      address: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      points: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-      },
+      numRatings: {
+      allowNull: true,
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
+    stars: {
+      allowNull: true,
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
+    avgStars: {
+      allowNull: true,
+      type: Sequelize.FLOAT,
+      defaultValue: 0,
+    },
+    quantityOnHand: {
+      type: Sequelize.DECIMAL(10,1),
+      allowNull: false,
+    },
+    costPerUnit: {
+      type: Sequelize.DECIMAL(10,2),
+      allowNull: false,
+    },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -62,8 +75,7 @@ module.exports = {
       }
     }, options);
   },
-
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users', options);
+    await queryInterface.dropTable('Items', options);
   }
 };

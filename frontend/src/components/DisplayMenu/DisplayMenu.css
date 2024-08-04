@@ -1,0 +1,77 @@
+.header {
+    background-image: url('/RussianFolkArtBird.jpg');
+    background-size: cover;
+    background-position: top;
+    text-align: center;
+    padding: 90px 0;
+    color: white;
+  }
+
+.menu-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 25px;
+    margin-top: 65px;
+  }
+  
+  .menu-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure the card takes up the full width of the container */
+    max-width: 600px; /* Limit the maximum width of the card */
+    margin: 0 auto; /* Center the card horizontally */
+  }
+  
+  .menu-image {
+    width: 100%;
+    height: 300px; /* Set a fixed height for the images */
+    object-fit: cover; /* Ensure the images cover the area without distortion */
+  }
+  
+  .menu-details {
+    padding: 10px; /* Reduce padding for smaller cards */
+  }
+  
+    .menu-details p {
+        margin: 0;
+        padding: 5px 0;
+        font-size: 1.1em;
+        color: silver;
+    }
+
+  .menu-details h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+  }
+  
+  @media (min-width: 768px) {
+    .menu-container {
+      grid-template-columns: repeat(2, 1fr); /* Two-column layout on medium to large screens */
+    }
+    .header {
+      background-position: top;
+      padding: 130px 0;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .header {
+        background-position: top;
+        padding: 200px 0;
+    }
+    
+  }
+  @media (min-width: 1390px) {
+    .menu-container {
+      grid-template-columns: repeat(3, 1fr); /* Three-column layout on large screens */
+    }
+    .header {
+        background-position: top;
+        padding: 210px 0;
+    }
+  }
+  

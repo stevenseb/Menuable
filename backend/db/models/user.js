@@ -1,18 +1,10 @@
 'use strict';
-const {
-  Model, Validator
-} = require('sequelize');
+const { Model, Validator } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      User.hasMany(models.Spot, { foreignKey: 'ownerId' });
-      User.hasMany(models.Review, { foreignKey: 'userId'});
-      User.hasMany(models.Booking, { foreignKey: 'userId' });
+      User.hasMany(models.Order, { foreignKey: 'userId' });
     }
   }
   User.init({
@@ -32,15 +24,15 @@ module.exports = (sequelize, DataTypes) => {
         len: [4, 30],
         notEmail(value) {
           if (Validator.isEmail(value)) {
-            throw new Error('Username can not be an email address.');
+            throw new Error('Username cannot be an email address.');
           }
         },
         async isUnique(username) {
-          const user = await User.findOne({ where: { username: username } });
+          const user = await User.findOne({ where: { username } });
           if (user) {
-              throw new Error('Username already exists');
+            throw new Error('Username already exists');
           }
-      },
+        },
       },
     },
     email: {
@@ -51,10 +43,10 @@ module.exports = (sequelize, DataTypes) => {
         len: [3, 256],
         isEmail: true,
         async isUnique(email) {
-            const user = await User.findOne({ where: { email: email } });
-            if (user) {
-                throw new Error('Email already exists');
-            }
+          const user = await User.findOne({ where: { email } });
+          if (user) {
+            throw new Error('Email already exists');
+          }
         },
       },
     },
@@ -64,6 +56,23 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [60, 60],
       }
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        len: [6, 15],
+      }
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    points: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
     }
   }, {
     sequelize,
@@ -71,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Users',
     defaultScope: {
       attributes: {
-        exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+        exclude: ["hashedPassword", "email", "phone", "address", "createdAt", "updatedAt"]
       }
     },
   });

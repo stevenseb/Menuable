@@ -4,13 +4,13 @@ const router = require('express').Router();
 const { restoreUser } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
-const spotsRouter = require('./spots.js');
-const bookingsRouter = require('./bookings.js');
-const reviewsRouter = require('./reviews.js');
-const reviewImagesRouter = require('./reviewImages.js');
-const spotImagesRouter = require('./spotImages.js');
+const itemsRouter = require('./items.js');
+const ordersRouter = require('./orders.js');
+const itemImagesRouter = require('./itemImages.js');
+const routesRouter = require('./routes.js');
+const orderItemsRouter = require('./orderItems.js');
 const { setTokenCookie } = require('../../utils/auth.js');
-const { User, Booking, Review, ReviewImage, SpotImage, Spot } = require('../../db/models/index.js');
+const { User, Route, Item, ItemImage, Order, OrderItem } = require('../../db/models/index.js');
 const { requireAuth } = require('../../utils/auth.js');
 
 
@@ -54,11 +54,11 @@ router.get(
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
-router.use('/spots', spotsRouter);
-router.use('/bookings', bookingsRouter);
-router.use('/reviews', reviewsRouter);
-router.use('/review-images', reviewImagesRouter);
-router.use('/spot-images', spotImagesRouter);
+router.use('/items', itemsRouter);
+router.use('/orders', ordersRouter);
+router.use('/routes', routesRouter);
+router.use('/itemImages', itemImagesRouter);
+router.use('/orderItems', orderItemsRouter);
 
 
 router.post('/test', (req, res) => {

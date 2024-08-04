@@ -1,10 +1,10 @@
-// frontend/src/App.js
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import * as sessionActions from './store/session';
+import DisplayMenu from './components/DisplayMenu';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -33,11 +33,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <DisplaySpots />,
+        element: <DisplayMenu />,
       },
       {
-        path: '/spots/:id',
-        element: <SpotDetails />,
+        // path: '/menu-items/:id',
+        // element: <SpotDetails />,
       },
     ],
   },

@@ -7,8 +7,8 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-info">
-          <h2>Landbnb</h2>
-          <p>&copy; 2024 Landbnb. All rights reserved.</p>
+          <h2>Menuable</h2>
+          <p>&copy; 2024 Menuable. All rights reserved.</p>
           <p>123 Market Street, San Francisco, CA 94103</p>
           <p>Phone: (415) 555-1234</p>
         </div>
@@ -22,6 +22,7 @@ const Footer = () => {
           <FontAwesomeIcon icon={faInstagram} className="social-icon" />
           <FontAwesomeIcon icon={faFacebook} className="social-icon" />
         </div>
+        <img src="ComederiaRussa.png" alt="Menuable Logo" className="footer-logo" />
       </div>
     </footer>
   );

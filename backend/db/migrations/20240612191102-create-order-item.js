@@ -2,34 +2,26 @@
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // define your schema in options object
+  options.schema = process.env.SCHEMA;
 }
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('SpotImages', {
+    await queryInterface.createTable('OrderItems', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      spotId: {
+      orderId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
-        allowNull: false,
-        // references: {
-        //   model: Spot,
-        //   key: 'id',
-        // },
       },
-      url: {
+      itemId: {
         allowNull: false,
-        type: Sequelize.TEXT
-      },
-      preview: {
-        defaultValue: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -42,6 +34,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('SpotImages', options);
+    await queryInterface.dropTable('OrderItems', options);
   }
 };

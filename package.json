@@ -1,5 +1,5 @@
 {
-  "name": "Menubile",
+  "name": "Menuable",
   "version": "1.0.0",
   "description": "## Database Schema Design",
   "main": "index.js",
@@ -13,13 +13,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stevenseb/Menubile.git"
+    "url": "git+https://github.com/stevenseb/Menuable.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stevenseb/Menubile/issues"
+    "url": "https://github.com/stevenseb/Menuable/issues"
   },
-  "homepage": "https://github.com/stevenseb/Menubile#readme"
+  "homepage": "https://github.com/stevenseb/Menuable#readme",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.7",
+    "normalizr": "^3.6.2"
+  }
 }

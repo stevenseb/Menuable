@@ -1,101 +1,9 @@
-/* Dark mode styles */
-body.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
-}
- 
-body.dark-mode .spot-details,
-body.dark-mode .spot-details h1,
-body.dark-mode .spot-details p,
-body.dark-mode .spot-details .price-reviews,
-body.dark-mode .spot-details .price-reviews .price,
-body.dark-mode .spot-details .price-reviews .reviews,
-body.dark-mode .spot-details .reviews-section,
-body.dark-mode .spot-details .reviews-section h2,
-body.dark-mode .spot-details .reviews-section .review,
-body.dark-mode .spot-details .reviews-section .review .review-author,
-body.dark-mode .spot-details .reviews-section .review .review-date,
-body.dark-mode .spot-details .reviews-section .review .review-content,
-body.dark-mode .spot-link,
-body.dark-mode .spot-details .location,
-body.dark-mode .spot-details .avg-rating, 
-body.dark-mode .star-icon {
-  color: #ffffff;
-}
-
-.navbar.dark-mode {
-  background-color: #333333;
-}
-
-.dropdown-menu.dark-mode {
-  background-color: #252424;
-}
-
-/* Dark mode toggle switch */
-.dark-mode-toggle {
-  position: relative;
-  margin-left: 8px;
-  display: inline-block;
-  width: 63px;
-  height: 55px;
-  vertical-align: middle;
-}
-
-.dark-mode-toggle input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 50%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-  transform: translateY(-30%);
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 20px; 
-  width: 30px; 
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #0e0e0e;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-.toggle-label {
-  display: block;
-  text-align: center;
-  font-size: 10px;
-  font-weight: 900;
-  margin-top: -14px;
-  margin-bottom: 16px;
-  color: black;
-}
-
 /* Regular navbar styles */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #f3f1f1;
+  background-color: #692222;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -118,7 +26,7 @@ input:checked + .slider:before {
 }
 
 .navbar-logo {
-  width: 205px;
+  width: 180px;
   height: auto;
   padding-left: 10px;
 }
@@ -276,7 +184,7 @@ body.dark-mode .user-icon {
 /* Media Query for mobile screens */
 @media (max-width: 740px) {
   .navbar-logo {
-    width: 60%; /* Adjust the logo on mobile */
+    width: 32%; /* Adjust the logo on mobile */
     height: auto;
   }
 

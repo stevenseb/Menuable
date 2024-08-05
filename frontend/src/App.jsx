@@ -5,6 +5,8 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import * as sessionActions from './store/session';
 import DisplayMenu from './components/DisplayMenu';
+import AddItem from './components/Dashboard';
+
 
 function Layout() {
   const dispatch = useDispatch();
@@ -36,8 +38,8 @@ const router = createBrowserRouter([
         element: <DisplayMenu />,
       },
       {
-        // path: '/menu-items/:id',
-        // element: <SpotDetails />,
+        path: '/dashboard',
+        element: <AddItem />,
       },
     ],
   },

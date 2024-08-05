@@ -24,6 +24,8 @@
   "homepage": "https://github.com/stevenseb/Menuable#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
+    "axios": "^1.7.3",
+    "dotenv": "^16.4.5",
     "normalizr": "^3.6.2"
   }
 }

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenuItems } from '../../store/item';
 import './DisplayMenu.css';
 
+const BUNNY_CDN_URL = 'https://comideria-russa.b-cdn.net/';
+
 const DisplayMenu = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.menu.items);
@@ -25,28 +27,22 @@ const DisplayMenu = () => {
 
   return (
     <div>
-      <div className="header">
-      </div>
       <div className="menu-container">
-        {items.length === 0 ? (
-          <h2>CREATE YOUR FIRST BOARD!</h2>
-        ) : (
-          items.map((item) => (
-            <div key={item.id} className="menu-card">
-              <img 
-                src={item.imageUrl} 
-                alt={item.name} 
-                className="menu-image" 
-              />
-              <div className="menu-details">
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
-                <p>Price: ${item.price} for {item.quantity} {item.measure}</p>
-                <p>Quantity Available: {item.quantityOnHand}</p>
-              </div>
+        {items.map((item) => (
+          <div key={item.id} className="menu-card">
+            <img 
+              src={`${BUNNY_CDN_URL}${item.imageFilename}`} 
+              alt={item.name} 
+              className="menu-image" 
+            />
+            <div className="menu-details">
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+              <p>Price: ${item.price} for {item.quantity} {item.measure}</p>
+              <p>Quantity Available: {item.quantityOnHand}</p>
             </div>
-          ))
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );

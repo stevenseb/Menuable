@@ -41,28 +41,22 @@ module.exports = {
         type: Sequelize.STRING
       },
       numRatings: {
-      allowNull: true,
-      type: Sequelize.INTEGER,
+       type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      stars: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
       defaultValue: 0,
-    },
-    stars: {
-      allowNull: true,
-      type: Sequelize.INTEGER,
-      defaultValue: 0,
-    },
-    avgStars: {
-      allowNull: true,
-      type: Sequelize.FLOAT,
-      defaultValue: 0,
-    },
-    quantityOnHand: {
-      type: Sequelize.DECIMAL(10,1),
-      allowNull: false,
-    },
-    costPerUnit: {
-      type: Sequelize.DECIMAL(10,2),
-      allowNull: false,
-    },
+      },
+      quantityOnHand: {
+        type: Sequelize.DECIMAL(10,1),
+        allowNull: false,
+      },
+      costPerUnit: {
+        type: Sequelize.DECIMAL(10,2),
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -72,7 +66,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
-      }
+      },
+      imageFilename: {
+        allowNull: false,
+        type: Sequelize.STRING,
+    },
     }, options);
   },
   async down(queryInterface, Sequelize) {

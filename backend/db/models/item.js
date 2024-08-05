@@ -1,12 +1,8 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Item extends Model {
-    
     static associate(models) {
-      Item.hasOne(models.ItemImage, {foreignKey: 'itemId'});
       Item.belongsToMany(models.Order, { through: 'OrderItems', foreignKey: 'itemId' });
     }
   }
@@ -25,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
     },
     price: {
-      type: DataTypes.DECIMAL(10,2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
     quantity: {
-      type: DataTypes.DECIMAL(10,1),
+      type: DataTypes.DECIMAL(10, 1),
       allowNull: false,
     },
     measure: {
@@ -46,19 +42,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: 0,
     },
-    avgStars: {
-      type: DataTypes.FLOAT,
-      allowNull: true,
-      defaultValue: 0,
-    },
     quantityOnHand: {
-      type: DataTypes.DECIMAL(10,1),
+      type: DataTypes.DECIMAL(10, 1),
       allowNull: false,
     },
     costPerUnit: {
-      type: DataTypes.DECIMAL(10,2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
-    }
+    },
+    imageFilename: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   }, {
     sequelize,
     modelName: 'Item',

@@ -6,7 +6,6 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const itemsRouter = require('./items.js');
 const ordersRouter = require('./orders.js');
-const itemImagesRouter = require('./itemImages.js');
 const routesRouter = require('./routes.js');
 const orderItemsRouter = require('./orderItems.js');
 const { setTokenCookie } = require('../../utils/auth.js');
@@ -57,7 +56,6 @@ router.use('/users', usersRouter);
 router.use('/items', itemsRouter);
 router.use('/orders', ordersRouter);
 router.use('/routes', routesRouter);
-router.use('/itemImages', itemImagesRouter);
 router.use('/orderItems', orderItemsRouter);
 
 

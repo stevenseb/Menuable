@@ -19,6 +19,7 @@ const demoItems = [
     measure: 'grams',
     quantityOnHand: 20,
     costPerUnit: 2.50,
+    imageFilename: 'pelmeni.jpg',
   },
   {
     name: 'Golubtsi',
@@ -29,6 +30,7 @@ const demoItems = [
     measure: 'each',
     quantityOnHand: 50,
     costPerUnit: 1.25,
+    imageFilename: 'golubtsi.jpg',
   },
   {
     name: 'Beef Tongue',
@@ -36,9 +38,10 @@ const demoItems = [
     onMenu: true,
     price: 20,
     quantity: 1,
-    measure: 'each',
+    measure: 'whole',
     quantityOnHand: 8,
     costPerUnit: 2.50,
+    imageFilename: 'beef-tongue.jpg',
   },
   {
     name: 'Black Bread',
@@ -49,6 +52,7 @@ const demoItems = [
     measure: 'loaf',
     quantityOnHand: 20,
     costPerUnit: 3.75,
+    imageFilename: 'Russian-black-bread.jpg',
   },
   {
     name: 'Fresh Patagonian Berries',
@@ -59,6 +63,7 @@ const demoItems = [
     measure: 'grams',
     quantityOnHand: 20,
     costPerUnit: 4.5,
+    imageFilename: 'mixed-berries.jpeg',
   },
   {
     name: 'Smoked Mackerel',
@@ -66,9 +71,10 @@ const demoItems = [
     onMenu: true,
     price: 14,
     quantity: 1,
-    measure: 'each',
+    measure: 'whole fish',
     quantityOnHand: 20,
     costPerUnit: 8,
+    imageFilename: 'smoked-mackerel.webp',
   },
   {
     name: 'Lavash Flatbread',
@@ -79,6 +85,7 @@ const demoItems = [
     measure: 'each',
     quantityOnHand: 20,
     costPerUnit: 1.25,
+    imageFilename: 'lavash.jpg',
   },
   {
     name: 'Kefir',
@@ -89,6 +96,7 @@ const demoItems = [
     measure: 'milliliters',
     quantityOnHand: 12,
     costPerUnit: 2,
+    imageFilename: 'kefir.jpg',
   },
   {
     name: 'Tvorog',
@@ -99,6 +107,7 @@ const demoItems = [
     measure: 'grams',
     quantityOnHand: 50,
     costPerUnit: 2,
+    imageFilename: 'farmer-cheese.jpg',
   },
   {
     name: 'Crepes - Plain',
@@ -109,6 +118,7 @@ const demoItems = [
     measure: 'each',
     quantityOnHand: 25,
     costPerUnit: 2.25,
+    imageFilename: 'crepes.jpg',
   },
   {
     name: 'Crepes with Meat Filling',
@@ -119,16 +129,18 @@ const demoItems = [
     measure: 'each',
     quantityOnHand: 15,
     costPerUnit: 4.75,
+    imageFilename: 'meat-crepes.jpg',
   },
   {
     name: 'Beef Milanesa',
-    description: 'Argentine traditional thin tenderized beef cutlets breaded and fried',
+    description: 'Argentine traditional thin tenderized beef cutlets breaded and fried - about 400 grams each',
     onMenu: true,
     price: 2,
     quantity: 1,
     measure: 'each',
     quantityOnHand: 40,
     costPerUnit: 1,
+    imageFilename: 'milanesa.jpg',
   },
   {
     name: 'Fresh Patagonia Honey',
@@ -139,6 +151,7 @@ const demoItems = [
     measure: 'milliliters',
     quantityOnHand: 40,
     costPerUnit: 3,
+    imageFilename: 'patagonia-honey.jpg',
   },
   {
     name: 'Fermented Cabbage',
@@ -149,6 +162,7 @@ const demoItems = [
     measure: 'grams',
     quantityOnHand: 40,
     costPerUnit: 1.25,
+    imageFilename: 'fermented-cabbage.jpg',
   },
 ];
 

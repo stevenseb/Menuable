@@ -22,7 +22,7 @@ const Footer = () => {
           <FontAwesomeIcon icon={faInstagram} className="social-icon" />
           <FontAwesomeIcon icon={faFacebook} className="social-icon" />
         </div>
-        <img src="ComederiaRussa.png" alt="Menuable Logo" className="footer-logo" />
+        <img src="ComideriaRussa.png" alt="Menuable Logo" className="footer-logo" />
       </div>
     </footer>
   );

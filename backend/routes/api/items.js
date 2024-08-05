@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { Item, ItemImage } = require('../../db/models');
+const { Item } = require('../../db/models');
 
-// GET all items with associated image
+// GET all items
 router.get('/', async (req, res) => {
     try {
         const items = await Item.findAll({
@@ -14,15 +14,9 @@ router.get('/', async (req, res) => {
                 'quantity', 
                 'measure', 
                 'numRatings', 
-                'stars', 
-                'avgStars', 
-                'quantityOnHand'
-            ],
-            include: [
-                {
-                    model: ItemImage,
-                    attributes: ['url']
-                }
+                'stars',
+                'quantityOnHand',
+                'imageFilename'
             ]
         });
 
@@ -46,15 +40,9 @@ router.get('/menu', async (req, res) => {
                 'quantity', 
                 'measure', 
                 'numRatings', 
-                'stars', 
-                'avgStars', 
-                'quantityOnHand'
-            ],
-            include: [
-                {
-                    model: ItemImage,
-                    attributes: ['url']
-                }
+                'stars',
+                'quantityOnHand',
+                'imageFilename'
             ]
         });
 
@@ -78,15 +66,9 @@ router.get('/:itemId', async (req, res) => {
                 'quantity', 
                 'measure', 
                 'numRatings', 
-                'stars', 
-                'avgStars', 
-                'quantityOnHand'
-            ],
-            include: [
-                {
-                    model: ItemImage,
-                    attributes: ['url']
-                }
+                'stars',
+                'quantityOnHand',
+                'imageFilename'
             ]
         });
 

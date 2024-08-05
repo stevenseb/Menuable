@@ -34,7 +34,7 @@ const NavBar = ({ isLoaded }) => {
     <nav className="navbar">
       <div className="navbar-brand">
         <NavLink to="/" onClick={handleLogoClick}>
-          <img src='ComederiaRussa.png' alt="La Comederia Russa" className="navbar-logo" />
+          <img src='ComideriaRussa.png' alt="La Comederia Russa" className="navbar-logo" />
         </NavLink>
       </div>
       <div className="navbar-links">

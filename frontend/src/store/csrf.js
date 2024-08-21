@@ -1,33 +1,51 @@
 import Cookies from 'js-cookie';
 
+// Fetch and restore the CSRF token
+export async function restoreCSRF() {
+  try {
+    const response = await csrfFetch('/api/csrf/restore');
+    if (response.ok) {
+      return response.json(); // Return JSON response, if needed
+    }
+    throw new Error('Failed to restore CSRF token');
+  } catch (error) {
+    console.error('Error restoring CSRF token:', error);
+    throw error; // Rethrow to handle further up if needed
+  }
+}
 
-// call this to get the "XSRF-TOKEN" cookie, should only be used in development
-export function restoreCSRF() {
-  return csrfFetch('http://localhost:8000/api/csrf/restore');
-} 
+export const fetchWithCSRF = async (url, options = {}) => {
+    await restoreCSRF();
+    return csrfFetch(url, options);
+  };
+
 
 export async function csrfFetch(url, options = {}) {
-  // set options.method to 'GET' if there is no method
+  // Default method to 'GET' if not specified
   options.method = options.method || 'GET';
-  // set options.headers to an empty object if there is no headers
+  
+  // Default headers to an empty object if not specified
   options.headers = options.headers || {};
 
-  // if the options.method is not 'GET', then set the "Content-Type" header to
-  // "application/json", and set the "XSRF-TOKEN" header to the value of the
-  // "XSRF-TOKEN" cookie
+  // Set headers for non-GET requests
   if (options.method.toUpperCase() !== 'GET') {
     options.headers['Content-Type'] =
       options.headers['Content-Type'] || 'application/json';
     options.headers['XSRF-Token'] = Cookies.get('XSRF-TOKEN');
   }
-  // call the default window's fetch with the url and the options passed in
-  const res = await window.fetch(url, options);
 
-  // if the response status code is 400 or above, then throw an error with the
-  // error being the response
-  if (res.status >= 400) throw res;
+  try {
+    const response = await window.fetch(url, options);
 
-  // if the response status code is under 400, then return the response to the
-  // next promise chain
-  return res;
+    // Handle non-2xx responses
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Network response was not ok');
+    }
+
+    return response;
+  } catch (error) {
+    console.error('Error during fetch:', error);
+    throw error; // Rethrow to handle further up if needed
+  }
 }

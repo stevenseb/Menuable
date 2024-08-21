@@ -83,4 +83,39 @@ router.get('/:itemId', async (req, res) => {
     }
 });
 
+// POST a new item
+router.post('/', async (req, res) => {
+    try {
+      const { 
+        name, 
+        description, 
+        price, 
+        quantity, 
+        measure, 
+        quantityOnHand, 
+        costPerUnit, 
+        onMenu, 
+        imageFilename 
+      } = req.body;
+  
+      const newItem = await Item.create({
+        name,
+        description,
+        price,
+        quantity,
+        measure,
+        quantityOnHand,
+        costPerUnit,
+        onMenu,
+        imageFilename,
+      });
+  
+      res.status(201).json({ item: newItem });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+
+
 module.exports = router;

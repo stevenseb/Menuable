@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchWithCSRF } from './csrf';
+
 
 // Thunk to fetch menu items
 export const fetchMenuItems = createAsyncThunk('menu/fetchMenuItems', async () => {
@@ -9,16 +11,19 @@ export const fetchMenuItems = createAsyncThunk('menu/fetchMenuItems', async () =
 
 // Thunk to add a new item
 export const addItem = createAsyncThunk('menu/addItem', async (newItem) => {
-  const response = await fetch('/api/items', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(newItem),
+    const response = await fetchWithCSRF('/api/items', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...newItem,
+        imageFilename: newItem.imageFilename,
+      }),
+    });
+    const data = await response.json();
+    return { ...data.item, imageFilename: newItem.imageFilename };
   });
-  const data = await response.json();
-  return data.item; // Adjust to match the structure of your response
-});
 
 // Initial state
 const initialState = {
@@ -51,9 +56,9 @@ const itemsSlice = createSlice({
       .addCase(addItem.fulfilled, (state, action) => {
         state.items.push({
           ...action.payload,
-          imageUrl: action.payload.imageFilename ? `https://comideria-russa.b-cdn.net/${action.payload.imageFilename}` : 'default-image-url.jpg'
+          imageUrl: action.payload.imageFilename ? `https://comideria-russa.b-cdn.net/${action.payload.imageFilename}` : 'default-image-url.jpg',
         });
-      });
+      })
   },
 });
 

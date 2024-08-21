@@ -1,7 +1,7 @@
 .footer {
   border-top: 1px solid #ccc;
   padding: 20px;
-  background-color: #f8f8f8;
+  background-color: #141313;
   text-align: center;
   margin-top: 40px; 
 }
@@ -30,6 +30,7 @@
 
 .footer-social {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .social-icon {
@@ -41,4 +42,8 @@
 
 .social-icon:hover {
   color: #000;
+}
+
+.footer-logo {
+  max-width: 500px;
 }

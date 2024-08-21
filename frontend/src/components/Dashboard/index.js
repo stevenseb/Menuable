@@ -1,3 +1,3 @@
-import AddItem from './AddItem';
+import MainPage from './MainPage';
 
-export default AddItem;
+export default MainPage;

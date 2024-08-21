@@ -60,90 +60,6 @@ const validateLogin = [
     .withMessage('Please provide a password.'),
   handleValidationErrors
 ];
-//VALIDATE SPOT INPUT FOR CREATE NEW SPOT
-// const validateSpot = [
-//   check('address')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Address is required.'),
-//   check('city')
-//     .exists({ checkFalsy: true })
-//     .withMessage('City is required.'),
-//   check('state')
-//     .exists({checkFalsy: true})
-//     .withMessage('State is requried.'),
-//   check('country')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Country is required.'),
-//   // check('lat')
-//   //   .exists({ checkFalsy: true })
-//   //   .isFloat({ min: -90, max: 90 })
-//   //   .withMessage('Lattitude is not valid.'),
-//   // check('lng')
-//   //   .exists({checkFalsy: true})
-//   //   .isFloat({ min: -180, max: 180 })
-//   //   .withMessage('Longitute is not valid.'),
-//   check('name')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Name is required.')
-//     .isLength({ min: 1, max: 50 })
-//     .withMessage('Name must be less than 50 characters.'),
-//   check('description')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Description is required.'),
-//   check('price')
-//     .exists({ checkFalsy: true })
-//     .isFloat({ min:0 })
-//     .withMessage('Price per day is required.'),
-//   handleValidationErrors
-// ];
-
-//VALIDATE CREATE NEW REVIEW INPUT
-// const validateReview = [
-// check('review')
-//   .exists({ checkFalsy: true })
-//   .withMessage('Review text is required.'),
-// check('stars')
-//   .exists({ checkFalsy: true, checkNull: true })
-//   .isInt({ min: 1, max: 5 })
-//   .withMessage('Stars must be an integer from 1 to 5.'),
-//   handleValidationErrors
-// ];
-
-
-
-
-// VALIDATE MIN MAX LAT QUERY
-// const validateLatQuery = [
-//     check('minLat')
-//         .optional()
-//         .isFloat({ min: -90, max: 90 })
-//         .withMessage('Minimum latitude is not valid.')
-//         .custom((value) => {
-//             if (!/^-?\d{1,3}\.\d{6}$/.test(value)) {
-//                 throw new Error('Minimum latitude is not valid.');
-//             }
-//             return true;
-//         }),
-//     check('maxLat')
-//         .optional()
-//         .isFloat({ min: -90, max: 90 })
-//         .withMessage('Maximum latitude is not valid.')
-//         .custom((value) => {
-//             if (!/^-?\d{1,3}\.\d{6}$/.test(value)) {
-//                 throw new Error('Maximum latitude is not valid.');
-//             }
-//             return true;
-//         })
-// ];
-
-
-// VALIDATE MIN MAX LNG QUERY
-// const validateLngQuery = [
-//   check('minLng').optional().isFloat({ min: -180, max: 180 }).withMessage('Minimum longitude is not valid.'),
-//   check('maxLng').optional().isFloat({ min: -180, max: 180 }).withMessage('Maximum longitude is not valid.'),
-//   handleValidationErrors
-// ];
-
 
 
 
@@ -152,9 +68,4 @@ module.exports = {
   handleValidationErrors,
   validateLogin,
   validateSignup,
-  // validateSpot,
-  // validateReview,
-  // validatePriceQuery,
-  // validateLatQuery,
-  // validateLngQuery
 };

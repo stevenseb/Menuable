@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #692222;
+  background-color: #000;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -11,8 +11,15 @@
   align-items: center;
   padding: 15px;
   box-sizing: border-box;
-  height: 75px;
+  height: 90px;
 }
+  
+.main-header {
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+    margin-left: 15px;
+  }
 
 .navbar-brand {
   display: flex;
@@ -51,10 +58,22 @@
   cursor: pointer;
 }
 
-.profile-button-container {
+/* .profile-button-container {
   display: flex;
   align-items: center;
   cursor: pointer;
+} */
+
+.profile-button {
+  height: 100%;
+  border-radius: 8px;
+}
+
+.profileIcon {
+    width: 150%;
+    height: 150%;
+    border-radius: 8px;
+    object-fit: cover;
 }
 
 .hamburger-button,
@@ -179,6 +198,10 @@ body.dark-mode .user-icon {
 
 .profile-dropdown-item a:hover {
   background-color: #fefbfb;
+}
+
+.profileIcon {
+  width: 25px;
 }
 
 /* Media Query for mobile screens */

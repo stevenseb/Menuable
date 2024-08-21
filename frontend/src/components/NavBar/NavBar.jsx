@@ -38,11 +38,6 @@ const NavBar = ({ isLoaded }) => {
         </NavLink>
       </div>
       <div className="navbar-links">
-        {sessionUser && (
-          <NavLink to="/spots/new" className="create-spot-link">
-            Create a New Spot
-          </NavLink>
-        )}
         <div className="menu-button" ref={menuRef}>
           {!sessionUser && (
             <button className="hamburger-button" onClick={handleMenuToggle}>

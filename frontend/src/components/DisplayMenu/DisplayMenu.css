@@ -10,9 +10,9 @@
 .menu-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 28px;
     padding: 25px;
-    margin-top: 65px;
+    margin: 125px 30px;
   }
   
   .menu-card {
@@ -34,19 +34,33 @@
   }
   
   .menu-details {
-    padding: 10px; /* Reduce padding for smaller cards */
+    padding: 15px; /* Reduce padding for smaller cards */
+    line-height: 110%;
   }
   
-    .menu-details p {
-        margin: 0;
-        padding: 5px 0;
-        font-size: 1.1em;
-        color: silver;
+  .text {
+      margin: 0;
+      padding: 5px 0;
+      font-size: .8em;
+      color: silver;
+      line-height: 110%;
     }
 
-  .menu-details h3 {
+  .menu-details h2 {
+    color:beige;
     margin-top: 0;
+    margin-bottom: 4px;
     font-size: 1.5em;
+  }
+
+  .quantity {
+    color: silver;
+    font-size: .9em;
+  }
+
+  .price {
+    font-size: .9em;
+    color: silver;
   }
   
   @media (min-width: 768px) {

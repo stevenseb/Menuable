@@ -5,7 +5,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import * as sessionActions from './store/session';
 import DisplayMenu from './components/DisplayMenu';
-import AddItem from './components/Dashboard';
+import MainPage from './components/Dashboard';
 
 
 function Layout() {
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <AddItem />,
+        element: <MainPage />,
       },
     ],
   },

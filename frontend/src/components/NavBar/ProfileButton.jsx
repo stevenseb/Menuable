@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { FaUserCircle } from 'react-icons/fa';
-// import hamburger from '../../../assets/PinkHamburger.png';
 import * as sessionActions from '../../store/session';
 import './NavBar.css';
 
@@ -41,8 +39,7 @@ function ProfileButton({ user }) {
   return (
     <div className="profile-button-container" ref={menuRef}>
       <button className="profile-button" onClick={toggleMenu}>
-        {/* <img src={hamburger} alt="Menu" className="hamburger-icon" /> */}
-        <FaUserCircle className="user-icon" />
+        <img src='/iconSmall.jpg' alt="Menu" className="profileIcon" />
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
@@ -59,13 +56,8 @@ function ProfileButton({ user }) {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/booking" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
-              Bookings
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/manage-spots" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
-              Manage Spots
+            <NavLink to="/account" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
+              My Account
             </NavLink>
           </li>
           <li>

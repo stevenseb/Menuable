@@ -52,7 +52,7 @@
     margin: 0;
     color: rgb(244, 244, 233);
     font-size: 22px;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .close-button {
@@ -89,7 +89,7 @@
 .item-info p {
     margin: 0;
     color: rgb(219, 214, 214); /* Changed to white for better visibility */
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .item-actions {
@@ -100,7 +100,7 @@
 }
 
 .item-actions button {
-    background: rgb(216, 211, 211);
+    background: rgb(202, 197, 197);
     border: solid black 1px;
     border-radius: 6px;
     cursor: pointer;
@@ -112,8 +112,8 @@
 
 .item-subtotal {
     color: rgb(218, 216, 216); /* Changed to white for better visibility */
-    font-weight: 400;
-    font-size: 14px;
+    font-weight: 300;
+    font-size: 16px;
     margin-left: 10px;
 }
 
@@ -129,4 +129,5 @@
 .cart-modal-footer button {
     border-radius: 6px;
     margin-left: 2px;
+    background-color: rgb(202, 197, 197);
 }

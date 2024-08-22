@@ -10,10 +10,10 @@ const { User } = require('../../db/models');
 
 // USER SIGN UP
 router.post('/', validateSignup, async (req, res) => {
-  const { firstName, lastName, email, password, username } = req.body;
+  const { firstName, lastName, email, password, username, phone, address } = req.body;
   try {
     const hashedPassword = bcrypt.hashSync(password);
-    const user = await User.create({ firstName, lastName, email, username, hashedPassword });
+    const user = await User.create({ firstName, lastName, email, hashedPassword, username, phone, address });
 
     const safeUser = {
       id: user.id,
@@ -21,6 +21,8 @@ router.post('/', validateSignup, async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       username: user.username,
+      phone: user.phone,
+      address: user.address,
     };
 
     await setTokenCookie(res, safeUser);
@@ -91,6 +93,8 @@ router.post('/:userId', requireAuth, async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       username: user.username,
+      phone: user.phone,
+      address: user.address,
     };
 
     res.json({ user: safeUser });

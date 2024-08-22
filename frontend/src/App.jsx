@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import * as sessionActions from './store/session';
 import DisplayMenu from './components/DisplayMenu';
 import MainPage from './components/Dashboard';
+import Checkout from './components/Checkout';
 
 
 function Layout() {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <DisplayMenu />,
+      },
+      {
+        path: '/checkout',
+        element: <Checkout />,
       },
       {
         path: '/dashboard',

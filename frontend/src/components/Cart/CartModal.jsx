@@ -10,9 +10,10 @@ import { useModal } from '../../context/Modal';
 
 import './CartModal.css';
 
-const CartModal = () => {
+const CartModal = ({ onCheckout }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const user = useSelector((state) => state.session.user);
   const { closeModal } = useModal();
   const modalRef = useRef();
 
@@ -33,11 +34,11 @@ const CartModal = () => {
   };
 
   const handleClickOutside = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        closeModal();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      closeModal();
+    }
+  };
+  document.addEventListener('mousedown', handleClickOutside);
 
   const calculateSubtotal = (item) => {
     return item.price * item.quantity;
@@ -45,6 +46,15 @@ const CartModal = () => {
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + calculateSubtotal(item), 0);
+  };
+
+  const handleCheckout = () => {
+    closeModal();
+    if (user) {
+      onCheckout('/checkout');
+    } else {
+      onCheckout('/signup');
+    }
   };
 
   return (
@@ -82,7 +92,9 @@ const CartModal = () => {
         </div>
         <div className="cart-modal-footer">
           <p>Total: ${calculateTotal().toFixed(2)}</p>
-          <button className="checkout">Checkout</button>
+          <button onClick={handleCheckout}>
+            {user ? 'Checkout' : 'Sign In / Sign Up'}
+          </button>
         </div>
       </div>
     </div>

@@ -88,6 +88,9 @@ const DisplayMenu = () => {
                   </p>
                 )}
               </div>
+              {quantityInCart > 0 && (
+                <p className="in-cart">In cart: {quantityInCart}</p>
+              )}
               <div className="buttonWrapper">
               <button 
                 className={`addToCart ${addedToCart[item.id] ? 'added' : ''}`} 
@@ -98,9 +101,6 @@ const DisplayMenu = () => {
                 <FontAwesomeIcon icon={faShoppingCart} style={{ marginLeft: '5px' }} />
               </button>
               </div>
-              {quantityInCart > 0 && (
-                <p className="in-cart">In cart: {quantityInCart}</p>
-              )}
             </div>
           );
         })}

@@ -11,6 +11,8 @@ function SignupFormModal() {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -20,6 +22,8 @@ function SignupFormModal() {
 
   useEffect(() => {
     setIsDisabled(
+      !phone ||
+      !address ||
       !email ||
       username.length < 4 ||
       !firstName ||
@@ -27,7 +31,7 @@ function SignupFormModal() {
       password.length < 6 ||
       password !== confirmPassword
     );
-  }, [email, username, firstName, lastName, password, confirmPassword]);
+  }, [phone, address, email, username, firstName, lastName, password, confirmPassword]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +43,9 @@ function SignupFormModal() {
           username,
           firstName,
           lastName,
-          password
+          password,
+          address,
+          phone,
         })
       )
       .then(closeModal)
@@ -68,6 +74,8 @@ function SignupFormModal() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      setAddress("");
+      setPhone("");
       setEmail("");
       setUsername("");
       setFirstName("");
@@ -81,7 +89,7 @@ function SignupFormModal() {
 
   return (
     <div className="modal-backdrop">
-      <div className="modal-container" ref={modalRef}>
+      <div className="modal-container-signup" ref={modalRef}>
         <div className="signup-box">
           <h5 className="centered-text">Sign Up</h5>
           <form className="signup-form" onSubmit={handleSubmit}>
@@ -125,6 +133,26 @@ function SignupFormModal() {
               />
             </label>
             {errors.lastName && <p>{errors.lastName}</p>}
+            <label>
+              Phone
+              <input
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
+            </label>
+            {errors.phone && <p>{errors.phone}</p>}
+            <label>
+              Address
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              />
+            </label>
+            {errors.address && <p>{errors.address}</p>}
             <label>
               Password
               <input

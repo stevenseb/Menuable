@@ -14,13 +14,13 @@
 }
 
 /* Modal content styling */
-.modal-container {
+.modal-container-signup {
   position: relative;
-  background-color: white;
+  background-color: rgb(56, 54, 54, .1) !important;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px; /* Adjust width as needed */
+  height: 110% !important;
   width: 100%;
   margin: 100px auto 0; /* Add top margin for vertical adjustment */
   z-index: 1000; /* Ensure modal content is above the backdrop */
@@ -31,12 +31,12 @@
 
 /* Signup box styling */
 .signup-box {
-  background-color: white;
-  padding: 0px;
+  background-color: rgb(91, 91, 91);
+  padding: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
+  max-width: 420px;
   width: 100%; /* Ensure signup box takes full width */
 }
 
@@ -44,11 +44,12 @@
 .signup-form {
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 10px;
-  max-width: 225px; /* Adjust width as needed */
+  padding: 14px;
+  max-width: 350px; /* Adjust width as needed */
   width: 100%; /* Ensure form takes full width */
   margin: 0 auto;
-  background-color: #f9f9f9;
+  margin-top: 10px;
+  background-color: rgb(91, 91, 91);
 }
 
 /* Label styling */
@@ -56,6 +57,7 @@ label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
+  font-size: 16px;
 }
 
 /* Input field styling */
@@ -79,6 +81,7 @@ button[type="submit"] {
   cursor: pointer;
   margin-top: 8px;
   transition: background-color 0.3s ease;
+  width: 100%;
 }
 
 button[type="submit"]:hover {

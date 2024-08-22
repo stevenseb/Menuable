@@ -1,14 +1,15 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { toggleCartModal } from '../../store/ui';
+import { useModal } from '../../context/Modal';
+import CartModal from '../Cart/CartModal';
 
 const CartIcon = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();
+  const { setModalContent } = useModal();
 
   const handleCartIconClick = () => {
-    dispatch(toggleCartModal());
+    setModalContent(<CartModal />);
   };
 
   return (

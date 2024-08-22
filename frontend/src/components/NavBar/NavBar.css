@@ -38,6 +38,13 @@
   padding-left: 10px;
 }
 
+.owners {
+    width: 200px;
+    height: auto;
+    border-radius: 6px;
+    margin-right: 30px;
+}
+
 .cart-icon {
   font-size: 1.4rem;
   color: beige;

@@ -37,13 +37,18 @@ const NavBar = ({ isLoaded }) => {
         <NavLink to="/" onClick={handleLogoClick}>
           <img src='ComideriaRussa.png' alt="La Comederia Russa" className="navbar-logo" />
         </NavLink>
+        
+      </div>
+      <div className="vera-andrei">
+        
       </div>
       <CartIcon />
+      
       <div className="navbar-links">
+      <img src='Vera-Andrei-Wide-2.jpg' alt="Vera and Andrei" className="owners" />
         <div className="menu-button" ref={menuRef}>
           {!sessionUser && (
             <button className="hamburger-button" onClick={handleMenuToggle}>
-              {/* <img src={hamburger} alt="Menu" className="hamburger-icon" /> */}
             </button>
           )}
           {sessionUser && <ProfileButton user={sessionUser} className="profile-icon" />}

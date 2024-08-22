@@ -1,17 +1,51 @@
+/* Modal backdrop styling */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Ensure full height for backdrop */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align the modal a bit lower */
+    padding-top: 0px;
+  }
+  
+  /* Modal content styling */
+  .modal-container {
+    position: relative;
+    background-color: rgb(56, 54, 54) !important;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 110% !important;
+    width: 100%;
+    margin: 100px auto 0; /* Add top margin for vertical adjustment */
+    z-index: 1000; /* Ensure modal content is above the backdrop */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align form content */
+  }
+
+
 /* Login box styling */
 .login-box {
-  background-color: white;
+  background-color: rgb(91, 91, 91);
   padding: 30px;
-  border: 1px solid #ccc;
+  border: 1px solid #515050;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 290px;
   width: 100%; /* Ensure login box takes full width */
+  color: beige;
 }
 
 /* Form styling */
 .login-form {
-  border: 1px solid #ccc;
+  border: 1px solid rgb(91, 91, 91);
+  background-color: rgb(91, 91, 91) !important;
   border-radius: 8px;
   padding: 20px;
   width: 75%; /* Ensure form takes full width */
@@ -20,18 +54,19 @@
   flex-direction: column;
   align-items: center; /* Center-align form content */
   margin-left: 15px;
+  margin-top: 10px;
 }
 
 /* Label styling */
-label {
+.login-form label {
   width: 100%; /* Ensure labels take full width */
   margin-bottom: 10px;
-  font-weight: bold;
+  font-weight: 400;
   text-align: left; /* Left-align labels */
 }
 
 /* Input field styling */
-input {
+.login-form input {
   width: 100%; /* Adjust width to 100% */
   padding: 8px;
   border: 1px solid #ccc;
@@ -45,12 +80,12 @@ button[type="submit"],
 button[type="button"] {
   width: 90%;
   background-color: #4CAF50;
-  color: white;
+  color: beige;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 6px;
   transition: background-color 0.3s ease;
 }
 
@@ -59,9 +94,13 @@ button[type="button"] {
   background-color: #262826;
 }
 
+button[type="button"]:hover {
+  background-color: #363736;
+}
+
 /* Submit button hover effect */
 button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #4da352;
 }
 
 /* Disabled submit button styling */
@@ -76,13 +115,4 @@ button[type="submit"]:disabled {
 p {
   color: red;
   font-weight: bold;
-}
-
-/* Ensure text remains black in dark mode */
-body.dark-mode .login-box,
-body.dark-mode .login-form,
-body.dark-mode .login-box label,
-body.dark-mode .login-box input,
-body.dark-mode .login-box p {
-  color: black;
 }

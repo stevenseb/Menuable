@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import * as sessionActions from './store/session';
 import DisplayMenu from './components/DisplayMenu';
 import MainPage from './components/Dashboard';
+import CartModal from './components/Cart/CartModal';
 
 
 function Layout() {
@@ -24,6 +25,7 @@ function Layout() {
       <div className="main-content">
         {isLoaded && <Outlet />}
       </div>
+      <CartModal />
       <Footer />
     </>
   );

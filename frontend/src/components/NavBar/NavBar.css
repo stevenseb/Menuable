@@ -11,7 +11,7 @@
   align-items: center;
   padding: 15px;
   box-sizing: border-box;
-  height: 90px;
+  height: 100px;
 }
   
 .main-header {
@@ -33,11 +33,21 @@
 }
 
 .navbar-logo {
-  width: 180px;
+  width: 200px;
   height: auto;
   padding-left: 10px;
 }
 
+.cart-icon {
+  font-size: 1.4rem;
+  color: beige;
+}
+
+.cart-count {
+    color: green;
+    font-size: 1rem;
+    margin-left: 5px;
+}
 .navbar-links {
   display: flex;
   align-items: center;

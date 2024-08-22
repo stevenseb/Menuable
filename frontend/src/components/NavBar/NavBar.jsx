@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useRef } from 'react';
 import ProfileButton from './ProfileButton';
+import CartIcon from './CartIcon';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import OpenModalButton from '../OpenModalButton';
@@ -37,6 +38,7 @@ const NavBar = ({ isLoaded }) => {
           <img src='ComideriaRussa.png' alt="La Comederia Russa" className="navbar-logo" />
         </NavLink>
       </div>
+      <CartIcon />
       <div className="navbar-links">
         <div className="menu-button" ref={menuRef}>
           {!sessionUser && (

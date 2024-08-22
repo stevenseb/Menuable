@@ -6,7 +6,7 @@ import { fetchWithCSRF } from './csrf';
 export const fetchMenuItems = createAsyncThunk('menu/fetchMenuItems', async () => {
   const response = await fetch('/api/items');
   const data = await response.json();
-  return data.items; // Adjust to match the structure of your response
+  return data.items;
 });
 
 // Thunk to add a new item

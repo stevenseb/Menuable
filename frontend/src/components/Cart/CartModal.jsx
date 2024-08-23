@@ -83,7 +83,7 @@ const CartModal = ({ onCheckout }) => {
                   <button onClick={() => handleDecreaseQuantity(item)}>-</button>
                   <button onClick={() => handleRemoveFromCart(item)}>Remove</button>
                 </div>
-                <div>
+                <div className="subtotals">
                 <p className="item-subtotal">Subtotal: ${calculateSubtotal(item).toFixed(2)}</p>
                 </div>
               </div>

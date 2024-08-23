@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -36,6 +36,7 @@
   width: 200px;
   height: auto;
   padding-left: 10px;
+  border-radius: 4px;
 }
 
 .owners {
@@ -48,10 +49,13 @@
 .cart-icon {
   font-size: 1.4rem;
   color: beige;
+  border-radius: 7px;
+  padding: 4px;
+  background-color: black;
 }
 
 .cart-count {
-    color: green;
+    color: rgb(31, 228, 31);
     font-size: 1rem;
     margin-left: 5px;
 }
@@ -87,8 +91,8 @@
 }
 
 .profileIcon {
-    width: 150%;
-    height: 150%;
+    width: 200%;
+    height: 200%;
     border-radius: 8px;
     object-fit: cover;
 }
@@ -101,20 +105,16 @@
   padding: 2px;
 }
 
-.hamburger-icon {
+/* .hamburger-icon {
   margin-bottom: 3px;
   width: 24px;
   height: auto;
-}
+} */
 
 .user-icon {
   margin-left: 8px;
-  font-size: 24px;
+  font-size: 34px;
   color: #101111;
-}
-
-body.dark-mode .user-icon {
-  color: #161515;
 }
 
 .dropdown-menu {
@@ -193,11 +193,6 @@ body.dark-mode .user-icon {
   text-decoration: underline;
 }
 
-.create-spot-link {
-  color: black;
-  padding: 10px;
-}
-
 /* Ensure all drop-down text remains black in light and dark mode */
 .profile-dropdown, .profile-dropdown-item, .dropdown-item, .profile-info {
   color: black !important;
@@ -224,7 +219,7 @@ body.dark-mode .user-icon {
 /* Media Query for mobile screens */
 @media (max-width: 740px) {
   .navbar-logo {
-    width: 32%; /* Adjust the logo on mobile */
+    width: 82%; /* Adjust the logo on mobile */
     height: auto;
   }
 
@@ -234,5 +229,18 @@ body.dark-mode .user-icon {
   
   .user-icon {
     margin-left: -2px; /* Adjust this value as needed */
+  }
+
+  .cart-icon {
+    font-size: .5rem;
+    margin-left: 12px;
+  }
+
+  .cart-count {
+    font-size: .6rem;
+}
+
+  .owners {
+    width: 50%;
   }
 }

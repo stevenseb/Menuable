@@ -42,38 +42,9 @@ module.exports = {
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
       }
     }, options);
-
-    // Add foreign key constraints
-    await queryInterface.addConstraint('Reviews', {
-      fields: ['userId'],
-      type: 'foreign key',
-      name: 'fk_review_user',
-      references: {
-        table: 'Users',
-        field: 'id'
-      },
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE'
-    });
-
-    await queryInterface.addConstraint('Reviews', {
-      fields: ['itemId'],
-      type: 'foreign key',
-      name: 'fk_review_item',
-      references: {
-        table: 'Items',
-        field: 'id'
-      },
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE'
-    });
   },
 
   async down (queryInterface, Sequelize) {
-    // Remove foreign key constraints
-    await queryInterface.removeConstraint('Reviews', 'fk_review_user');
-    await queryInterface.removeConstraint('Reviews', 'fk_review_item');
-
     // Drop the table
     await queryInterface.dropTable('Reviews');
   }

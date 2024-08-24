@@ -6,9 +6,13 @@ module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     
     static associate(models) {
-      Order.belongsToMany(models.Item, { through: 'OrderItems', foreignKey: 'orderId' });
-      Order.belongsTo(models.User, {foreignKey: 'userId'});
-      Order.belongsTo(models.Route, {foreignKey: 'routeId'});
+        Order.belongsTo(models.User, { foreignKey: 'userId' });
+        Order.belongsTo(models.Route, { foreignKey: 'routeId' });
+        Order.belongsToMany(models.Item, { 
+          through: 'OrderItems',
+          foreignKey: 'orderId',
+          otherKey: 'itemId'
+        });
     }
   }
   Order.init({

@@ -84,7 +84,7 @@
 
 .item-info p {
     margin: 0;
-    color: rgb(219, 214, 214); /* Changed to white for better visibility */
+    color: rgb(219, 214, 214);
     font-size: 18px;
 }
 
@@ -93,7 +93,7 @@
     border: solid black 1px;
     border-radius: 6px;
     cursor: pointer;
-    color: black;
+    color: black !important;
     font-size: 12px;
     padding: 5px 10px;
     height: 24px;
@@ -104,6 +104,11 @@
     gap: 5px;
     width: 10vw;
     margin-left: 12px;
+}
+
+.black {
+    color: black !important;
+    font-weight: 400;
 }
 
 .subtotals {

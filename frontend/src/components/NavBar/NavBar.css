@@ -52,6 +52,7 @@
   border-radius: 7px;
   padding: 4px;
   background-color: black;
+  cursor: pointer;
 }
 
 .cart-count {

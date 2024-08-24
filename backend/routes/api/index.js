@@ -8,6 +8,7 @@ const itemsRouter = require('./items.js');
 const ordersRouter = require('./orders.js');
 const routesRouter = require('./routes.js');
 const orderItemsRouter = require('./orderItems.js');
+const reviewsRouter = require('./reviews.js');
 const { setTokenCookie } = require('../../utils/auth.js');
 const { User, Route, Item, ItemImage, Order, OrderItem } = require('../../db/models/index.js');
 const { requireAuth } = require('../../utils/auth.js');
@@ -57,6 +58,7 @@ router.use('/items', itemsRouter);
 router.use('/orders', ordersRouter);
 router.use('/routes', routesRouter);
 router.use('/orderItems', orderItemsRouter);
+router.use('/reviews', reviewsRouter);
 
 
 router.post('/test', (req, res) => {

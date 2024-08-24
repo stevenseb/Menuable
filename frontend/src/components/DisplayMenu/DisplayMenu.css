@@ -28,21 +28,21 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensure the card takes up the full width of the container */
-    max-width: 600px; /* Limit the maximum width of the card */
-    margin: 0 auto; /* Center the card horizontally */
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     height: 100%;
   }
   
   .menu-image {
     width: 100%;
-    height: 300px; /* Set a fixed height for the images */
-    object-fit: cover; /* Ensure the images cover the area without distortion */
+    height: 300px;
+    object-fit: cover;
   }
   
   .menu-details {
-    flex-grow: 1; /* Allow the details to take up the remaining space */
-    padding: 15px; /* Reduce padding for smaller cards */
+    flex-grow: 1;
+    padding: 15px;
     line-height: 110%;
   }
   
@@ -109,11 +109,25 @@
   
   .in-cart {
     font-size: 0.9em;
-    color: #b1afaf;
+    color: #29a90c;
     margin-top: 5px;
     margin-left: 7px;
   }
+
+  .create-review {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  .rating {
+    cursor: pointer;
+  }
   
+  .rating:hover {
+    text-decoration: underline;
+  }
+
+/* Mobile responsive styles */
 @media (max-width: 767px) {
     .addToCart {
         font-size: .6em;

@@ -1,76 +1,66 @@
-// frontend/src/components/CreateReviewModal/ReviewForm.jsx
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createReview, fetchReviews } from '../../store/reviews';
-import './ReviewForm.css';
+import { createReview } from '../../store/review';
+import './CreateReviewModal.css';
 
-const ReviewForm = ({ spotId, closeModal }) => {
+const CreateReviewModal = ({ itemId, userId, onClose }) => {
+  const [rating, setRating] = useState(0);
+  const [content, setContent] = useState('');
+  const [hoveredRating, setHoveredRating] = useState(0);
   const dispatch = useDispatch();
-  const [comment, setComment] = useState('');
-  const [stars, setStars] = useState(0);
-  const [errors, setErrors] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = [];
-
-    if (comment.length < 10) {
-      validationErrors.push('Review must be at least 10 characters');
-    }
-
-    if (stars === 0) {
-      validationErrors.push('Rating must be at least 1 star');
-    }
-
-    setErrors(validationErrors);
-
-    if (validationErrors.length === 0) {
-      try {
-        await dispatch(createReview({ spotId, review: comment, stars }));
-        dispatch(fetchReviews(spotId));
-        closeModal();
-      } catch (error) {
-        setErrors([error.message]);
-      }
-    }
+  const handleStarClick = (star) => {
+    setRating(star);
   };
 
+  const handleStarHover = (star) => {
+    setHoveredRating(star);
+  };
+
+  const handleStarLeave = () => {
+    setHoveredRating(0);
+  };
+
+  const handleSubmit = () => {
+  const reviewData = {
+    userId: parseInt(userId),
+    itemId: parseInt(itemId),
+    rating: parseInt(rating),
+    content: content
+  };
+  console.log(reviewData);
+  dispatch(createReview(reviewData));
+  onClose();
+};
+
   return (
-    <div className="review-form-container">
-      <h2>How was your stay?</h2>
-      {errors.length > 0 && (
-        <ul className="errors">
-          {errors.map((error, index) => (
-            <li key={index}>{error}</li>
-          ))}
-        </ul>
-      )}
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="Leave your review here..."
-        ></textarea>
-        <div className="stars-input">
-          <label htmlFor="stars">Stars</label>
-          <input
-            type="number"
-            id="stars"
-            value={stars}
-            onChange={(e) => setStars(parseInt(e.target.value))}
-            min="1"
-            max="5"
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={comment.length < 10 || stars === 0}
-        >
-          Submit Your Review
-        </button>
-      </form>
+    <div className="review-modal">
+      <h2>Write a Review</h2>
+      <div className="star-rating">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span 
+            key={star} 
+            className={`star ${star <= (hoveredRating || rating) ? 'active' : ''}`} 
+            onClick={() => handleStarClick(star)}
+            onMouseEnter={() => handleStarHover(star)}
+            onMouseLeave={handleStarLeave}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+      <textarea 
+        className="review-content"
+        value={content} 
+        onChange={(e) => setContent(e.target.value)} 
+        placeholder="Write your review here..."
+      />
+      <div className="button-container">
+        <button className="submit-button" onClick={handleSubmit}>Submit Review</button>
+        <button className="cancel-button" onClick={onClose}>Cancel</button>
+      </div>
     </div>
   );
 };
 
-export default ReviewForm;
+export default CreateReviewModal;

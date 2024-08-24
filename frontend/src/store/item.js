@@ -25,18 +25,20 @@ export const addItem = createAsyncThunk('menu/addItem', async (newItem) => {
     return { ...data.item, imageFilename: newItem.imageFilename };
   });
 
-// Initial state
-const initialState = {
-  items: [],
-  status: 'idle',
-  error: null,
-};
-
 // Slice
 const itemsSlice = createSlice({
   name: 'menu',
-  initialState,
-  reducers: {},
+  initialState: { items: [], status: 'idle', error: null },
+  reducers: {
+    updateItemRating: (state, action) => {
+        const { itemId, newRating } = action.payload;
+        const item = state.items.find(item => item.id === itemId);
+        if (item) {
+          item.stars += newRating;
+          item.numRatings += 1;
+        }
+      }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMenuItems.pending, (state) => {
@@ -53,14 +55,22 @@ const itemsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
+      .addCase(addItem.pending, (state) => {
+        state.status = 'loading';
+      })
       .addCase(addItem.fulfilled, (state, action) => {
+        state.status = 'succeeded';
         state.items.push({
           ...action.payload,
           imageUrl: action.payload.imageFilename ? `https://comideria-russa.b-cdn.net/${action.payload.imageFilename}` : 'default-image-url.jpg',
         });
       })
+      .addCase(addItem.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
   },
 });
 
-// Export the reducer and the addItem action
+export const { updateItemRating } = itemsSlice.actions;
 export default itemsSlice.reducer;

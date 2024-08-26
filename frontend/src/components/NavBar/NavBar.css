@@ -220,7 +220,7 @@
 /* Media Query for mobile screens */
 @media (max-width: 740px) {
   .navbar-logo {
-    width: 82%; /* Adjust the logo on mobile */
+    width: 89%; /* Adjust the logo on mobile */
     height: auto;
   }
 
@@ -233,7 +233,7 @@
   }
 
   .cart-icon {
-    font-size: .5rem;
+    font-size: .6rem;
     margin-left: 12px;
   }
 

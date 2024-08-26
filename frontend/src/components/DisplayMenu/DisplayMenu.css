@@ -115,6 +115,7 @@
   }
 
   .create-review {
+    color: green;
     margin-right: 5px;
     cursor: pointer;
   }

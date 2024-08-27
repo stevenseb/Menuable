@@ -23,6 +23,26 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      quantity: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      units: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      measure: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      pricePerUnit: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(10, 2),
+      },
+      costPerUnit: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(10, 2),
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -57,7 +57,7 @@ router.use('/users', usersRouter);
 router.use('/items', itemsRouter);
 router.use('/orders', ordersRouter);
 router.use('/routes', routesRouter);
-router.use('/orderItems', orderItemsRouter);
+router.use('/order-items', orderItemsRouter);
 router.use('/reviews', reviewsRouter);
 
 

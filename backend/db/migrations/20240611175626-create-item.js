@@ -32,7 +32,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DECIMAL(10,2),
       },
-      quantity: {
+      units: {
         allowNull: false,
         type: Sequelize.DECIMAL(10,1)
       },

@@ -94,15 +94,15 @@
     border-radius: 6px;
     cursor: pointer;
     color: black !important;
-    font-size: 12px;
-    padding: 5px 10px;
+    font-size: 14px;
+    padding: 4px 8px;
     height: 24px;
 }
 
 .item-actions {
     display: flex;
     gap: 5px;
-    width: 10vw;
+    width: auto;
     margin-left: 12px;
 }
 
@@ -112,11 +112,9 @@
 }
 
 .subtotals {
-    width: 10vw;
+    width: 8vw;
     margin-left: 15px;
 }
-
-
 
 .item-subtotal {
     color: rgb(218, 216, 216);

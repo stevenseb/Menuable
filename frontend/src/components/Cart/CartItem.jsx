@@ -16,6 +16,7 @@ const CartItem = ({ item }) => {
       <div className="item-details">
         <h3>{item.name}</h3>
         <p>Quantity: {item.quantity}</p>
+        <p>Size: {item.units} {item.measure}</p>
         <p>Price: ${item.price * item.quantity}</p>
         <button onClick={handleRemoveFromCart}>Remove</button>
       </div>

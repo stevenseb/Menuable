@@ -130,33 +130,43 @@ router.get('/route/:routeId', async (req, res) => {
 
 // POST a new order
 router.post('/', requireAuth, async (req, res) => {
-  const { user } = req;
-  const { routeId, total, orderDate, items } = req.body;
-
-  try {
-    const order = await Order.create({
-      userId: user.id,
-      routeId,
-      total,
-      orderDate
-    });
-
-    if (items && items.length > 0) {
-      const orderItems = items.map(item => ({
-        orderId: order.id,
-        itemId: item.itemId,
-        quantity: item.quantity
-      }));
-
-      await OrderItem.bulkCreate(orderItems);
+    const { user } = req;
+    const { routeId, total, orderDate, items } = req.body;
+  
+    try {
+      const order = await Order.create({
+        userId: user.id,
+        routeId,
+        total,
+        orderDate
+      });
+  
+      if (items && items.length > 0) {
+        const orderItems = await Promise.all(items.map(async (item) => {
+          const dbItem = await Item.findByPk(item.id);
+          if (!dbItem) {
+            throw new Error(`Item with id ${item.id} not found`);
+          }
+          return {
+            orderId: order.id,
+            itemId: dbItem.id,
+            quantity: item.quantity,
+            units: dbItem.units,
+            measure: dbItem.measure,
+            pricePerUnit: dbItem.price,
+            costPerUnit: dbItem.costPerUnit
+          };
+        }));
+  
+        await OrderItem.bulkCreate(orderItems);
+      }
+  
+      res.status(201).json({ order });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
     }
-
-    res.status(201).json({ order });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
+  });
 
 // DELETE an order
 router.delete('/:orderId', requireAuth, async (req, res) => {
@@ -211,7 +221,7 @@ router.post('/:orderId', requireAuth, async (req, res) => {
       const orderItems = items.map(item => ({
         orderId: order.id,
         itemId: item.itemId,
-        quantity: item.quantity
+        units: item.units
       }));
 
       await OrderItem.bulkCreate(orderItems);
@@ -237,7 +247,7 @@ router.get('/:orderId/items', async (req, res) => {
             'name', 
             'description', 
             'price', 
-            'quantity', 
+            'units', 
             'measure', 
             'numRatings', 
             'stars', 

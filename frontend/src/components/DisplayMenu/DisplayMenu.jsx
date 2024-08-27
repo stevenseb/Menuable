@@ -106,8 +106,8 @@ const DisplayMenu = () => {
               <div className="menu-details">
                 <h2>{item.name}</h2>
                 <p className="text">{item.description}</p>
-                <p className="price">Price: ${item.price} for {item.quantity} {item.measure}</p>
-                <p className="quantity">Quantity Available: {item.quantityOnHand}</p>
+                <p className="price">Price: ${item.price} for {item.units} {item.measure}</p>
+                <p className="units">units Available: {item.quantityOnHand}</p>
                 <div className="rating">
                 <p className="text">
                   {averageRating ? (

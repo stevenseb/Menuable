@@ -73,9 +73,9 @@ const CartModal = ({ onCheckout }) => {
             cartItems.map((item) => (
               <div className="cart-item" key={item.id}>
                 <div className="item-info">
-                  <p>{item.name}</p>
+                  <p>{item.name} x {item.quantity}</p>
                   <p>
-                    ${item.price} x {item.quantity} {item.measure}
+                    ${item.price} per {item.units} {item.measure} 
                   </p>
                 </div>
                 <div className="item-actions">

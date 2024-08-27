@@ -22,7 +22,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    price: {
+    units: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    measure: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    pricePerUnit: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },

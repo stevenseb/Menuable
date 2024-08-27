@@ -29,8 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    quantity: {
-      type: DataTypes.DECIMAL(10, 1),
+    units: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     measure: {

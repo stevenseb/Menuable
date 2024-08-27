@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserInfo } from '../../store/session';
 import { useNavigate } from 'react-router-dom';
+import { createOrder } from '../../store/order';
 import './Checkout.css';
 
 
@@ -42,10 +43,25 @@ const CheckoutPage = () => {
     setIsConfirmed(true);
   };
 
-  const handlePlaceOrder = () => {
-    // Implement order placement logic here
-    console.log('Order placed');
-  };
+  const handlePlaceOrder = async () => {
+  const routeId = 1; // TODO GET ROUTE ID ASSIGNED BY WEEKLY DELIVERY
+  const total = calculateTotal();
+  const orderDate = new Date().toISOString();
+
+  const itemsForOrder = cartItems.map(item => ({
+    id: item.id,
+    quantity: item.quantity,
+  }));
+console.log(itemsForOrder);
+  try {
+    await dispatch(createOrder({ routeId, total, orderDate, items: itemsForOrder }));
+    // Clear the cart and navigate to a confirmation page
+    // dispatch(clearCart());
+    navigate('/order-confirmation');
+  } catch (error) {
+    console.error('Failed to place order:', error);
+  }
+};
 
   if (!user) {
     return null; // or a loading spinner
@@ -58,7 +74,7 @@ const CheckoutPage = () => {
         {cartItems.map((item) => (
           <div key={item.id} className="cart-item">
             <p className="col1">{item.name}</p>
-            <p className="col2">${item.price} x {item.quantity}</p>
+            <p className="col2">${item.price} x {item.units}</p>
             <p className="col3">Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
           </div>
         ))}

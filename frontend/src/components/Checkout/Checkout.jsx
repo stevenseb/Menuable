@@ -74,7 +74,7 @@ console.log(itemsForOrder);
         {cartItems.map((item) => (
           <div key={item.id} className="cart-item">
             <p className="col1">{item.name}</p>
-            <p className="col2">${item.price} x {item.units}</p>
+            <p className="col2">${item.price} x {item.quantity}</p>
             <p className="col3">Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
           </div>
         ))}

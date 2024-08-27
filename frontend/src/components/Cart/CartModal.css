@@ -52,17 +52,17 @@
     margin: 0;
     color: rgb(244, 244, 233);
     font-size: 22px;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
 }
 
 .close-button {
     background: none;
-    border: solid 1px rgb(244, 244, 233);
-    color: rgb(244, 244, 233);
+    border: solid 1px rgb(203, 203, 72);
+    color: rgb(223, 223, 93);
     border-radius: 4px;
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 5px 8px;
 }
 
 
@@ -71,10 +71,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
+    gap: 8px;
+    padding: 8px;
     border-bottom: 1px solid #ccc;
-    height: 35px;
+    height: 60px;
+    width: 95%;
     margin-top: 0px;
 }
 
@@ -86,6 +87,7 @@
     margin: 0;
     color: rgb(219, 214, 214);
     font-size: 18px;
+    width: 100%;
 }
 
 .item-actions button {

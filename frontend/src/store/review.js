@@ -53,7 +53,7 @@ export const editReview = createAsyncThunk(
   'reviews/edit',
   async ({ reviewId, reviewData }, { rejectWithValue }) => {
     try {
-      const response = await fetchWithCSRF(`/api/reviews/${reviewId}`, {
+      const response = await fetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reviewData),

@@ -58,13 +58,13 @@ function SignupFormModal() {
       });
     }
 
-    const switchToLogin = () => {
-    setModalContent(<LoginFormModal />);
-  };
-
     return setErrors({
       confirmPassword: "Confirm Password field must be the same as the Password field"
     });
+  };
+
+  const switchToLogin = () => {
+    setModalContent(<LoginFormModal />);
   };
 
   useEffect(() => {
@@ -180,6 +180,7 @@ function SignupFormModal() {
             {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
             <button type="submit" disabled={isDisabled}>Sign Up</button>
           </form>
+          <button type="button" onClick={switchToLogin}>Already Registered? -Log In</button>
         </div>
       </div>
     </div>

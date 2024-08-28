@@ -137,6 +137,7 @@
 .cart-modal-footer button {
     border-radius: 6px;
     margin-left: 2px;
+    padding: 2px;
     background-color: rgb(202, 197, 197);
 }
 

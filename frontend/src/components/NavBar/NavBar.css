@@ -43,7 +43,7 @@
     width: 200px;
     height: auto;
     border-radius: 6px;
-    margin-right: 30px;
+    margin-left: 250px;
 }
 
 .cart-icon {
@@ -72,7 +72,7 @@
 .menu-button {
   display: flex;
   align-items: center;
-  background-color: #f8f5f6;
+  background-color: #282727;
   opacity: 0.8;
   border-radius: 18px;
   padding: 8px;
@@ -80,43 +80,35 @@
   cursor: pointer;
 }
 
-/* .profile-button-container {
+.profile-button-container {
   display: flex;
   align-items: center;
   cursor: pointer;
-} */
-
-.profile-button {
-  height: 100%;
-  border-radius: 8px;
 }
 
-.profileIcon {
-    width: 200%;
-    height: 200%;
+ 
+.profile-button {
+    height: 100%;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .profileIcon,
+  .hamburger-icon {
+    width: 30px;
+    height: 30px;
     border-radius: 8px;
     object-fit: cover;
-}
-
-.hamburger-button,
-.profile-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 2px;
-}
-
-/* .hamburger-icon {
-  margin-bottom: 3px;
-  width: 24px;
-  height: auto;
-} */
-
-.user-icon {
-  margin-left: 8px;
-  font-size: 34px;
-  color: #101111;
-}
+  }
+  
+  .hamburger-icon {
+    filter: invert(1); /* This will make the hamburger icon white */
+  }
 
 .dropdown-menu {
   position: absolute;
@@ -164,6 +156,7 @@
   border: none;
   text-align: left;
   width: 100%;
+  cursor: pointer;
 }
 
 .profile-dropdown-item:hover {
@@ -173,6 +166,7 @@
 .text-link {
   background: none;
   border: none;
+  text-decoration: none !important;
   display: block;
   text-align: center;
   color: #343a40;
@@ -183,7 +177,7 @@
 }
 
 .text-link:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .logout {
@@ -191,7 +185,7 @@
 }
 
 .logout:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /* Ensure all drop-down text remains black in light and dark mode */
@@ -201,7 +195,7 @@
 
 /* Ensure the 'Home' link is styled like other drop-down links */
 .profile-dropdown-item a {
-  text-decoration: none;
+  text-decoration: none !important;
   color: black;
   display: block;
   padding: 0.75rem 1.5rem;
@@ -211,6 +205,7 @@
 
 .profile-dropdown-item a:hover {
   background-color: #fefbfb;
+  text-decoration: none !important;
 }
 
 .profileIcon {

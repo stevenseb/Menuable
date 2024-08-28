@@ -6,6 +6,7 @@ import {
   removeFromCart,
   loadCart
 } from '../../store/cart';
+import SignupFormModal from '../SignupFormModal';
 import { useModal } from '../../context/Modal';
 
 import './CartModal.css';
@@ -14,7 +15,7 @@ const CartModal = ({ onCheckout }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const user = useSelector((state) => state.session.user);
-  const { closeModal } = useModal();
+  const { closeModal, setModalContent } = useModal();
   const modalRef = useRef();
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const CartModal = ({ onCheckout }) => {
     if (user) {
       onCheckout('/checkout');
     } else {
-      onCheckout('/signup');
+      setModalContent(<SignupFormModal />);
     }
   };
 
@@ -92,7 +93,7 @@ const CartModal = ({ onCheckout }) => {
         </div>
         <div className="cart-modal-footer">
           <p>Total: ${calculateTotal().toFixed(2)}</p>
-          <button onClick={handleCheckout}>
+          <button onClick={handleCheckout} className='footerButton'>
             {user ? 'Checkout' : 'Sign In / Sign Up'}
           </button>
         </div>

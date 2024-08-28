@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import LoginFormModal from '../LoginFormModal';
 import { useModal } from '../../context/Modal';
 import './SignupForm.css';
 
@@ -16,7 +17,7 @@ function SignupFormModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const { closeModal, setModalContent } = useModal();
   const [isDisabled, setIsDisabled] = useState(true);
   const modalRef = useRef();
 
@@ -56,6 +57,10 @@ function SignupFormModal() {
         }
       });
     }
+
+    const switchToLogin = () => {
+    setModalContent(<LoginFormModal />);
+  };
 
     return setErrors({
       confirmPassword: "Confirm Password field must be the same as the Password field"

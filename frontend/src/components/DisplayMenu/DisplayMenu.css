@@ -121,13 +121,13 @@
     font-size: 1.4em;
   }
 
-  .rating {
+  /* .rating {
     cursor: pointer;
-  }
+  } */
   
-  .rating:hover {
+  /* .rating:hover {
     text-decoration: underline;
-  }
+  } */
 
 /* Mobile responsive styles */
 @media (max-width: 767px) {

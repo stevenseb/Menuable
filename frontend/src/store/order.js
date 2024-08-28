@@ -1,12 +1,12 @@
 // store/orderSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchWithCSRF } from './csrf';
+import { csrfFetch } from './csrf';
 
 export const createOrder = createAsyncThunk(
   'orders/create',
   async ({ routeId, total, orderDate, items }, { rejectWithValue }) => {
     try {
-      const orderResponse = await fetchWithCSRF('/api/orders', {
+      const orderResponse = await csrfFetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ routeId, total, orderDate, items }),
@@ -15,7 +15,7 @@ export const createOrder = createAsyncThunk(
       if (!orderResponse.ok) throw new Error('Failed to create order');
       const orderData = await orderResponse.json();
 
-      const orderItemsResponse = await fetchWithCSRF('/api/order-items', {
+      const orderItemsResponse = await csrfFetch('/api/order-items', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderId: orderData.order.id, items }),

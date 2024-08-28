@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchWithCSRF } from './csrf';
+import { csrfFetch } from './csrf';
 
 
 // Thunk to fetch menu items
@@ -11,7 +11,7 @@ export const fetchMenuItems = createAsyncThunk('menu/fetchMenuItems', async () =
 
 // Thunk to add a new item
 export const addItem = createAsyncThunk('menu/addItem', async (newItem) => {
-    const response = await fetchWithCSRF('/api/items', {
+    const response = await csrfFetch('/api/items', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

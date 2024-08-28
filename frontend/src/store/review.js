@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchWithCSRF } from './csrf';
-import { updateItemRating } from './item'; // Import the action from itemSlice
+import { csrfFetch } from './csrf';
+import { updateItemRating } from './item';
 
 export const fetchReviewsForItems = createAsyncThunk(
     'reviews/fetchForItems',
     async (itemIds, { rejectWithValue }) => {
       try {
-        const response = await fetchWithCSRF(`/api/reviews/items`, {
+        const response = await csrfFetch(`/api/reviews/items`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ itemIds }),
@@ -28,7 +28,7 @@ export const createReview = createAsyncThunk(
           throw new Error('Invalid userId or itemId');
         }
   
-        const response = await fetchWithCSRF('/api/reviews', {
+        const response = await csrfFetch('/api/reviews', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(reviewData),
@@ -53,7 +53,7 @@ export const editReview = createAsyncThunk(
   'reviews/edit',
   async ({ reviewId, reviewData }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`/api/reviews/${reviewId}`, {
+      const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reviewData),
@@ -70,7 +70,7 @@ export const deleteReview = createAsyncThunk(
   'reviews/delete',
   async (reviewId, { rejectWithValue }) => {
     try {
-      const response = await fetchWithCSRF(`/api/reviews/${reviewId}`, {
+      const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE',
       });
       if (!response.ok) throw new Error('Failed to delete review');

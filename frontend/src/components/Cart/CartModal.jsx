@@ -93,7 +93,11 @@ const CartModal = ({ onCheckout }) => {
         </div>
         <div className="cart-modal-footer">
           <p>Total: ${calculateTotal().toFixed(2)}</p>
-          <button onClick={handleCheckout} className='footerButton'>
+          <button 
+          onClick={handleCheckout} 
+          className='footerButton'
+          disabled={cartItems.length === 0} 
+          >
             {user ? 'Checkout' : 'Sign In / Sign Up'}
           </button>
         </div>

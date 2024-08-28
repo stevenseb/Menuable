@@ -64,7 +64,7 @@ console.log(itemsForOrder);
 };
 
   if (!user) {
-    return null; // or a loading spinner
+    return null;
   }
 
   return (
@@ -108,7 +108,7 @@ console.log(itemsForOrder);
         )}
       </div>
       {!isConfirmed && <button onClick={handleConfirm}>Confirm Information</button>}
-      {isConfirmed && <button onClick={handlePlaceOrder}>Place Order</button>}
+      {isConfirmed && <button onClick={handlePlaceOrder} disabled={cartItems.length === 0}>Place Order</button>}
     </div>
   );
 };

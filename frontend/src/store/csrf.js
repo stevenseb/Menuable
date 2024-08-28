@@ -14,10 +14,10 @@ export async function restoreCSRF() {
   }
 }
 
-export const fetchWithCSRF = async (url, options = {}) => {
-    await restoreCSRF();
-    return csrfFetch(url, options);
-  };
+// export const fetchWithCSRF = async (url, options = {}) => {
+//     await restoreCSRF();
+//     return csrfFetch(url, options);
+//   };
 
 
 export async function csrfFetch(url, options = {}) {

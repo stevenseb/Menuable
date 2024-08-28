@@ -85,3 +85,15 @@
     width: 480px !important;
     color:brown !important;
 }
+
+.checkout-page button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+
+.cart-modal-footer button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}

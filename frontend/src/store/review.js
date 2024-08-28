@@ -67,19 +67,19 @@ export const editReview = createAsyncThunk(
 );
 
 export const deleteReview = createAsyncThunk(
-  'reviews/delete',
-  async (reviewId, { rejectWithValue }) => {
-    try {
-      const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-        method: 'DELETE',
-      });
-      if (!response.ok) throw new Error('Failed to delete review');
-      return reviewId;
-    } catch (error) {
-      return rejectWithValue(error.message);
+    'reviews/delete',
+    async ({ reviewId, itemId }, { rejectWithValue }) => {
+      try {
+        const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+          method: 'DELETE',
+        });
+        if (!response.ok) throw new Error('Failed to delete review');
+        return { reviewId, itemId };
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
     }
-  }
-);
+  );
 
 const reviewSlice = createSlice({
     name: 'reviews',

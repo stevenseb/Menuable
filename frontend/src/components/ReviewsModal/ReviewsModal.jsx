@@ -34,8 +34,8 @@ const ReviewsModal = ({ item }) => {
     setEditingReview(null);
   };
 
-  const handleDelete = (reviewId) => {
-    dispatch(deleteReview({ itemId: item.id, reviewId }));
+  const handleDelete = (reviewId, itemId) => {
+  dispatch(deleteReview({ reviewId, itemId }));
   };
 
   return (
@@ -68,7 +68,7 @@ const ReviewsModal = ({ item }) => {
                     <FontAwesomeIcon icon={faEdit} />
                   </button>
                 )}
-                <button onClick={() => handleDelete(review.id)}>
+                <button onClick={() => handleDelete(review.id, item.id)}>
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
               </div>

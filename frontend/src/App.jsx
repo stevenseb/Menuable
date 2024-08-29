@@ -7,6 +7,7 @@ import * as sessionActions from './store/session';
 import DisplayMenu from './components/DisplayMenu';
 import MainPage from './components/Dashboard';
 import Checkout from './components/Checkout';
+import MyAccount from './components/MyAccount/MyAccount';
 
 
 function Layout() {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/checkout',
         element: <Checkout />,
+      },
+      {
+        path: '/my-account',
+        element: <MyAccount />,
       },
       {
         path: '/dashboard',

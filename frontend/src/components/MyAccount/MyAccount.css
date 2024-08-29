@@ -1,0 +1,75 @@
+.my-account-page {
+    padding: 150px;
+  }
+  
+  .view-toggle button {
+    margin-right: 10px;
+  }
+  
+  .orders-view .order {
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .my-account-page p {
+    color: silver;
+    margin: 5px 0; /* Reduce vertical margin */
+  }
+  
+  .order-summary {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .order-details {
+    margin-top: 16px;
+  }
+  
+  .info-view {
+    margin-top: 20px;
+  }
+  
+  .info-view input {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .info-view button {
+    margin-top: 10px;
+  }
+  
+  /* New styles for cart items */
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .cart-item p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .cart-item .col1 {
+    flex: 2;
+  }
+  
+  .cart-item .col2, .cart-item .col3 {
+    flex: 1;
+    text-align: left;
+  }
+  
+  /* Adjust the h4 margin for "Items:" */
+  .order-details h4 {
+    margin-bottom: 5px;
+  }
+  
+  /* Adjust the total line */
+  .order-details .total {
+    margin-top: 10px;
+    font-weight: bold;
+  }

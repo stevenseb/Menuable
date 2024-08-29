@@ -65,7 +65,7 @@ function ProfileButton({ user }) {
                 </NavLink>
       
       
-                <NavLink to="/account" className="profile-dropdown-item logout" onClick={() => setShowMenu(false)}>
+                <NavLink to="/my-account" className="profile-dropdown-item logout" onClick={() => setShowMenu(false)}>
                   My Account
                 </NavLink>
               

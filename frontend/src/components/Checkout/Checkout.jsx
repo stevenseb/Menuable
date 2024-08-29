@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUserInfo } from '../../store/session';
 import { useNavigate } from 'react-router-dom';
 import { createOrder } from '../../store/order';
+import { clearCart } from '../../store/cart';
 import './Checkout.css';
 
 
@@ -56,8 +57,8 @@ console.log(itemsForOrder);
   try {
     await dispatch(createOrder({ routeId, total, orderDate, items: itemsForOrder }));
     // Clear the cart and navigate to a confirmation page
-    // dispatch(clearCart());
-    navigate('/order-confirmation');
+    dispatch(clearCart());
+    navigate('/my-account');
   } catch (error) {
     console.error('Failed to place order:', error);
   }

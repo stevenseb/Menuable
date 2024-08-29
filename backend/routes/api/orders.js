@@ -27,82 +27,82 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET all orders by userId
-router.get('/user/:userId', async (req, res) => {
-  const { userId } = req.params;
-  try {
-    const orders = await Order.findAll({
-      where: { userId },
-      include: [
-        {
-          model: User,
-          attributes: ['firstName', 'lastName', 'phone', 'address']
-        },
-        {
-          model: Route,
-          attributes: ['deliveryDate']
-        }
-      ]
-    });
-    res.json({ orders });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
+// // GET all orders by userId
+// router.get('/user/:userId', async (req, res) => {
+//   const { userId } = req.params;
+//   try {
+//     const orders = await Order.findAll({
+//       where: { userId },
+//       include: [
+//         {
+//           model: User,
+//           attributes: ['firstName', 'lastName', 'phone', 'address']
+//         },
+//         {
+//           model: Route,
+//           attributes: ['deliveryDate']
+//         }
+//       ]
+//     });
+//     res.json({ orders });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// });
 
-// GET all orders for current user
-router.get('/current', requireAuth, async (req, res) => {
-  const { user } = req;
-  try {
-    const orders = await Order.findAll({
-      where: { userId: user.id },
-      include: [
-        {
-          model: User,
-          attributes: ['firstName', 'lastName', 'phone', 'address']
-        },
-        {
-          model: Route,
-          attributes: ['deliveryDate']
-        }
-      ]
-    });
-    res.json({ orders });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
+// // GET all orders for current user
+// router.get('/current', requireAuth, async (req, res) => {
+//   const { user } = req;
+//   try {
+//     const orders = await Order.findAll({
+//       where: { userId: user.id },
+//       include: [
+//         {
+//           model: User,
+//           attributes: ['firstName', 'lastName', 'phone', 'address']
+//         },
+//         {
+//           model: Route,
+//           attributes: ['deliveryDate']
+//         }
+//       ]
+//     });
+//     res.json({ orders });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// });
 
-// GET most recent order by userId (based on most recent orderDate)
-router.get('/user/:userId/recent', async (req, res) => {
-  const { userId } = req.params;
-  try {
-    const order = await Order.findOne({
-      where: { userId },
-      order: [['orderDate', 'DESC']],
-      include: [
-        {
-          model: User,
-          attributes: ['firstName', 'lastName', 'phone', 'address']
-        },
-        {
-          model: Route,
-          attributes: ['deliveryDate']
-        }
-      ]
-    });
-    if (order) {
-      res.json({ order });
-    } else {
-      res.status(404).json({ message: 'Order not found' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
+// // GET most recent order by userId (based on most recent orderDate)
+// router.get('/user/:userId/recent', async (req, res) => {
+//   const { userId } = req.params;
+//   try {
+//     const order = await Order.findOne({
+//       where: { userId },
+//       order: [['orderDate', 'DESC']],
+//       include: [
+//         {
+//           model: User,
+//           attributes: ['firstName', 'lastName', 'phone', 'address']
+//         },
+//         {
+//           model: Route,
+//           attributes: ['deliveryDate']
+//         }
+//       ]
+//     });
+//     if (order) {
+//       res.json({ order });
+//     } else {
+//       res.status(404).json({ message: 'Order not found' });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// });
 
 // GET all orders by routeId (include user on order with full name, phone, and address)
 router.get('/route/:routeId', async (req, res) => {

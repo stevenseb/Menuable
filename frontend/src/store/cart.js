@@ -22,6 +22,8 @@ const saveCartToStorage = (items) => {
   }
 };
 
+
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
@@ -65,6 +67,10 @@ const cartSlice = createSlice({
     loadCart: (state) => {
       state.items = loadCartFromStorage();
     },
+    clearCart: (state) => {
+        state.items = [];
+        saveCartToStorage(state.items);
+      },
   },
 });
 
@@ -73,7 +79,8 @@ export const {
   removeFromCart, 
   increaseItemQuantity, 
   decreaseItemQuantity,
-  loadCart
+  loadCart,
+  clearCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

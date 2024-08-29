@@ -6,7 +6,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { validateSignup } = require('../../utils/validation');
-const { User } = require('../../db/models');
+const { User, Order, Route, OrderItem, Item } = require('../../db/models');
 
 // USER SIGN UP
 router.post('/', validateSignup, async (req, res) => {
@@ -127,5 +127,43 @@ router.delete('/:userId', requireAuth, async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+// GET /api/users/:userId/orders
+router.get('/:userId/orders', requireAuth, async (req, res) => {
+    const { userId } = req.params;
+    
+    if (req.user.id !== parseInt(userId)) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+  
+    try {
+      const orders = await Order.findAll({
+        where: { userId },
+        include: [
+          {
+            model: Route,
+            attributes: ['deliveryDate']
+          },
+          {
+            model: Item,
+            as: 'Items',
+            through: {
+                model: OrderItem,
+                as: 'OrderItems',
+                attributes: ['quantity', 'units', 'measure', 'pricePerUnit']
+            },
+            attributes: ['name']
+          }
+        ],
+        order: [['createdAt', 'DESC']]
+      });
+      res.json({ orders });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
 
 module.exports = router;

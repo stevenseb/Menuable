@@ -58,6 +58,15 @@ const MyAccount = () => {
     return <div>Error: {error}</div>;
   }
 
+  const formatCurrency = (value) => {
+    const number = parseFloat(value);
+    if (!isNaN(number)) {
+        return number.toFixed(2);
+    }
+    return '0.00'; // or return a dash or any other placeholder
+  };
+
+
   return (
     <div className="my-account-page">
       <div className="view-toggle">
@@ -75,7 +84,7 @@ const MyAccount = () => {
                 <div className="order-summary" onClick={() => handleToggleOrder(order.id)}>
                   <p>Order ID: {order.id}</p>
                   <p>Created: {new Date(order.createdAt).toLocaleDateString()}</p>
-                  <p>Total: ${order.total.toFixed(2)}</p>
+                  <p>Total: ${formatCurrency(order.total)}</p>
                   <button>{expandedOrderId === order.id ? 'Collapse' : 'Expand'}</button>
                 </div>
                 {expandedOrderId === order.id && (
@@ -86,14 +95,14 @@ const MyAccount = () => {
                       <div key={item.id} className="cart-item">
                         <p className="col1">{item.name}</p>
                         <p className="col2">
-                          ${item.OrderItems.pricePerUnit.toFixed(2)} x {item.OrderItems.quantity} {item.OrderItems.measure}
+                          ${formatCurrency(item.OrderItems?.pricePerUnit)} x {item.OrderItems.quantity} {item.OrderItems.measure}
                         </p>
                         <p className="col3">
-                          Subtotal: ${(item.OrderItems.pricePerUnit * item.OrderItems.quantity).toFixed(2)}
+                          Subtotal: ${formatCurrency((item.OrderItems.pricePerUnit * item.OrderItems.quantity))}
                         </p>
                       </div>
                     ))}
-                    <p className="total">Total: ${order.total.toFixed(2)}</p>
+                    <p className="total">Total: ${formatCurrency(order.total)}</p>
                     <p>Status: {order.status || 'Pending'}</p>
                   </div>
                 )}

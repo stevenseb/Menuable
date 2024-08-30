@@ -63,7 +63,7 @@ const MyAccount = () => {
     if (!isNaN(number)) {
         return number.toFixed(2);
     }
-    return '0.00'; // or return a dash or any other placeholder
+    return '0.00';
   };
 
 

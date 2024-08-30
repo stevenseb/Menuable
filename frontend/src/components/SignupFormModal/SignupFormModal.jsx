@@ -94,10 +94,12 @@ function SignupFormModal() {
 
   return (
     <div className="modal-backdrop">
-      <div className="modal-container-signup" ref={modalRef}>
-        <div className="signup-box">
-          <h5 className="centered-text">Sign Up</h5>
-          <form className="signup-form" onSubmit={handleSubmit}>
+  <div className="modal-container-signup" ref={modalRef}>
+    <div className="signup-box">
+      <h5 className="centered-text">Sign Up</h5>
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <div className="form-columns">
+          <div className="form-column">
             <label>
               Email
               <input
@@ -138,6 +140,8 @@ function SignupFormModal() {
               />
             </label>
             {errors.lastName && <p>{errors.lastName}</p>}
+          </div>
+          <div className="form-column">
             <label>
               Phone
               <input
@@ -178,12 +182,14 @@ function SignupFormModal() {
               />
             </label>
             {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-            <button type="submit" disabled={isDisabled}>Sign Up</button>
-          </form>
-          <button type="button" onClick={switchToLogin}>Already Registered? -Log In</button>
+          </div>
         </div>
-      </div>
+        <button type="submit" disabled={isDisabled}>Sign Up</button>
+        <button type="button" onClick={switchToLogin}>Already Registered? -Log In</button>
+      </form>
     </div>
+  </div>
+</div>
   );
 }
 

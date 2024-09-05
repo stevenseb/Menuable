@@ -34,7 +34,7 @@ module.exports = {
       },
       units: {
         allowNull: false,
-        type: Sequelize.DECIMAL(10,1)
+        type: Sequelize.STRING
       },
       measure: {
         allowNull: false,
@@ -50,7 +50,7 @@ module.exports = {
       defaultValue: 0,
       },
       quantityOnHand: {
-        type: Sequelize.DECIMAL(10,1),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       costPerUnit: {

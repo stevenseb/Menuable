@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
     },
     quantityOnHand: {
-      type: DataTypes.DECIMAL(10, 1),
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     costPerUnit: {

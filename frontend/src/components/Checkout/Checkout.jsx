@@ -78,11 +78,11 @@ const CheckoutPage = () => {
     {cartItems.map((item) => (
         <div key={item.id} className="cart-item">
         <p className="col1">{item.name}</p>
-        <p className="col2">${item.price.toFixed(2)} x {item.quantity}</p>
-        <p className="col3">${(item.price * item.quantity).toFixed(2)}</p>
+        <p className="col2">${item.price} x {item.quantity}</p>
+        <p className="col3">${(item.price * item.quantity)}</p>
         </div>
     ))}
-     <p className="total">Total: ${calculateTotal().toFixed(2)}</p>
+     <p className="total">Total: ${calculateTotal()}</p>
     </div>
       <div className="user-info">
         <h3>Delivery Information</h3>

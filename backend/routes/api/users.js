@@ -9,57 +9,77 @@ const { validateSignup } = require('../../utils/validation');
 const { User, Order, Route, OrderItem, Item } = require('../../db/models');
 
 // USER SIGN UP
-router.post('/', validateSignup, async (req, res) => {
-  const { firstName, lastName, email, password, username, phone, address } = req.body;
-  try {
-    const hashedPassword = bcrypt.hashSync(password);
-    const user = await User.create({ firstName, lastName, email, hashedPassword, username, phone, address });
-
-    const safeUser = {
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      username: user.username,
-      phone: user.phone,
-      address: user.address,
-    };
-
-    await setTokenCookie(res, safeUser);
-
-    return res.json({
-      user: safeUser
-    });
-  } catch (error) {
-    if (error.message.includes('Email already exists')) {
-      return res.status(500).json({
-        message: "User already exists",
-        errors: {
-          email: "User with that email already exists"
+// USER SIGN UP
+router.post('/', async (req, res, next) => {
+    try {
+        const { username, firstName, lastName, email, password, phone, address } = req.body;
+        
+        // Check if username already exists
+        const existingUsername = await User.findOne({ where: { username } });
+        if (existingUsername) {
+            return res.status(400).json({ message: 'Username already exists' });
         }
-      });
-    } else if (error.message.includes('Username already exists')) {
-      return res.status(500).json({
-        message: "User already exists",
-        errors: {
-          username: "User with that username already exists"
+
+        // Check if email already exists
+        const existingEmail = await User.findOne({ where: { email } });
+        if (existingEmail) {
+            return res.status(400).json({ message: 'Email already exists' });
         }
-      });
-    } else {
-      return res.status(500).json({ message: 'Internal server error' });
+
+        // Check if phone already exists
+        const existingPhone = await User.findOne({ where: { phone } });
+        if (existingPhone) {
+            return res.status(400).json({ message: 'Phone number already exists' });
+        }
+
+        const user = await User.scope('withAllFields').create({
+            username,
+            firstName,
+            lastName,
+            email,
+            hashedPassword: bcrypt.hashSync(password, 10),
+            phone,
+            address,
+            points: 0
+        });
+        
+        const safeUser = {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            username: user.username,
+            phone: user.phone,
+            address: user.address,
+        };
+
+        await setTokenCookie(res, safeUser);
+        return res.json({
+            user: safeUser
+        });
+    } catch (error) {
+        console.error('Detailed signup error:', error);
+        if (error.name === 'SequelizeValidationError') {
+            const validationErrors = error.errors.map(err => ({
+                field: err.path,
+                message: err.message
+            }));
+            return res.status(400).json({
+                message: 'Validation error',
+                errors: validationErrors
+            });
+        } else if (error.name === 'SequelizeUniqueConstraintError') {
+            const field = error.errors[0].path;
+            return res.status(400).json({
+                message: `${field} already exists`
+            });
+        } else {
+            return res.status(500).json({
+                message: 'An unexpected error occurred during signup',
+                error: error.message
+            });
+        }
     }
-  }
-});
-
-// GET all users
-router.get('/', async (req, res) => {
-  try {
-    const users = await User.findAll();
-    res.json({ users });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
 });
 
 // POST edit user by userId

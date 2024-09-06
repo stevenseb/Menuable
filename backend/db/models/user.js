@@ -28,12 +28,6 @@ module.exports = (sequelize, DataTypes) => {
             throw new Error('Username cannot be an email address.');
           }
         },
-        async isUnique(username) {
-          const user = await User.findOne({ where: { username } });
-          if (user) {
-            throw new Error('Username already exists');
-          }
-        },
       },
     },
     email: {
@@ -43,12 +37,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [3, 256],
         isEmail: true,
-        async isUnique(email) {
-          const user = await User.findOne({ where: { email } });
-          if (user) {
-            throw new Error('Email already exists');
-          }
-        },
       },
     },
     hashedPassword: {
@@ -61,7 +49,6 @@ module.exports = (sequelize, DataTypes) => {
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
       validate: {
         len: [6, 15],
       }
@@ -84,6 +71,33 @@ module.exports = (sequelize, DataTypes) => {
         exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
       }
     },
+    scopes: {
+      withAllFields: {
+        attributes: {}
+      }
+    },
   });
+
+  User.addHook('beforeValidate', async (user, options) => {
+    if (user.changed('username')) {
+      const existingUser = await User.findOne({ where: { username: user.username } });
+      if (existingUser) {
+        throw new Error('Username already exists');
+      }
+    }
+    if (user.changed('email')) {
+      const existingUser = await User.findOne({ where: { email: user.email } });
+      if (existingUser) {
+        throw new Error('Email already exists');
+      }
+    }
+    if (user.changed('phone')) {
+      const existingUser = await User.findOne({ where: { phone: user.phone } });
+      if (existingUser) {
+        throw new Error('Phone number already exists');
+      }
+    }
+  });
+
   return User;
 };

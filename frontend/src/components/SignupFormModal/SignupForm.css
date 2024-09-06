@@ -45,8 +45,9 @@
   }
 
   .signup-form button {
-    max-width: 400px;
-    margin: 20px;
+    max-width: 380px;
+    margin: 12px 14px;
+
   }
   
   /* New styles for 2-column layout */
@@ -56,7 +57,7 @@
   }
   
   .form-column {
-    width: 48%; /* Adjust as needed */
+    width: 45%; /* Adjust as needed */
   }
   
   /* Label styling */
@@ -106,4 +107,21 @@
   p {
     color: red;
     font-weight: bold;
+  }
+
+  .warning {
+    color: rgb(214, 137, 4);
+    font-size: 0.8em;
+    margin-top: 5px;
+    background-color: rgb(236, 234, 234);
+  }
+  
+  .error {
+    color: rgb(188, 30, 56);
+    background-color: rgb(236, 234, 234);
+    font-size: 1em;
+    margin-top: 5px;
+    width: 30%;
+    margin-left: 40px;
+    text-align: center;
   }

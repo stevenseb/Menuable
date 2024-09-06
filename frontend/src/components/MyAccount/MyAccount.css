@@ -1,75 +1,84 @@
 .my-account-page {
-    padding: 150px;
+    padding: 50px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 100px;
   }
   
-  .view-toggle button {
+  .my-account-view-toggle button {
     margin-right: 10px;
   }
   
-  .orders-view .order {
-    padding: 10px;
+  .my-account-orders-view {
+    width: 100%;
+  }
+  
+  .my-account-order {
+    border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  
+  .my-account-order-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #0a0a0a;
+    cursor: pointer;
+  }
+  
+  .my-account-order-summary p {
+    margin: 0;
+    padding: 0 10px;
+    flex: 1;
+  }
+  
+  .my-account-order-summary button {
+    flex: 0 0 auto;
+    margin-left: 10px;
+  }
+  
+  .my-account-order-details {
+    padding: 10px;
+  }
+  
+  .my-account-order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .my-account-order-item:last-child {
+    border-bottom: none;
+  }
+  
+  .my-account-order-item .item-name { flex: 2; }
+  .my-account-order-item .item-price, 
+  .my-account-order-item .item-subtotal { 
+    flex: 1; 
+    text-align: right; 
+  }
+  
+  .my-account-order-details .order-total {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  .my-account-order-details p {
+    font-size: 20px;
+  }
+  
+  .my-account-info-view {
+    margin-top: 20px;
   }
   
   .my-account-page p {
     color: silver;
-    margin: 5px 0; /* Reduce vertical margin */
-  }
-  
-  .order-summary {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .order-details {
-    margin-top: 16px;
-  }
-  
-  .info-view {
-    margin-top: 20px;
-  }
-  
-  .info-view input {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .info-view button {
-    margin-top: 10px;
-  }
-  
-  /* New styles for cart items */
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .cart-item p {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .cart-item .col1 {
-    flex: 2;
-  }
-  
-  .cart-item .col2, .cart-item .col3 {
-    flex: 1;
-    text-align: left;
-  }
-  
-  /* Adjust the h4 margin for "Items:" */
-  .order-details h4 {
-    margin-bottom: 5px;
-  }
-  
-  /* Adjust the total line */
-  .order-details .total {
-    margin-top: 10px;
-    font-weight: bold;
+    margin: 5px 0;
   }

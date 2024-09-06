@@ -25,18 +25,19 @@ const updateUser = (user) => ({
 
 // thunk for login
 export const login = (user) => async (dispatch) => {
-  const { credential, password } = user;
-  const response = await csrfFetch("/api/session", {
-    method: "POST",
-    body: JSON.stringify({
-      credential,
-      password
-    })
-  });
-  const data = await response.json();
-  dispatch(setUser(data.user));
-  return response;
-};
+    try {
+      const response = await csrfFetch("/api/session", {
+        method: "POST",
+        body: JSON.stringify(user),
+      });
+      const data = await response.json();
+      dispatch(setUser(data.user));
+      return response;
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
+  };
 
 // thunk for restore session
 export const restoreUser = () => async (dispatch) => {

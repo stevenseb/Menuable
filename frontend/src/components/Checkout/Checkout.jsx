@@ -18,6 +18,10 @@ const CheckoutPage = () => {
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (!user) {
       navigate('/signup');
     }
@@ -53,7 +57,6 @@ const CheckoutPage = () => {
     id: item.id,
     quantity: item.quantity,
   }));
-console.log(itemsForOrder);
   try {
     await dispatch(createOrder({ routeId, total, orderDate, items: itemsForOrder }));
     // Clear the cart and navigate to a confirmation page
@@ -72,15 +75,15 @@ console.log(itemsForOrder);
     <div className="checkout-page">
       <h2>Your Pending Order</h2>
       <div className="order-summary">
-        {cartItems.map((item) => (
-          <div key={item.id} className="cart-item">
-            <p className="col1">{item.name}</p>
-            <p className="col2">${item.price} x {item.quantity}</p>
-            <p className="col3">Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
-          </div>
-        ))}
-        <p className="total">Total: ${calculateTotal().toFixed(2)}</p>
-      </div>
+    {cartItems.map((item) => (
+        <div key={item.id} className="cart-item">
+        <p className="col1">{item.name}</p>
+        <p className="col2">${item.price.toFixed(2)} x {item.quantity}</p>
+        <p className="col3">${(item.price * item.quantity).toFixed(2)}</p>
+        </div>
+    ))}
+     <p className="total">Total: ${calculateTotal().toFixed(2)}</p>
+    </div>
       <div className="user-info">
         <h3>Delivery Information</h3>
         {isEditing ? (

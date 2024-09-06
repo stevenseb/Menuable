@@ -112,7 +112,13 @@ button[type="submit"]:disabled {
 }
 
 /* Error message styling */
-p {
-  color: red;
-  font-weight: bold;
-}
+
+.error-login {
+    color: red;
+    background-color: silver;
+    border-radius: 5px;
+    font-size: 0.8em;
+    padding: 2px;
+    margin: 5px;
+    width: 120% !important;
+  }

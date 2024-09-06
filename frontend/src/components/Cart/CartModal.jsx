@@ -69,7 +69,7 @@ const CartModal = ({ onCheckout }) => {
         </div>
         <div className="cart-modal-body">
           {cartItems.length === 0 ? (
-            <p>Your cart is empty.</p>
+            <p className="empty">Your cart is empty.</p>
           ) : (
             cartItems.map((item) => (
               <div className="cart-item" key={item.id}>

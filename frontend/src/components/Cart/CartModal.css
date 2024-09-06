@@ -140,6 +140,13 @@
     margin-left: 2px;
     padding: 2px;
     background-color: rgb(202, 197, 197);
+    color: black !important;
+}
+
+.empty {
+    color: rgb(253, 50, 50);
+    font-weight: 500;
+    font-size: 1.4em;
 }
 
 

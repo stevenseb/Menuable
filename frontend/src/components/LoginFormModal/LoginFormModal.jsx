@@ -16,29 +16,44 @@ function LoginFormModal() {
     setIsDisabled(credential.length < 4 || password.length < 6);
   }, [credential, password]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors({});
-    return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setErrors({});
+  try {
+    const response = await dispatch(sessionActions.login({ credential, password }));
+    if (response.ok) {
+      closeModal();
+    } else {
+      const data = await response.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+      } else if (data && data.message) {
+        setErrors({ credential: data.message });
+      } else {
+        setErrors({ credential: 'Invalid username or password' });
+      }
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    setErrors({ credential: 'Invalid username or password' });
+  }
+};
 
-  const handleDemoLogin = (e) => {
+  const handleDemoLogin = async (e) => {
     e.preventDefault();
-    return dispatch(sessionActions.login({ credential: 'demo', password: 'demo' }))
-      .then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
+    try {
+      await dispatch(sessionActions.login({ credential: 'demo', password: 'demo' }));
+      closeModal();
+    } catch (error) {
+      console.error('Demo login error:', error);
+      if (error && error.errors) {
+        setErrors(error.errors);
+      } else if (error && error.message) {
+        setErrors({ credential: error.message });
+      } else {
+        setErrors({ credential: 'An error occurred during demo login' });
+      }
+    }
   };
 
   return (
@@ -63,7 +78,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.credential && (<p>{errors.credential}</p>)}
+        {errors.credential && <p className="error-login">{errors.credential}</p>}
         <button type="submit" disabled={isDisabled}>Log In</button>
         <br />
         <button type="button" onClick={handleDemoLogin}>

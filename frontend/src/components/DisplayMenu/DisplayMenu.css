@@ -121,9 +121,11 @@
     font-size: 1.4em;
   }
 
-  /* .rating {
+  .rating {
+    color: silver;
     cursor: pointer;
-  } */
+    font-size: 1.1em;
+  }
   
   /* .rating:hover {
     text-decoration: underline;

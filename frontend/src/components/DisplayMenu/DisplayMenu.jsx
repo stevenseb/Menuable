@@ -108,12 +108,13 @@ const DisplayMenu = () => {
                 <p className="text">{item.description}</p>
                 <p className="price">Price: ${item.price} for {item.units} {item.measure}</p>
                 <p className="units">Units Available: {item.quantityOnHand}</p>
-                <div className="rating">
+                <div className="community-rating">
                 <p className="text">
                   {averageRating ? (
                     <>
-                      Community rating: {averageRating}
+                      Community rating: <span className="rating" onClick={() => openReviewsModal(item)}>{averageRating}</span>
                       <FontAwesomeIcon 
+                      className="rating"
                       icon={faStar} 
                       style={{ color: 'gold', marginLeft: '5px' }} 
                       onClick={() => openReviewsModal(item)}

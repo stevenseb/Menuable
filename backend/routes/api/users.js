@@ -9,7 +9,6 @@ const { validateSignup } = require('../../utils/validation');
 const { User, Order, Route, OrderItem, Item } = require('../../db/models');
 
 // USER SIGN UP
-// USER SIGN UP
 router.post('/', async (req, res, next) => {
     try {
         const { username, firstName, lastName, email, password, phone, address } = req.body;

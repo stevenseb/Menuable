@@ -52,12 +52,12 @@ function ProfileButton({ user }) {
         <ul className="profile-dropdown">
           {user ? (
             <>
-              <li className="profile-info">
-                <div>Hello {user.firstName}!</div>
-                <div>&#x2022; {user.username}</div>
-                <div>&#x2022; {user.firstName} {user.lastName}</div>
-                <div>&#x2022; {user.email}</div>
-              </li>
+              <div className="profile-info">
+                <div>Hello {user.firstName} !</div>
+                <div> {user.username}</div>
+                <div> {user.firstName} {user.lastName}</div>
+                <div>{user.email}</div>
+                </div>
               <hr />
         
                 <NavLink to="/" className="profile-dropdown-item logout" onClick={() => setShowMenu(false)}>

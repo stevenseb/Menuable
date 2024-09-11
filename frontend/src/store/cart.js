@@ -22,12 +22,11 @@ const saveCartToStorage = (items) => {
   }
 };
 
-
-
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     items: loadCartFromStorage(),
+    tempReservedQuantities: {},
   },
   reducers: {
     addToCart: (state, action) => {
@@ -38,10 +37,20 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ ...item, quantity: 1 });
       }
+      // Update temporary reserved quantity
+      state.tempReservedQuantities[item.id] = (state.tempReservedQuantities[item.id] || 0) + 1;
       saveCartToStorage(state.items);
     },
     removeFromCart: (state, action) => {
       const item = action.payload;
+      const existingItem = state.items.find((i) => i.id === item.id);
+      if (existingItem) {
+        // Release temporary reserved quantity
+        state.tempReservedQuantities[item.id] -= existingItem.quantity;
+        if (state.tempReservedQuantities[item.id] <= 0) {
+          delete state.tempReservedQuantities[item.id];
+        }
+      }
       state.items = state.items.filter((i) => i.id !== item.id);
       saveCartToStorage(state.items);
     },
@@ -50,6 +59,8 @@ const cartSlice = createSlice({
       const existingItem = state.items.find((i) => i.id === item.id);
       if (existingItem) {
         existingItem.quantity += 1;
+        // Update temporary reserved quantity
+        state.tempReservedQuantities[item.id] = (state.tempReservedQuantities[item.id] || 0) + 1;
       }
       saveCartToStorage(state.items);
     },
@@ -58,6 +69,11 @@ const cartSlice = createSlice({
       const existingItem = state.items.find((i) => i.id === item.id);
       if (existingItem) {
         existingItem.quantity -= 1;
+        // Release temporary reserved quantity
+        state.tempReservedQuantities[item.id] -= 1;
+        if (state.tempReservedQuantities[item.id] <= 0) {
+          delete state.tempReservedQuantities[item.id];
+        }
         if (existingItem.quantity === 0) {
           state.items = state.items.filter((i) => i.id !== item.id);
         }
@@ -66,11 +82,20 @@ const cartSlice = createSlice({
     },
     loadCart: (state) => {
       state.items = loadCartFromStorage();
+      // Reset temporary reserved quantities
+      state.tempReservedQuantities = {};
+      state.items.forEach(item => {
+        state.tempReservedQuantities[item.id] = item.quantity;
+      });
     },
     clearCart: (state) => {
-        state.items = [];
-        saveCartToStorage(state.items);
-      },
+      state.items = [];
+      state.tempReservedQuantities = {};
+      saveCartToStorage(state.items);
+    },
+    expireCart: (state) => {
+      state.tempReservedQuantities = {};
+    },
   },
 });
 
@@ -81,6 +106,7 @@ export const {
   decreaseItemQuantity,
   loadCart,
   clearCart,
+  expireCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

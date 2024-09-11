@@ -41,8 +41,8 @@
   }
   
   .onMenu label {
-    margin-bottom: 0.5rem; /* Space between label and checkbox */
-    font-weight: 400; /* To make the label more prominent */
+    margin-bottom: 0.5rem;
+    font-weight: 400;
     color: rgb(70, 68, 68);
   }
   

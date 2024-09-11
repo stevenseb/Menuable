@@ -36,7 +36,7 @@ const ReviewForm = ({ spotId, closeModal, addNewReview }) => {
           stars,
         };
         const newReview = await dispatch(createReview(reviewPayload));
-        addNewReview(newReview);  // callback function passed as a prop
+        addNewReview(newReview); 
         closeModal();
       } catch (error) {
         setErrors([error.message]);

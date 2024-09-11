@@ -15,39 +15,51 @@ export const fetchUserOrders = createAsyncThunk(
     }
   );
 
-export const createOrder = createAsyncThunk(
-  'orders/createOrder',
-  async ({ routeId, total, orderDate, items }, { rejectWithValue, dispatch }) => {
-    try {
-      const orderResponse = await csrfFetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ routeId, total, orderDate, items }),
-      });
-
-      if (!orderResponse.ok) throw new Error('Failed to create order');
-      const orderData = await orderResponse.json();
-
-      const orderItemsResponse = await csrfFetch('/api/order-items', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId: orderData.order.id, items }),
-      });
-
-      if (!orderItemsResponse.ok) throw new Error('Failed to create order items');
-      const orderItemsData = await orderItemsResponse.json();
-
-      const completeOrder = { ...orderData.order, orderItems: orderItemsData.orderItems };
-
-      // Dispatch an action to fetch all orders after creating a new one
-      dispatch(fetchUserOrders(orderData.order.userId));
-
-      return completeOrder;
-    } catch (error) {
-      return rejectWithValue(error.message);
+  export const createOrder = createAsyncThunk(
+    'orders/createOrder',
+    async ({ routeId, total, orderDate, items }, { rejectWithValue, dispatch }) => {
+      try {
+        // Create the order
+        const orderResponse = await csrfFetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ routeId, total, orderDate, items }),
+        });
+  
+        if (!orderResponse.ok) throw new Error('Failed to create order');
+        const orderData = await orderResponse.json();
+  
+        // Create order items
+        const orderItemsResponse = await csrfFetch('/api/order-items', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: orderData.order.id, items }),
+        });
+  
+        if (!orderItemsResponse.ok) throw new Error('Failed to create order items');
+        const orderItemsData = await orderItemsResponse.json();
+  
+        // Update item quantities in the database
+        for (const item of items) {
+          await csrfFetch(`/api/items/${item.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ quantityOnHand: item.quantityOnHand - item.quantity }),
+          });
+        }
+  
+        const completeOrder = { ...orderData.order, orderItems: orderItemsData.orderItems };
+  
+        // Dispatch an action to fetch all orders after creating a new one
+        dispatch(fetchUserOrders(orderData.order.userId));
+  
+        return completeOrder;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
     }
-  }
-);
+  );
+  
 
 const orderSlice = createSlice({
   name: 'orders',

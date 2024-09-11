@@ -5,19 +5,14 @@ export async function restoreCSRF() {
   try {
     const response = await csrfFetch('/api/csrf/restore');
     if (response.ok) {
-      return response.json(); // Return JSON response, if needed
+      return response.json();
     }
     throw new Error('Failed to restore CSRF token');
   } catch (error) {
     console.error('Error restoring CSRF token:', error);
-    throw error; // Rethrow to handle further up if needed
+    throw error;
   }
 }
-
-// export const fetchWithCSRF = async (url, options = {}) => {
-//     await restoreCSRF();
-//     return csrfFetch(url, options);
-//   };
 
 
 export async function csrfFetch(url, options = {}) {
@@ -46,6 +41,6 @@ export async function csrfFetch(url, options = {}) {
     return response;
   } catch (error) {
     console.error('Error during fetch:', error);
-    throw error; // Rethrow to handle further up if needed
+    throw error; 
   }
 }

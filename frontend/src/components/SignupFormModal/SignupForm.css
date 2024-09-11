@@ -7,7 +7,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     height: 100% !important;
     width: 100%;
-    max-width: 1000px; /* Increased max-width for 2 columns */
+    max-width: 1000px;
     margin: 70px auto 0;
     z-index: 1000;
     display: flex;
@@ -50,14 +50,14 @@
 
   }
   
-  /* New styles for 2-column layout */
+  /* 2-column layout */
   .form-columns {
     display: flex;
     justify-content: space-between;
   }
   
   .form-column {
-    width: 45%; /* Adjust as needed */
+    width: 45%;
   }
   
   /* Label styling */

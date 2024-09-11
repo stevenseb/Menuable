@@ -83,7 +83,6 @@
 .profile-button-container {
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
  
@@ -107,7 +106,7 @@
   }
   
   .hamburger-icon {
-    filter: invert(1); /* This will make the hamburger icon white */
+    filter: invert(1);
   }
 
 .dropdown-menu {
@@ -156,7 +155,7 @@
   border: none;
   text-align: left;
   width: 100%;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .profile-dropdown-item:hover {
@@ -215,16 +214,16 @@
 /* Media Query for mobile screens */
 @media (max-width: 740px) {
   .navbar-logo {
-    width: 89%; /* Adjust the logo on mobile */
+    width: 92%;
     height: auto;
   }
 
   .profile-button {
-    margin-left: 0; /* Reset the margin for stacked icons */
+    margin-left: 0;
   }
   
   .user-icon {
-    margin-left: -2px; /* Adjust this value as needed */
+    margin-left: -2px;
   }
 
   .cart-icon {

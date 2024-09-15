@@ -1,6 +1,6 @@
 # Menuable Lightweight Food Ordering App
 
-![Uploading menuable.png…]()
+![Menuable Screenshot](https://github.com/stevenseb/Menuable/blob/main/menuable.png)
 
 
 <a href="https://menuable-main.onrender.com">Menuable Live Site</a>

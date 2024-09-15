@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { useModal } from '../../context/Modal';
@@ -11,6 +11,7 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const [isDisabled, setIsDisabled] = useState(true);
+  const modalRef = useRef();
 
   useEffect(() => {
     setIsDisabled(credential.length < 4 || password.length < 6);
@@ -57,7 +58,7 @@ function LoginFormModal() {
   };
 
   return (
-    <div className="login-box">
+    <div className="login-box" ref={modalRef}>
       <h3 className="centered-text">Log In</h3>
       <form className="login-form" onSubmit={handleSubmit}>
         <label>

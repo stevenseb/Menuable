@@ -113,9 +113,7 @@ function SignupFormModal() {
   };
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal-container-signup" ref={modalRef}>
-        <div className="signup-box">
+        <div className="signup-box" ref={modalRef}>
           <h5 className="centered-text">Sign Up</h5>
           <form className="signup-form" onSubmit={handleSubmit}>
             <div className="form-columns">
@@ -223,8 +221,6 @@ function SignupFormModal() {
             <button type="button" onClick={switchToLogin}>Already Registered? -Log In</button>
           </form>
         </div>
-      </div>
-    </div>
   );
 }
 

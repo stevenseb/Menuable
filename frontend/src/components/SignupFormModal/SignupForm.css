@@ -1,4 +1,18 @@
 /* Modal content styling */
+/* .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 0px;
+  }
+  
 .modal-container-signup {
     position: relative;
     background-color: rgba(56, 54, 54, 0.1) !important;
@@ -13,17 +27,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+  } */
   
   /* Signup box styling */
   .signup-box {
     background-color: rgb(91, 91, 91);
-    padding: 15px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    border: 1px solid #515050;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    height: 67%;
+    width: 92%;
+    color: beige;
   }
   
   .centered-text {
@@ -33,20 +47,15 @@
   
   /* Form styling */
   .signup-form {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 12px;
-    width: 90%;
-    height: 70%;
-    margin: 0 auto;
-    margin-top: 10px;
-    background-color: rgb(91, 91, 91);
-    color: beige;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .signup-form button {
     max-width: 380px;
-    margin: 12px 14px;
+    margin: 8px 14px;
 
   }
   
@@ -54,6 +63,7 @@
   .form-columns {
     display: flex;
     justify-content: space-between;
+    width: 95%;
   }
   
   .form-column {

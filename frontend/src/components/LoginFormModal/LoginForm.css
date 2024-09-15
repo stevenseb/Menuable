@@ -1,23 +1,8 @@
-/* Modal backdrop styling */
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 0px;
-  }
-  
-  /* Modal content styling */
-  .modal-container {
+/* Modal content styling */
+  /* .modal-container {
     position: relative;
     background-color: rgb(56, 54, 54) !important;
-    padding: 15px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     height: 110% !important;
@@ -27,18 +12,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+  } */
 
 
 /* Login box styling */
 .login-box {
   background-color: rgb(91, 91, 91);
-  padding: 30px;
+  padding: 12px;
   border: 1px solid #515050;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 290px;
+  max-width: 500px;
   width: 100%;
+  height: 100%;
   color: beige;
 }
 
@@ -52,15 +38,15 @@
   background-color: #f9f9f9;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-left: 15px;
-  margin-top: 10px;
+  align-items: center !important;
+  margin-left: 30px;
+  margin-top: 6px;
 }
 
 /* Label styling */
 .login-form label {
   width: 100%; 
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-weight: 400;
   text-align: left;
 }

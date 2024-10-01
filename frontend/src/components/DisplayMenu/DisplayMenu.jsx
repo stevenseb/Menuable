@@ -47,7 +47,7 @@ const DisplayMenu = () => {
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchMenuItems());
+      dispatch(fetchMenuItems()); // Fetch only items with onMenu: true
     }
   }, [dispatch, status]);
 
@@ -88,10 +88,10 @@ const DisplayMenu = () => {
 
   return (
     <div>
-    <div className="siteDescription">
+      <div className="siteDescription">
         <h2>Artisan Slavic Foods and Argentine Goodness</h2>
         <h3>Delivered to Your Door</h3>
-        </div>
+      </div>
       <div className="menu-container">
         {items.map((item) => {
           const averageRating = calculateAverageRating(item.id);
@@ -109,41 +109,41 @@ const DisplayMenu = () => {
                 <p className="price">Price: ${item.price} for {item.units} {item.measure}</p>
                 <p className="units">Units Available: {item.quantityOnHand}</p>
                 <div className="community-rating">
-                <p className="text">
-                  {averageRating ? (
-                    <>
-                      Community rating: <span className="rating" onClick={() => openReviewsModal(item)}>{averageRating}</span>
-                      <FontAwesomeIcon 
-                      className="rating"
-                      icon={faStar} 
-                      style={{ color: 'gold', marginLeft: '5px' }} 
-                      onClick={() => openReviewsModal(item)}
-                      />
-                    </>
-                  ) : (
-                    'No reviews yet'
-                  )}
-                </p>
+                  <p className="text">
+                    {averageRating ? (
+                      <>
+                        Community rating: <span className="rating" onClick={() => openReviewsModal(item)}>{averageRating}</span>
+                        <FontAwesomeIcon 
+                          className="rating"
+                          icon={faStar} 
+                          style={{ color: 'gold', marginLeft: '5px' }} 
+                          onClick={() => openReviewsModal(item)}
+                        />
+                      </>
+                    ) : (
+                      'No reviews yet'
+                    )}
+                  </p>
                 </div>
                 {loggedInUser && !hasUserReviewed(item.id) && (
-                    <p className="text leave-review">
-                        <FontAwesomeIcon icon={faEdit} className='create-review' onClick={() => openCreateReviewModal(item.id)} />
-                         Leave a review
-                    </p>
+                  <p className="text leave-review">
+                    <FontAwesomeIcon icon={faEdit} className='create-review' onClick={() => openCreateReviewModal(item.id)} />
+                     Leave a review
+                  </p>
                 )}
               </div>
               {quantityInCart > 0 && (
                 <p className="in-cart">In cart: {quantityInCart}</p>
               )}
               <div className="buttonWrapper">
-              <button 
-                className={`addToCart ${addedToCart[item.id] ? 'added' : ''}`} 
-                onClick={() => handleAddToCart(item)}
-                disabled={addedToCart[item.id]}
-              >
-                {addedToCart[item.id] ? 'Added!' : 'Add to Cart'}
-                <FontAwesomeIcon icon={faShoppingCart} style={{ marginLeft: '5px' }} />
-              </button>
+                <button 
+                  className={`addToCart ${addedToCart[item.id] ? 'added' : ''}`} 
+                  onClick={() => handleAddToCart(item)}
+                  disabled={addedToCart[item.id]}
+                >
+                  {addedToCart[item.id] ? 'Added!' : 'Add to Cart'}
+                  <FontAwesomeIcon icon={faShoppingCart} style={{ marginLeft: '5px' }} />
+                </button>
               </div>
             </div>
           );

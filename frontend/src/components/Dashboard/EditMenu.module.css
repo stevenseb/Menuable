@@ -1,17 +1,77 @@
-.editMenu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.container {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 114px;
+    min-width: 680px;
     justify-content: center;
-    height: 100%;
+  }
+  .smallText {
+    text-align: center;
+    background-color: #dde1e2;
+    border-radius: 5px;
+    color: rgb(92, 90, 90);
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .smallText2 {
+    text-align: center;
+    border-radius: 5px;
+    font-weight:700;
+    color: rgb(49, 48, 48);
+    font-size: 1em;
+    margin-bottom: 6px;
+  }
+
+  .sectionTitle {
+    margin: 10px;
+    text-align: center;
+    color: rgb(32, 30, 30);
   }
   
-  .heading {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+  .itemRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: rgb(35, 34, 34);
+  }
+
+  .itemRow button {
+    border-radius: 6px;
+    cursor: pointer;
   }
   
-  .message {
-    font-size: 1.5rem;
-    color: white;
+  .thumbnail {
+    width: 90px;
+    height: 70px;
+    margin-right: 10px;
   }
+  
+  .checkbox {
+    margin-left: 10px;
+    cursor: pointer;
+    border: solid rgb(51, 50, 50) 2px;
+  }
+  
+  .deleteButton {
+    margin-left: 10px;
+    cursor: pointer;
+    border: solid rgb(174, 172, 172) 2px;
+  }
+  
+  .onMenuSection {
+    background-color: #e9f0ea;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 48px;
+  }
+  
+  .offMenuSection {
+    background-color: #9fa7ae;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  

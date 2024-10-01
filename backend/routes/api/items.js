@@ -16,7 +16,8 @@ router.get('/', async (req, res) => {
                 'numRatings', 
                 'stars',
                 'quantityOnHand',
-                'imageFilename'
+                'imageFilename',
+                'onMenu'
             ]
         });
 
@@ -42,7 +43,8 @@ router.get('/menu', async (req, res) => {
                 'numRatings', 
                 'stars',
                 'quantityOnHand',
-                'imageFilename'
+                'imageFilename',
+                'onMenu'
             ]
         });
 
@@ -68,7 +70,8 @@ router.get('/:itemId', async (req, res) => {
                 'numRatings', 
                 'stars',
                 'quantityOnHand',
-                'imageFilename'
+                'imageFilename',
+                'onMenu'
             ]
         });
 
@@ -139,5 +142,26 @@ router.post('/', async (req, res) => {
     }
   });
 
+  // PATCH an item's onMenu status
+router.patch('/:itemId/onMenu', async (req, res) => {
+    const { itemId } = req.params;
+    const { onMenu } = req.body;
+  
+    try {
+      const item = await Item.findByPk(itemId);
+  
+      if (!item) {
+        return res.status(404).json({ message: 'Item not found' });
+      }
+  
+      item.onMenu = onMenu;
+      await item.save();
+  
+      res.json({ item });
+    } catch (error) {
+      console.error('Error updating item onMenu status:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 module.exports = router;

@@ -41,6 +41,22 @@ export const updateItemOnMenu = createAsyncThunk('menu/updateItemOnMenu', async 
     return data.item;
   });
 
+// Thunk to update an item's quantityOnHand
+export const updateItemQuantity = createAsyncThunk('menu/updateItemQuantity', async ({ id, quantityOnHand }) => {
+  const response = await csrfFetch(`/api/items/${id}/quantity`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ quantityOnHand }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to update item quantity');
+  }
+
+  const data = await response.json();
+  return data.item;
+});
+
 // Thunk to delete an item
 export const deleteItem = createAsyncThunk('menu/deleteItem', async (id) => {
   await csrfFetch(`/api/items/${id}`, { method: 'DELETE' });
@@ -99,6 +115,12 @@ const itemsSlice = createSlice({
       })
       .addCase(deleteItem.fulfilled, (state, action) => {
         state.items = state.items.filter(item => item.id !== action.payload);
+      })
+      .addCase(updateItemQuantity.fulfilled, (state, action) => {
+        const index = state.items.findIndex(item => item.id === action.payload.id);
+        if (index !== -1) {
+          state.items[index].quantityOnHand = action.payload.quantityOnHand;
+        }
       });
   },
 });

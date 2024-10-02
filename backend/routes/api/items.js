@@ -164,4 +164,26 @@ router.patch('/:itemId/onMenu', async (req, res) => {
     }
 });
 
+// PATCH an item's quantityOnHand
+router.patch('/:itemId/quantity', async (req, res) => {
+  const { itemId } = req.params;
+  const { quantityOnHand } = req.body;
+
+  try {
+    const item = await Item.findByPk(itemId);
+
+    if (!item) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+
+    item.quantityOnHand = quantityOnHand;
+    await item.save();
+
+    res.json({ item });
+  } catch (error) {
+    console.error('Error updating item quantity:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 module.exports = router;

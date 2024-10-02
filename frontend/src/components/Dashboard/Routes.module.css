@@ -13,5 +13,23 @@
   
   .message {
     font-size: 1.5rem;
+    font-weight: 500;
+    color: rgb(181, 177, 177);
+  }
+
+  .small {
+    font-size: 1rem;
     color: white;
+    max-width: 55%;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  .list {
+    max-width: 50%;
+    margin-top: 20px;
+  }
+
+  .list li {
+    margin-bottom: 10px;
   }

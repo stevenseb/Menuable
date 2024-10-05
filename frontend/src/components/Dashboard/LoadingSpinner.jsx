@@ -11,6 +11,6 @@ const LoadingSpinner = ({ isVisible }) => {
       </div>
     </div>
   );
-};
+};   
 
 export default LoadingSpinner;

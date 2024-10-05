@@ -8,6 +8,12 @@
     margin-top: 130px;
   }
   
+  .inventory h3 {
+    text-align: center;
+    padding-top: 20px;
+    color: rgb(219, 30, 30);
+  }
+
   .sortButton {
     display: block;
     margin: 20px auto;

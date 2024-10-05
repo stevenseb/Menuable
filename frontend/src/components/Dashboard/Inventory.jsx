@@ -19,33 +19,36 @@ const Inventory = () => {
     }
   }, [dispatch, status]);
 
-  // Focus the input when editing starts
   useEffect(() => {
     if (editingItemId !== null && inputRef.current) {
       inputRef.current.focus();
     }
   }, [editingItemId]);
 
-  const handleQuantityBlur = useCallback(async (itemId) => {
-    console.log('Blur event triggered for item:', itemId);
+  const handleQuantityUpdate = useCallback(async (itemId) => {
     if (quantityInput !== '') {
-      console.log('Dispatching update with quantity:', quantityInput);
       try {
         await dispatch(updateItemQuantity({ id: itemId, quantityOnHand: parseInt(quantityInput, 10) }));
-        console.log('Update successful');
       } catch (error) {
         console.error('Update failed:', error);
       }
       setEditingItemId(null);
-    } else {
-      console.log('No changes made to quantity.');
     }
-   }, [dispatch, quantityInput]);
+  }, [dispatch, quantityInput]);
+
+  const handleQuantityBlur = useCallback((itemId) => {
+    handleQuantityUpdate(itemId);
+  }, [handleQuantityUpdate]);
+
+  const handleKeyDown = useCallback((e, itemId) => {
+    if (e.key === 'Enter') {
+      handleQuantityUpdate(itemId);
+    }
+  }, [handleQuantityUpdate]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (inputRef.current && !inputRef.current.contains(event.target)) {
-        console.log('Clicked outside, closing edit mode');
         handleQuantityBlur(editingItemId);
       }
     };
@@ -57,6 +60,7 @@ const Inventory = () => {
   }, [inputRef, editingItemId, handleQuantityBlur]);
 
   const inventoryItems = items.filter(item => item.quantityOnHand > 0);
+  const outOfStockItems = items.filter(item => item.quantityOnHand === 0);
 
   const sortedItems = [...inventoryItems].sort((a, b) => {
     return sortOrder === 'asc'
@@ -69,7 +73,6 @@ const Inventory = () => {
   };
 
   const handleQuantityClick = (itemId, currentQuantity) => {
-    console.log(`Editing quantity for item ID: ${itemId}`);
     setEditingItemId(itemId);
     setQuantityInput(currentQuantity.toString());
   };
@@ -80,6 +83,31 @@ const Inventory = () => {
     }
   };
 
+  const renderItemRow = (item) => (
+    <div key={item.id} className={styles.itemRow}>
+      <img src={item.imageUrl} alt={item.name} className={styles.thumbnail} />
+      <span className={styles.itemName}>{item.name}</span>
+      {editingItemId === item.id ? (
+        <input
+          ref={inputRef}
+          type="text"
+          value={quantityInput}
+          onChange={handleQuantityChange}
+          onBlur={() => handleQuantityBlur(item.id)}
+          onKeyDown={(e) => handleKeyDown(e, item.id)}
+          className={styles.quantityInput}
+        />
+      ) : (
+        <span
+          className={styles.quantity}
+          onClick={() => handleQuantityClick(item.id, item.quantityOnHand)}
+        >
+          Available: {item.quantityOnHand}
+        </span>
+      )}
+    </div>
+  );
+
   return (
     <div className={styles.inventory}>
       <h2 className={styles.heading}>Inventory</h2>
@@ -87,30 +115,16 @@ const Inventory = () => {
         Sort by Quantity: {sortOrder === 'asc' ? 'Most First' : 'Least first'}
       </button>
       <div className={styles.itemList}>
-        {sortedItems.map(item => (
-          <div key={item.id} className={styles.itemRow}>
-            <img src={item.imageUrl} alt={item.name} className={styles.thumbnail} />
-            <span className={styles.itemName}>{item.name}</span>
-            {editingItemId === item.id ? (
-              <input
-                ref={inputRef}
-                type="text"
-                value={quantityInput}
-                onChange={handleQuantityChange}
-                onBlur={() => handleQuantityBlur(item.id)}
-                className={styles.quantityInput}
-              />
-            ) : (
-              <span
-                className={styles.quantity}
-                onClick={() => handleQuantityClick(item.id, item.quantityOnHand)}
-              >
-                Available: {item.quantityOnHand}
-              </span>
-            )}
-          </div>
-        ))}
+        {sortedItems.map(renderItemRow)}
       </div>
+      {outOfStockItems.length > 0 && (
+        <div className={styles.outOfStock}>
+          <h3 className={styles.outOfStockHeading}>Out of Stock</h3>
+          <div className={styles.itemList}>
+            {outOfStockItems.map(renderItemRow)}
+          </div>
+        </div>
+      )}
       <BackToTopButton />
     </div>
   );

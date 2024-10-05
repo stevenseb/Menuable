@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import uploadFile from '../utils';
 import { addItem } from '../../store/item';
 import styles from './AddItem.module.css';
+import SuccessModal from './SuccessModal';
+import LoadingSpinner from './LoadingSpinner';
 
 const AdminPanel = () => {
   const dispatch = useDispatch();
@@ -15,9 +17,14 @@ const AdminPanel = () => {
   const [costPerUnit, setCostPerUnit] = useState('');
   const [onMenu, setOnMenu] = useState(false);
   const [image, setImage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const fileInputRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     let imageFilename = '';
 
     if (image) {
@@ -37,8 +44,20 @@ const AdminPanel = () => {
       imageFilename,
     };
 
-    dispatch(addItem(newItem));
+    await dispatch(addItem(newItem));
 
+    setIsLoading(false);
+
+    // Show success modal
+    setModalMessage(`${name} added successfully!`);
+    setShowModal(true);
+
+    // Hide modal after 2 seconds
+    setTimeout(() => {
+      setShowModal(false);
+    }, 2000);
+
+    // Reset form
     setName('');
     setDescription('');
     setPrice('');
@@ -48,6 +67,9 @@ const AdminPanel = () => {
     setCostPerUnit('');
     setOnMenu(false);
     setImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   return (
@@ -62,7 +84,7 @@ const AdminPanel = () => {
           <input type="text" value={measure} onChange={(e) => setMeasure(e.target.value)} placeholder="Measure" required />
           <input type="number" value={quantityOnHand} onChange={(e) => setQuantityOnHand(e.target.value)} placeholder="units On Hand" required />
           <input type="number" value={costPerUnit} onChange={(e) => setCostPerUnit(e.target.value)} placeholder="Cost Per Unit" required />
-          <input type="file" onChange={(e) => setImage(e.target.files[0])} required />
+          <input type="file" onChange={(e) => setImage(e.target.files[0])} ref={fileInputRef} required />
         </div>
         <div className={styles.onMenu}>
           <label>
@@ -76,6 +98,8 @@ const AdminPanel = () => {
         </div>
         <button className={styles.addItemButton} type="submit">Add Item</button>
       </form>
+      <SuccessModal message={modalMessage} isVisible={showModal} />
+      <LoadingSpinner isVisible={isLoading} />
     </div>
   );
 };

@@ -186,4 +186,24 @@ router.patch('/:itemId/quantity', async (req, res) => {
   }
 });
 
+// DELETE an item
+router.delete('/:itemId', async (req, res) => {
+    const { itemId } = req.params;
+
+    try {
+        const item = await Item.findByPk(itemId);
+
+        if (!item) {
+            return res.status(404).json({ message: 'Item not found' });
+        }
+
+        await item.destroy();
+
+        res.json({ message: 'Item deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting item:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 module.exports = router;

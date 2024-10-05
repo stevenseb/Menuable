@@ -6,7 +6,7 @@ const SuccessModal = ({ message, isVisible }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <p>{message}</p>
+        <p className={styles.message}>{message}</p>
       </div>
     </div>
   );

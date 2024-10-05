@@ -12,14 +12,14 @@
   }
   
   .modalContent {
-    background-color: rgb(12, 12, 12);
+    background-color: rgb(12, 12, 12, 0.85);
     padding: 20px;
     border-radius: 8px;
     text-align: center;
   }
 
   .message {
-    color: rgb(11, 125, 11);
+    color: rgb(125, 225, 125);
     font-weight: 500;
     font-size: 1.2rem;
     max-width: 150px;

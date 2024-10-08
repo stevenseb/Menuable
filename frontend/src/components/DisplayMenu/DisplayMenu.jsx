@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faEdit, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { fetchMenuItems } from '../../store/item';
+import { fetchMenuItems, updateLocalInventory } from '../../store/item';
 import { fetchReviewsForItems } from '../../store/review';
 import { addToCart } from '../../store/cart';
 import { useModal } from '../../context/Modal';
@@ -47,7 +47,7 @@ const DisplayMenu = () => {
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchMenuItems()); // Fetch only items with onMenu: true
+      dispatch(fetchMenuItems());
     }
   }, [dispatch, status]);
 
@@ -77,6 +77,7 @@ const DisplayMenu = () => {
   
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
+    dispatch(updateLocalInventory({ itemId: item.id, quantity: 1 }));
     setAddedToCart(prev => ({ ...prev, [item.id]: true }));
     setTimeout(() => setAddedToCart(prev => ({ ...prev, [item.id]: false })), 800);
   };
@@ -84,6 +85,11 @@ const DisplayMenu = () => {
   const getItemQuantityInCart = (itemId) => {
     const cartItem = cartItems.find(item => item.id === itemId);
     return cartItem ? cartItem.quantity : 0;
+  };
+
+  const getAvailableQuantity = (itemId) => {
+    const item = items.find(item => item.id === itemId);
+    return item ? item.quantityOnHand : 0;
   };
 
   return (
@@ -96,6 +102,7 @@ const DisplayMenu = () => {
         {items.map((item) => {
           const averageRating = calculateAverageRating(item.id);
           const quantityInCart = getItemQuantityInCart(item.id);
+          const availableQuantity = getAvailableQuantity(item.id);
           return (
             <div key={item.id} className="menu-card">
               <img 
@@ -107,7 +114,7 @@ const DisplayMenu = () => {
                 <h2>{item.name}</h2>
                 <p className="text">{item.description}</p>
                 <p className="price">Price: ${item.price} for {item.units} {item.measure}</p>
-                <p className="units">Units Available: {item.quantityOnHand}</p>
+                <p className="units">Units Available: {availableQuantity}</p>
                 <div className="community-rating">
                   <p className="text">
                     {averageRating ? (
@@ -139,9 +146,9 @@ const DisplayMenu = () => {
                 <button 
                   className={`addToCart ${addedToCart[item.id] ? 'added' : ''}`} 
                   onClick={() => handleAddToCart(item)}
-                  disabled={addedToCart[item.id]}
+                  disabled={addedToCart[item.id] || availableQuantity === 0}
                 >
-                  {addedToCart[item.id] ? 'Added!' : 'Add to Cart'}
+                  {addedToCart[item.id] ? 'Added!' : availableQuantity === 0 ? 'Out of Stock' : 'Add to Cart'}
                   <FontAwesomeIcon icon={faShoppingCart} style={{ marginLeft: '5px' }} />
                 </button>
               </div>

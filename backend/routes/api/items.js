@@ -121,26 +121,57 @@ router.post('/', async (req, res) => {
   });
 
   // PATCH an item's quantityOnHand
-  router.patch('/:itemId', async (req, res) => {
-    const { itemId } = req.params;
-    const { quantityOnHand } = req.body;
-  
-    try {
-      const item = await Item.findByPk(itemId);
-  
-      if (!item) {
-        return res.status(404).json({ message: 'Item not found' });
+
+router.patch('/update-quantities', async (req, res) => {
+  try {
+    const { items } = req.body;
+    const itemsArray = Array.isArray(items) ? items : [items];
+
+    const updatedItems = await Promise.all(itemsArray.map(async (item) => {
+      const dbItem = await Item.findByPk(item.id);
+      if (!dbItem) {
+        throw new Error(`Item with id ${item.id} not found`);
       }
-  
-      item.quantityOnHand = quantityOnHand;
-      await item.save();
-  
-      res.json({ item });
-    } catch (error) {
-      console.error('Error updating item quantity:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      dbItem.quantityOnHand = item.quantityOnHand;
+      await dbItem.save();
+      return dbItem;
+    }));
+
+    res.json({ items: updatedItems });
+  } catch (error) {
+    console.error('Error updating item quantities:', error);
+    res.status(500).json({ message: 'Failed to update item quantities' });
+  }
+});
+
+// PATCH an item (general update)
+router.patch('/:itemId', async (req, res) => {
+  const { itemId } = req.params;
+  const updateData = req.body;
+
+  try {
+    const item = await Item.findByPk(itemId);
+
+    if (!item) {
+      return res.status(404).json({ message: 'Item not found' });
     }
-  });
+
+    // Ensure quantityOnHand is not null or undefined
+    if (updateData.quantityOnHand !== undefined && updateData.quantityOnHand !== null) {
+      updateData.quantityOnHand = parseInt(updateData.quantityOnHand, 10);
+    } else {
+      delete updateData.quantityOnHand; // Remove it from updateData if it's null or undefined
+    }
+
+    // Update the item with all provided fields
+    await item.update(updateData);
+
+    res.json({ item });
+  } catch (error) {
+    console.error('Error updating item:', error);
+    res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
+});
 
   // PATCH an item's onMenu status
 router.patch('/:itemId/onMenu', async (req, res) => {

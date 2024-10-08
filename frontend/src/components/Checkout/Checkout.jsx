@@ -4,8 +4,8 @@ import { updateUserInfo } from '../../store/session';
 import { useNavigate } from 'react-router-dom';
 import { createOrder } from '../../store/order';
 import { clearCart } from '../../store/cart';
+import { resetLocalInventory, updateItemQuantity } from '../../store/item';
 import './Checkout.css';
-
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
@@ -49,23 +49,37 @@ const CheckoutPage = () => {
   };
 
   const handlePlaceOrder = async () => {
-  const routeId = 1; // TODO GET ROUTE ID ASSIGNED BY WEEKLY DELIVERY
-  const total = calculateTotal();
-  const orderDate = new Date().toISOString();
+    const routeId = 1; // TODO GET ROUTE ID ASSIGNED BY WEEKLY DELIVERY
+    const total = calculateTotal();
+    const orderDate = new Date().toISOString();
 
-  const itemsForOrder = cartItems.map(item => ({
-    id: item.id,
-    quantity: item.quantity,
-  }));
-  try {
-    await dispatch(createOrder({ routeId, total, orderDate, items: itemsForOrder }));
-    // Clear the cart and navigate to a confirmation page
-    dispatch(clearCart());
-    navigate('/my-account');
-  } catch (error) {
-    console.error('Failed to place order:', error);
-  }
-};
+    const itemsForOrder = cartItems.map(item => ({
+      id: item.id,
+      quantity: item.quantity,
+    }));
+
+    const itemsToUpdate = cartItems.map(item => ({
+      id: item.id,
+      quantityOnHand: item.quantityOnHand - item.quantity,
+    }));
+
+    try {
+      // First, update the item quantities
+      await dispatch(updateItemQuantity(itemsToUpdate));
+
+      // Then create the order
+      await dispatch(createOrder({ routeId, total, orderDate, items: itemsForOrder }));
+
+      // Clear the cart and reset local inventory
+      dispatch(clearCart());
+      dispatch(resetLocalInventory());
+      
+      navigate('/my-account');
+    } catch (error) {
+      console.error('Failed to place order:', error);
+      // Here you might want to show an error message to the user
+    }
+  };
 
   if (!user) {
     return null;
@@ -75,15 +89,15 @@ const CheckoutPage = () => {
     <div className="checkout-page">
       <h2>Your Pending Order</h2>
       <div className="order-summary">
-    {cartItems.map((item) => (
-        <div key={item.id} className="cart-item">
-        <p className="col1">{item.name}</p>
-        <p className="col2">${item.price} x {item.quantity}</p>
-        <p className="col3">${(item.price * item.quantity)}</p>
-        </div>
-    ))}
-     <p className="total">Total: ${calculateTotal()}</p>
-    </div>
+        {cartItems.map((item) => (
+          <div key={item.id} className="cart-item">
+            <p className="col1">{item.name}</p>
+            <p className="col2">${item.price} x {item.quantity}</p>
+            <p className="col3">${(item.price * item.quantity)}</p>
+          </div>
+        ))}
+        <p className="total">Total: ${calculateTotal()}</p>
+      </div>
       <div className="user-info">
         <h3>Delivery Information</h3>
         {isEditing ? (

@@ -28,7 +28,9 @@ const Inventory = () => {
   const handleQuantityUpdate = useCallback(async (itemId) => {
     if (quantityInput !== '') {
       try {
-        await dispatch(updateItemQuantity({ id: itemId, quantityOnHand: parseInt(quantityInput, 10) }));
+        await dispatch(updateItemQuantity({ id: itemId, quantityOnHand: parseInt(quantityInput, 10) })).unwrap();
+        // Force a re-render
+        dispatch(fetchMenuItems());
       } catch (error) {
         console.error('Update failed:', error);
       }

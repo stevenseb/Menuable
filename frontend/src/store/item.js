@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { csrfFetch } from './csrf';
 
-// Thunk to fetch menu items
-export const fetchAllItems = createAsyncThunk('menu/fetchMenuItems', async () => {
+// Thunk to fetch all items
+export const fetchAllItems = createAsyncThunk('menu/fetchAllItems', async () => {
   const response = await fetch('/api/items');
   const data = await response.json();
   return data.items;
@@ -10,11 +10,10 @@ export const fetchAllItems = createAsyncThunk('menu/fetchMenuItems', async () =>
 
 // Thunk to fetch menu items with onMenu: true
 export const fetchMenuItems = createAsyncThunk('menu/fetchMenuItems', async () => {
-    const response = await fetch('/api/items/menu'); // Use the /menu endpoint
-    const data = await response.json();
-    return data.items;
-  });
-  
+  const response = await fetch('/api/items/menu');
+  const data = await response.json();
+  return data.items;
+});
 
 // Thunk to add a new item
 export const addItem = createAsyncThunk('menu/addItem', async (newItem) => {
@@ -32,29 +31,39 @@ export const addItem = createAsyncThunk('menu/addItem', async (newItem) => {
 
 // Thunk to update an item's onMenu status
 export const updateItemOnMenu = createAsyncThunk('menu/updateItemOnMenu', async ({ id, onMenu }) => {
-    const response = await csrfFetch(`/api/items/${id}/onMenu`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ onMenu }),
-    });
-    const data = await response.json();
-    return data.item;
-  });
-
-// Thunk to update an item's quantityOnHand
-export const updateItemQuantity = createAsyncThunk('menu/updateItemQuantity', async ({ id, quantityOnHand }) => {
-  const response = await csrfFetch(`/api/items/${id}/quantity`, {
+  const response = await csrfFetch(`/api/items/${id}/onMenu`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ quantityOnHand }),
+    body: JSON.stringify({ onMenu }),
   });
-
-  if (!response.ok) {
-    throw new Error('Failed to update item quantity');
-  }
-
   const data = await response.json();
   return data.item;
+});
+
+// Thunk to update an item's quantityOnHand
+export const updateItemQuantity = createAsyncThunk('menu/updateItemQuantity', async (payload) => {
+  const items = Array.isArray(payload) ? payload : [payload];
+  
+  const updatedItems = await Promise.all(items.map(async (item) => {
+    if (item.quantityOnHand === undefined || item.quantityOnHand === null) {
+      throw new Error(`Invalid quantityOnHand for item ${item.id}`);
+    }
+
+    const response = await csrfFetch(`/api/items/${item.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quantityOnHand: item.quantityOnHand }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Failed to update item ${item.id}: ${errorData.message}`);
+    }
+
+    return response.json();
+  }));
+
+  return updatedItems;
 });
 
 // Thunk to delete an item
@@ -66,7 +75,7 @@ export const deleteItem = createAsyncThunk('menu/deleteItem', async (id) => {
 // Slice
 const itemsSlice = createSlice({
   name: 'menu',
-  initialState: { items: [], status: 'idle', error: null },
+  initialState: { items: [], status: 'idle', error: null, localInventory: {} },
   reducers: {
     updateItemRating: (state, action) => {
       const { itemId, newRating } = action.payload;
@@ -75,6 +84,19 @@ const itemsSlice = createSlice({
         item.stars += newRating;
         item.numRatings += 1;
       }
+    },
+    updateLocalInventory: (state, action) => {
+      const { itemId, quantity } = action.payload;
+      if (state.localInventory[itemId] !== undefined) {
+        state.localInventory[itemId] -= quantity;
+      }
+      const itemIndex = state.items.findIndex(item => item.id === itemId);
+      if (itemIndex !== -1) {
+        state.items[itemIndex].quantityOnHand -= quantity;
+      }
+    },
+    resetLocalInventory: (state) => {
+      state.localInventory = {};
     },
   },
   extraReducers: (builder) => {
@@ -88,6 +110,10 @@ const itemsSlice = createSlice({
           ...item,
           imageUrl: item.imageFilename ? `https://comideria-russa.b-cdn.net/${item.imageFilename}` : 'default-image-url.jpg'
         }));
+        state.localInventory = action.payload.reduce((acc, item) => {
+          acc[item.id] = item.quantityOnHand;
+          return acc;
+        }, {});
       })
       .addCase(fetchMenuItems.rejected, (state, action) => {
         state.status = 'failed';
@@ -117,14 +143,18 @@ const itemsSlice = createSlice({
         state.items = state.items.filter(item => item.id !== action.payload);
       })
       .addCase(updateItemQuantity.fulfilled, (state, action) => {
-        const index = state.items.findIndex(item => item.id === action.payload.id);
-        if (index !== -1) {
-          state.items[index].quantityOnHand = action.payload.quantityOnHand;
-        }
+        const updatedItems = Array.isArray(action.payload) ? action.payload : [action.payload];
+        updatedItems.forEach(updatedItem => {
+          const index = state.items.findIndex(item => item.id === updatedItem.id);
+          if (index !== -1) {
+            state.items[index] = { ...state.items[index], ...updatedItem };
+            state.localInventory[updatedItem.id] = updatedItem.quantityOnHand;
+          }
+        });
       });
   },
 });
 
-export const { updateItemRating } = itemsSlice.actions;
+export const { updateItemRating, updateLocalInventory, resetLocalInventory } = itemsSlice.actions;
 
 export default itemsSlice.reducer;

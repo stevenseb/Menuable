@@ -3,3 +3,14 @@ node_modules
 build
 .DS_Store
 *.db
+
+# Ignore test files and directories
+__tests__/
+*.test.js
+*.test.jsx
+*.test.ts
+*.test.tsx
+coverage/
+
+# Ignore Jest configuration files
+jest.config.cjs

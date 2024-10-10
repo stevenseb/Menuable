@@ -1,4 +1,4 @@
-import styles from './SuccessModal.module.css';
+import styles from "./SuccessModal.module.css";
 
 const SuccessModal = ({ message, isVisible }) => {
   if (!isVisible) return null;

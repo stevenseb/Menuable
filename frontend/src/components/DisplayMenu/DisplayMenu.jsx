@@ -1,16 +1,20 @@
-import { useState, useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faEdit, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { fetchMenuItems, updateLocalInventory } from '../../store/item';
-import { fetchReviewsForItems } from '../../store/review';
-import { addToCart } from '../../store/cart';
-import { useModal } from '../../context/Modal';
-import CreateReviewModal from '../CreateReviewModal';
-import ReviewsModal from '../ReviewsModal';
-import './DisplayMenu.css';
+import { useState, useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faStar,
+  faEdit,
+  faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons";
+import { fetchMenuItems, updateLocalInventory } from "../../store/item";
+import { fetchReviewsForItems } from "../../store/review";
+import { addToCart } from "../../store/cart";
+import { useModal } from "../../context/Modal";
+import CreateReviewModal from "../CreateReviewModal";
+import ReviewsModal from "../ReviewsModal";
+import "./DisplayMenu.css";
 
-const BUNNY_CDN_URL = 'https://comideria-russa.b-cdn.net/';
+const BUNNY_CDN_URL = "https://comideria-russa.b-cdn.net/";
 
 const DisplayMenu = () => {
   const dispatch = useDispatch();
@@ -23,14 +27,14 @@ const DisplayMenu = () => {
   const { setModalContent } = useModal();
 
   const openCreateReviewModal = (itemId) => {
-    if (hasUserReviewed(items.find(item => item.id === itemId))) {
+    if (hasUserReviewed(items.find((item) => item.id === itemId))) {
       alert("You have already reviewed this item.");
     } else {
       setModalContent(
-        <CreateReviewModal 
-          itemId={itemId} 
-          userId={loggedInUser.id} 
-          onClose={() => setModalContent(null)} 
+        <CreateReviewModal
+          itemId={itemId}
+          userId={loggedInUser.id}
+          onClose={() => setModalContent(null)}
         />
       );
     }
@@ -38,22 +42,19 @@ const DisplayMenu = () => {
 
   const openReviewsModal = (item) => {
     setModalContent(
-      <ReviewsModal 
-        item={item}
-        onClose={() => setModalContent(null)} 
-      />
+      <ReviewsModal item={item} onClose={() => setModalContent(null)} />
     );
   };
 
   useEffect(() => {
-    if (status === 'idle') {
+    if (status === "idle") {
       dispatch(fetchMenuItems());
     }
   }, [dispatch, status]);
 
   useEffect(() => {
     if (items.length > 0) {
-      const itemIds = items.map(item => item.id);
+      const itemIds = items.map((item) => item.id);
       dispatch(fetchReviewsForItems(itemIds));
     }
   }, [items, dispatch]);
@@ -62,7 +63,10 @@ const DisplayMenu = () => {
     return (itemId) => {
       const itemReviews = allReviews[itemId];
       if (!itemReviews || itemReviews.length === 0) return null;
-      const totalRating = itemReviews.reduce((sum, review) => sum + review.rating, 0);
+      const totalRating = itemReviews.reduce(
+        (sum, review) => sum + review.rating,
+        0
+      );
       return (totalRating / itemReviews.length).toFixed(1);
     };
   }, [allReviews]);
@@ -71,24 +75,27 @@ const DisplayMenu = () => {
     return (itemId) => {
       const itemReviews = allReviews[itemId];
       if (!itemReviews) return false;
-      return itemReviews.some(review => review.userId === loggedInUser?.id);
+      return itemReviews.some((review) => review.userId === loggedInUser?.id);
     };
   }, [allReviews, loggedInUser]);
-  
+
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
     dispatch(updateLocalInventory({ itemId: item.id, quantity: 1 }));
-    setAddedToCart(prev => ({ ...prev, [item.id]: true }));
-    setTimeout(() => setAddedToCart(prev => ({ ...prev, [item.id]: false })), 800);
+    setAddedToCart((prev) => ({ ...prev, [item.id]: true }));
+    setTimeout(
+      () => setAddedToCart((prev) => ({ ...prev, [item.id]: false })),
+      800
+    );
   };
 
   const getItemQuantityInCart = (itemId) => {
-    const cartItem = cartItems.find(item => item.id === itemId);
+    const cartItem = cartItems.find((item) => item.id === itemId);
     return cartItem ? cartItem.quantity : 0;
   };
 
   const getAvailableQuantity = (itemId) => {
-    const item = items.find(item => item.id === itemId);
+    const item = items.find((item) => item.id === itemId);
     return item ? item.quantityOnHand : 0;
   };
 
@@ -105,37 +112,49 @@ const DisplayMenu = () => {
           const availableQuantity = getAvailableQuantity(item.id);
           return (
             <div key={item.id} className="menu-card">
-              <img 
-                src={`${BUNNY_CDN_URL}${item.imageFilename}`} 
-                alt={item.name} 
-                className="menu-image" 
+              <img
+                src={`${BUNNY_CDN_URL}${item.imageFilename}`}
+                alt={item.name}
+                className="menu-image"
               />
               <div className="menu-details">
                 <h2>{item.name}</h2>
                 <p className="text">{item.description}</p>
-                <p className="price">Price: ${item.price} for {item.units} {item.measure}</p>
+                <p className="price">
+                  Price: ${item.price} for {item.units} {item.measure}
+                </p>
                 <p className="units">Units Available: {availableQuantity}</p>
                 <div className="community-rating">
                   <p className="text">
                     {averageRating ? (
                       <>
-                        Community rating: <span className="rating" onClick={() => openReviewsModal(item)}>{averageRating}</span>
-                        <FontAwesomeIcon 
+                        Community rating:{" "}
+                        <span
                           className="rating"
-                          icon={faStar} 
-                          style={{ color: 'gold', marginLeft: '5px' }} 
+                          onClick={() => openReviewsModal(item)}
+                        >
+                          {averageRating}
+                        </span>
+                        <FontAwesomeIcon
+                          className="rating"
+                          icon={faStar}
+                          style={{ color: "gold", marginLeft: "5px" }}
                           onClick={() => openReviewsModal(item)}
                         />
                       </>
                     ) : (
-                      'No reviews yet'
+                      "No reviews yet"
                     )}
                   </p>
                 </div>
                 {loggedInUser && !hasUserReviewed(item.id) && (
                   <p className="text leave-review">
-                    <FontAwesomeIcon icon={faEdit} className='create-review' onClick={() => openCreateReviewModal(item.id)} />
-                     Leave a review
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      className="create-review"
+                      onClick={() => openCreateReviewModal(item.id)}
+                    />
+                    Leave a review
                   </p>
                 )}
               </div>
@@ -143,13 +162,20 @@ const DisplayMenu = () => {
                 <p className="in-cart">In cart: {quantityInCart}</p>
               )}
               <div className="buttonWrapper">
-                <button 
-                  className={`addToCart ${addedToCart[item.id] ? 'added' : ''}`} 
+                <button
+                  className={`addToCart ${addedToCart[item.id] ? "added" : ""}`}
                   onClick={() => handleAddToCart(item)}
                   disabled={addedToCart[item.id] || availableQuantity === 0}
                 >
-                  {addedToCart[item.id] ? 'Added!' : availableQuantity === 0 ? 'Out of Stock' : 'Add to Cart'}
-                  <FontAwesomeIcon icon={faShoppingCart} style={{ marginLeft: '5px' }} />
+                  {addedToCart[item.id]
+                    ? "Added!"
+                    : availableQuantity === 0
+                    ? "Out of Stock"
+                    : "Add to Cart"}
+                  <FontAwesomeIcon
+                    icon={faShoppingCart}
+                    style={{ marginLeft: "5px" }}
+                  />
                 </button>
               </div>
             </div>

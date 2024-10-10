@@ -3,7 +3,7 @@
   padding: 20px;
   background-color: #141313;
   text-align: center;
-  margin-top: 40px; 
+  margin-top: 40px;
 }
 
 .footer-content {
@@ -15,7 +15,7 @@
 
 .footer-info h2 {
   margin: 0;
-  font-size: .85em;
+  font-size: 0.85em;
 }
 
 .footer-info p {
@@ -48,5 +48,4 @@
 .footer-logo {
   max-width: 350px;
   border-radius: 8px;
-
 }

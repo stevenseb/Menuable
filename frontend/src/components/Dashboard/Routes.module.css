@@ -1,36 +1,36 @@
 .routes {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    margin-bottom: 100px;
-  }
-  
-  .heading {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .message {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: rgb(181, 177, 177);
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-bottom: 100px;
+}
 
-  .small {
-    font-size: 1rem;
-    color: white;
-    max-width: 55%;
-    margin-top: 10px;
-    font-weight: 500;
-  }
+.heading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
 
-  .list {
-    max-width: 50%;
-    margin-top: 20px;
-  }
+.message {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgb(181, 177, 177);
+}
 
-  .list li {
-    margin-bottom: 10px;
-  }
+.small {
+  font-size: 1rem;
+  color: white;
+  max-width: 55%;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.list {
+  max-width: 50%;
+  margin-top: 20px;
+}
+
+.list li {
+  margin-bottom: 10px;
+}

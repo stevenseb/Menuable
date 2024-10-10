@@ -1,3 +1,3 @@
-import CreateReviewModal from './CreateReviewModal';
+import CreateReviewModal from "./CreateReviewModal";
 
 export default CreateReviewModal;

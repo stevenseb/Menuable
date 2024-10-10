@@ -1,6 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import './Footer.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faInstagram,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
+import "./Footer.css";
 
 const Footer = () => {
   return (
@@ -22,7 +26,11 @@ const Footer = () => {
           <FontAwesomeIcon icon={faInstagram} className="social-icon" />
           <FontAwesomeIcon icon={faFacebook} className="social-icon" />
         </div>
-        <img src="ComideriaRussa.png" alt="Menuable Logo" className="footer-logo" />
+        <img
+          src="ComideriaRussa.png"
+          alt="Menuable Logo"
+          className="footer-logo"
+        />
       </div>
     </footer>
   );

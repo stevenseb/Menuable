@@ -1,4 +1,4 @@
-import { csrfFetch } from './csrf';
+import { csrfFetch } from "./csrf";
 
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
@@ -8,36 +8,36 @@ const UPDATE_USER = "session/updateUser";
 const setUser = (user) => {
   return {
     type: SET_USER,
-    payload: user
+    payload: user,
   };
 };
 
 const removeUser = () => {
   return {
-    type: REMOVE_USER
+    type: REMOVE_USER,
   };
 };
 
 const updateUser = (user) => ({
-    type: UPDATE_USER,
-    payload: user
-  });
+  type: UPDATE_USER,
+  payload: user,
+});
 
 // thunk for login
 export const login = (user) => async (dispatch) => {
-    try {
-      const response = await csrfFetch("/api/session", {
-        method: "POST",
-        body: JSON.stringify(user),
-      });
-      const data = await response.json();
-      dispatch(setUser(data.user));
-      return response;
-    } catch (error) {
-      console.error('Login error:', error);
-      throw error;
-    }
-  };
+  try {
+    const response = await csrfFetch("/api/session", {
+      method: "POST",
+      body: JSON.stringify(user),
+    });
+    const data = await response.json();
+    dispatch(setUser(data.user));
+    return response;
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
+  }
+};
 
 // thunk for restore session
 export const restoreUser = () => async (dispatch) => {
@@ -49,15 +49,16 @@ export const restoreUser = () => async (dispatch) => {
 
 // thunk for logout
 export const logout = () => async (dispatch) => {
-  await csrfFetch('/api/session', {
-    method: 'DELETE',
+  await csrfFetch("/api/session", {
+    method: "DELETE",
   });
   dispatch(removeUser());
 };
 
 // thunk for signup
 export const signup = (user) => async (dispatch) => {
-  const { username, firstName, lastName, email, password, phone, address } = user;
+  const { username, firstName, lastName, email, password, phone, address } =
+    user;
   const response = await csrfFetch("/api/users", {
     method: "POST",
     body: JSON.stringify({
@@ -68,7 +69,7 @@ export const signup = (user) => async (dispatch) => {
       password,
       phone,
       address,
-    })
+    }),
   });
   const data = await response.json();
   dispatch(setUser(data.user));
@@ -77,25 +78,25 @@ export const signup = (user) => async (dispatch) => {
 
 // thunk for updating user info
 export const updateUserInfo = (userId, userInfo) => async (dispatch) => {
-    try {
-      const response = await csrfFetch(`/api/users/${userId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userInfo)
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to update user information');
-      }
-  
-      const data = await response.json();
-      dispatch(updateUser(data.user));
-      return data.user;
-    } catch (error) {
-      console.error('Error updating user information:', error);
-      throw error;
+  try {
+    const response = await csrfFetch(`/api/users/${userId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userInfo),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update user information");
     }
-  };
+
+    const data = await response.json();
+    dispatch(updateUser(data.user));
+    return data.user;
+  } catch (error) {
+    console.error("Error updating user information:", error);
+    throw error;
+  }
+};
 
 const initialState = { user: null };
 
@@ -105,8 +106,8 @@ const sessionReducer = (state = initialState, action) => {
       return { ...state, user: action.payload };
     case REMOVE_USER:
       return { ...state, user: null };
-      case UPDATE_USER:
-        return { ...state, user: action.payload };
+    case UPDATE_USER:
+      return { ...state, user: action.payload };
     default:
       return state;
   }

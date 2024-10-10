@@ -1,102 +1,102 @@
 .review-modal {
-    max-width: 600px;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: none;
-    border-radius: 8px;
-    position: relative;
-  }
-  
-  .review-modal h2 {
-    color: silver;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .star-rating {
-    display: flex;
-    justify-content: center;
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-  
-  .star {
-    color: #ddd;
-    cursor: pointer;
-    transition: color 0.2s ease-in-out;
-  }
-  
-  .star:hover,
-  .star.active {
-    color: #ffd700;
-  }
-  
-  .review-content {
-    display: flex;
-    justify-content: center;
-    width: 92%;
-    min-height: 150px;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    resize: vertical;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    position: relative;
-  }
-  
-  .submit-button,
-  .cancel-button {
-    padding: 10px 14px;
-    border: none;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .submit-button {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .submit-button:hover:not(.disabled) {
-    background-color: #45a049;
-  }
-  
-  .submit-button.disabled {
-    background-color: #cccccc;
-    color: #666666;
-    cursor: not-allowed;
-  }
-  
-  .cancel-button {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  .cancel-button:hover {
-    background-color: #d32f2f;
-  }
-  
-  .tooltip {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    white-space: nowrap;
-    opacity: 0.9;
-    margin-bottom: 5px;
-  }
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: none;
+  border-radius: 8px;
+  position: relative;
+}
+
+.review-modal h2 {
+  color: silver;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.star {
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.star:hover,
+.star.active {
+  color: #ffd700;
+}
+
+.review-content {
+  display: flex;
+  justify-content: center;
+  width: 92%;
+  min-height: 150px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+}
+
+.submit-button,
+.cancel-button {
+  padding: 10px 14px;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.submit-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.submit-button:hover:not(.disabled) {
+  background-color: #45a049;
+}
+
+.submit-button.disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #d32f2f;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}

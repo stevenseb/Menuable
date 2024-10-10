@@ -1,6 +1,6 @@
-import { useRef, useState, useContext, createContext } from 'react';
-import ReactDOM from 'react-dom';
-import './Modal.css';
+import { useRef, useState, useContext, createContext } from "react";
+import ReactDOM from "react-dom";
+import "./Modal.css";
 
 const ModalContext = createContext();
 
@@ -22,7 +22,7 @@ export function ModalProvider({ children }) {
     modalContent,
     setModalContent,
     setOnModalClose,
-    closeModal
+    closeModal,
   };
 
   return (

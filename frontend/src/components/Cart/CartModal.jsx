@@ -1,15 +1,15 @@
-import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { 
-  increaseItemQuantity, 
-  decreaseItemQuantity, 
+import { useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increaseItemQuantity,
+  decreaseItemQuantity,
   removeFromCart,
-  loadCart
-} from '../../store/cart';
-import SignupFormModal from '../SignupFormModal';
-import { useModal } from '../../context/Modal';
+  loadCart,
+} from "../../store/cart";
+import SignupFormModal from "../SignupFormModal";
+import { useModal } from "../../context/Modal";
 
-import './CartModal.css';
+import "./CartModal.css";
 
 const CartModal = ({ onCheckout }) => {
   const dispatch = useDispatch();
@@ -39,20 +39,23 @@ const CartModal = ({ onCheckout }) => {
       closeModal();
     }
   };
-  document.addEventListener('mousedown', handleClickOutside);
+  document.addEventListener("mousedown", handleClickOutside);
 
   const calculateSubtotal = (item) => {
     return item.price * item.quantity;
   };
 
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + calculateSubtotal(item), 0);
+    return cartItems.reduce(
+      (total, item) => total + calculateSubtotal(item),
+      0
+    );
   };
 
   const handleCheckout = () => {
     closeModal();
     if (user) {
-      onCheckout('/checkout');
+      onCheckout("/checkout");
     } else {
       setModalContent(<SignupFormModal />);
     }
@@ -74,18 +77,31 @@ const CartModal = ({ onCheckout }) => {
             cartItems.map((item) => (
               <div className="cart-item" key={item.id}>
                 <div className="item-info">
-                  <p>{item.name} x {item.quantity}</p>
                   <p>
-                    ${item.price} per {item.units} {item.measure} 
+                    {item.name} x {item.quantity}
+                  </p>
+                  <p>
+                    ${item.price} per {item.units} {item.measure}
                   </p>
                 </div>
                 <div className="item-actions">
-                  <button onClick={() => handleIncreaseQuantity(item)}>+</button>
-                  <button onClick={() => handleDecreaseQuantity(item)}>-</button>
-                  <button onClick={() => handleRemoveFromCart(item)} className="black" >Remove</button>
+                  <button onClick={() => handleIncreaseQuantity(item)}>
+                    +
+                  </button>
+                  <button onClick={() => handleDecreaseQuantity(item)}>
+                    -
+                  </button>
+                  <button
+                    onClick={() => handleRemoveFromCart(item)}
+                    className="black"
+                  >
+                    Remove
+                  </button>
                 </div>
                 <div className="subtotals">
-                <p className="item-subtotal">Subtotal: ${calculateSubtotal(item).toFixed(2)}</p>
+                  <p className="item-subtotal">
+                    Subtotal: ${calculateSubtotal(item).toFixed(2)}
+                  </p>
                 </div>
               </div>
             ))
@@ -93,12 +109,12 @@ const CartModal = ({ onCheckout }) => {
         </div>
         <div className="cart-modal-footer">
           <p>Total: ${calculateTotal().toFixed(2)}</p>
-          <button 
-          onClick={handleCheckout} 
-          className='footerButton'
-          disabled={cartItems.length === 0} 
+          <button
+            onClick={handleCheckout}
+            className="footerButton"
+            disabled={cartItems.length === 0}
           >
-            {user ? 'Checkout' : 'Sign In / Sign Up'}
+            {user ? "Checkout" : "Sign In / Sign Up"}
           </button>
         </div>
       </div>

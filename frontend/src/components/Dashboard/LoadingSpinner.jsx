@@ -1,4 +1,4 @@
-import styles from './LoadingSpinner.module.css';
+import styles from "./LoadingSpinner.module.css";
 
 const LoadingSpinner = ({ isVisible }) => {
   if (!isVisible) return null;
@@ -11,6 +11,6 @@ const LoadingSpinner = ({ isVisible }) => {
       </div>
     </div>
   );
-};   
+};
 
 export default LoadingSpinner;

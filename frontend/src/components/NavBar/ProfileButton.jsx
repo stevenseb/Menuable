@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
-import OpenModalButton from '../OpenModalButton';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
-import './NavBar.css';
+import { useState, useEffect, useRef } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import * as sessionActions from "../../store/session";
+import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import "./NavBar.css";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout()).then(() => {
-      navigate('/');
+      navigate("/");
       setShowMenu(false);
     });
   };
@@ -33,9 +33,9 @@ function ProfileButton({ user }) {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', closeMenu);
+    document.addEventListener("mousedown", closeMenu);
     return () => {
-      document.removeEventListener('mousedown', closeMenu);
+      document.removeEventListener("mousedown", closeMenu);
     };
   }, []);
 
@@ -43,9 +43,9 @@ function ProfileButton({ user }) {
     <div className="profile-button-container" ref={menuRef}>
       <button className="profile-button" onClick={toggleMenu}>
         {user ? (
-          <img src='/iconSmall.jpg' alt="Profile" className="profileIcon" />
+          <img src="/iconSmall.jpg" alt="Profile" className="profileIcon" />
         ) : (
-          <img src='/menus.png' alt="Menu" className="hamburger-icon" />
+          <img src="/menus.png" alt="Menu" className="hamburger-icon" />
         )}
       </button>
       {showMenu && (
@@ -55,44 +55,57 @@ function ProfileButton({ user }) {
               <div className="profile-info">
                 <div>Hello {user.firstName} !</div>
                 <div> {user.username}</div>
-                <div> {user.firstName} {user.lastName}</div>
-                <div>{user.email}</div>
+                <div>
+                  {" "}
+                  {user.firstName} {user.lastName}
                 </div>
+                <div>{user.email}</div>
+              </div>
               <hr />
-        
-                <NavLink to="/" className="profile-dropdown-item logout" onClick={() => setShowMenu(false)}>
-                  Home
-                </NavLink>
-      
-      
-                <NavLink to="/my-account" className="profile-dropdown-item logout" onClick={() => setShowMenu(false)}>
-                  My Account
-                </NavLink>
 
-                <NavLink to="/dashboard" className="profile-dropdown-item logout" onClick={() => setShowMenu(false)}>
-                  Owner Dashboard
-                </NavLink>
-              
-                <button onClick={logout} className="profile-dropdown-item logout">Log Out</button>
-            
+              <NavLink
+                to="/"
+                className="profile-dropdown-item logout"
+                onClick={() => setShowMenu(false)}
+              >
+                Home
+              </NavLink>
+
+              <NavLink
+                to="/my-account"
+                className="profile-dropdown-item logout"
+                onClick={() => setShowMenu(false)}
+              >
+                My Account
+              </NavLink>
+
+              <NavLink
+                to="/dashboard"
+                className="profile-dropdown-item logout"
+                onClick={() => setShowMenu(false)}
+              >
+                Owner Dashboard
+              </NavLink>
+
+              <button onClick={logout} className="profile-dropdown-item logout">
+                Log Out
+              </button>
             </>
           ) : (
             <>
-    
-                <OpenModalButton
-                  buttonText="Log In"
-                  onButtonClick={() => setShowMenu(false)}
-                  modalComponent={<LoginFormModal />}
-                  className="profile-dropdown-item"
-                />
-        
-                <OpenModalButton
-                  buttonText="Sign Up"
-                  onButtonClick={() => setShowMenu(false)}
-                  modalComponent={<SignupFormModal />}
-                  className="profile-dropdown-item"
-                />
-        
+              <OpenModalButton
+                buttonText="Log In"
+                onButtonClick={() => setShowMenu(false)}
+                modalComponent={<LoginFormModal />}
+                className="profile-dropdown-item"
+              />
+
+              <OpenModalButton
+                buttonText="Sign Up"
+                onButtonClick={() => setShowMenu(false)}
+                modalComponent={<SignupFormModal />}
+                className="profile-dropdown-item"
+              />
             </>
           )}
         </ul>

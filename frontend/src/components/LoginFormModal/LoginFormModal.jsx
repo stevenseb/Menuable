@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
-import { useModal } from '../../context/Modal';
-import './LoginForm.css';
+import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import * as sessionActions from "../../store/session";
+import { useModal } from "../../context/Modal";
+import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -18,41 +18,45 @@ function LoginFormModal() {
   }, [credential, password]);
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setErrors({});
-  try {
-    const response = await dispatch(sessionActions.login({ credential, password }));
-    if (response.ok) {
-      closeModal();
-    } else {
-      const data = await response.json();
-      if (data && data.errors) {
-        setErrors(data.errors);
-      } else if (data && data.message) {
-        setErrors({ credential: data.message });
+    e.preventDefault();
+    setErrors({});
+    try {
+      const response = await dispatch(
+        sessionActions.login({ credential, password })
+      );
+      if (response.ok) {
+        closeModal();
       } else {
-        setErrors({ credential: 'Invalid username or password' });
+        const data = await response.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        } else if (data && data.message) {
+          setErrors({ credential: data.message });
+        } else {
+          setErrors({ credential: "Invalid username or password" });
+        }
       }
+    } catch (error) {
+      console.error("Login error:", error);
+      setErrors({ credential: "Invalid username or password" });
     }
-  } catch (error) {
-    console.error('Login error:', error);
-    setErrors({ credential: 'Invalid username or password' });
-  }
-};
+  };
 
   const handleDemoLogin = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(sessionActions.login({ credential: 'demo', password: 'demo' }));
+      await dispatch(
+        sessionActions.login({ credential: "demo", password: "demo" })
+      );
       closeModal();
     } catch (error) {
-      console.error('Demo login error:', error);
+      console.error("Demo login error:", error);
       if (error && error.errors) {
         setErrors(error.errors);
       } else if (error && error.message) {
         setErrors({ credential: error.message });
       } else {
-        setErrors({ credential: 'An error occurred during demo login' });
+        setErrors({ credential: "An error occurred during demo login" });
       }
     }
   };
@@ -79,8 +83,12 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.credential && <p className="error-login">{errors.credential}</p>}
-        <button type="submit" disabled={isDisabled}>Log In</button>
+        {errors.credential && (
+          <p className="error-login">{errors.credential}</p>
+        )}
+        <button type="submit" disabled={isDisabled}>
+          Log In
+        </button>
         <br />
         <button type="button" onClick={handleDemoLogin}>
           Demo User

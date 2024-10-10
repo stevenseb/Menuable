@@ -1,3 +1,3 @@
-import DisplayMenu from './DisplayMenu';
+import DisplayMenu from "./DisplayMenu";
 
 export default DisplayMenu;

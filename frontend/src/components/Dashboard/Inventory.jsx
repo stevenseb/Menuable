@@ -1,20 +1,20 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchMenuItems, updateItemQuantity } from '../../store/item';
-import styles from './Inventory.module.css';
-import BackToTopButton from '../UI/BackToTopButton';
+import { useEffect, useState, useRef, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMenuItems, updateItemQuantity } from "../../store/item";
+import styles from "./Inventory.module.css";
+import BackToTopButton from "../UI/BackToTopButton";
 
 const Inventory = () => {
   const dispatch = useDispatch();
-  const items = useSelector(state => state.menu.items);
-  const status = useSelector(state => state.menu.status);
-  const [sortOrder, setSortOrder] = useState('asc');
+  const items = useSelector((state) => state.menu.items);
+  const status = useSelector((state) => state.menu.status);
+  const [sortOrder, setSortOrder] = useState("asc");
   const [editingItemId, setEditingItemId] = useState(null);
-  const [quantityInput, setQuantityInput] = useState('');
+  const [quantityInput, setQuantityInput] = useState("");
   const inputRef = useRef(null);
 
   useEffect(() => {
-    if (status === 'idle') {
+    if (status === "idle") {
       dispatch(fetchMenuItems());
     }
   }, [dispatch, status]);
@@ -25,28 +25,42 @@ const Inventory = () => {
     }
   }, [editingItemId]);
 
-  const handleQuantityUpdate = useCallback(async (itemId) => {
-    if (quantityInput !== '') {
-      try {
-        await dispatch(updateItemQuantity({ id: itemId, quantityOnHand: parseInt(quantityInput, 10) })).unwrap();
-        // Force a re-render
-        dispatch(fetchMenuItems());
-      } catch (error) {
-        console.error('Update failed:', error);
+  const handleQuantityUpdate = useCallback(
+    async (itemId) => {
+      if (quantityInput !== "") {
+        try {
+          await dispatch(
+            updateItemQuantity({
+              id: itemId,
+              quantityOnHand: parseInt(quantityInput, 10),
+            })
+          ).unwrap();
+          // Force a re-render
+          dispatch(fetchMenuItems());
+        } catch (error) {
+          console.error("Update failed:", error);
+        }
+        setEditingItemId(null);
       }
-      setEditingItemId(null);
-    }
-  }, [dispatch, quantityInput]);
+    },
+    [dispatch, quantityInput]
+  );
 
-  const handleQuantityBlur = useCallback((itemId) => {
-    handleQuantityUpdate(itemId);
-  }, [handleQuantityUpdate]);
-
-  const handleKeyDown = useCallback((e, itemId) => {
-    if (e.key === 'Enter') {
+  const handleQuantityBlur = useCallback(
+    (itemId) => {
       handleQuantityUpdate(itemId);
-    }
-  }, [handleQuantityUpdate]);
+    },
+    [handleQuantityUpdate]
+  );
+
+  const handleKeyDown = useCallback(
+    (e, itemId) => {
+      if (e.key === "Enter") {
+        handleQuantityUpdate(itemId);
+      }
+    },
+    [handleQuantityUpdate]
+  );
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -55,23 +69,23 @@ const Inventory = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [inputRef, editingItemId, handleQuantityBlur]);
 
-  const inventoryItems = items.filter(item => item.quantityOnHand > 0);
-  const outOfStockItems = items.filter(item => item.quantityOnHand === 0);
+  const inventoryItems = items.filter((item) => item.quantityOnHand > 0);
+  const outOfStockItems = items.filter((item) => item.quantityOnHand === 0);
 
   const sortedItems = [...inventoryItems].sort((a, b) => {
-    return sortOrder === 'asc'
+    return sortOrder === "asc"
       ? a.quantityOnHand - b.quantityOnHand
       : b.quantityOnHand - a.quantityOnHand;
   });
 
   const handleSortToggle = () => {
-    setSortOrder(prevOrder => (prevOrder === 'asc' ? 'desc' : 'asc'));
+    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
 
   const handleQuantityClick = (itemId, currentQuantity) => {
@@ -114,11 +128,9 @@ const Inventory = () => {
     <div className={styles.inventory}>
       <h2 className={styles.heading}>Inventory</h2>
       <button onClick={handleSortToggle} className={styles.sortButton}>
-        Sort by Quantity: {sortOrder === 'asc' ? 'Most First' : 'Least first'}
+        Sort by Quantity: {sortOrder === "asc" ? "Most First" : "Least first"}
       </button>
-      <div className={styles.itemList}>
-        {sortedItems.map(renderItemRow)}
-      </div>
+      <div className={styles.itemList}>{sortedItems.map(renderItemRow)}</div>
       {outOfStockItems.length > 0 && (
         <div className={styles.outOfStock}>
           <h3 className={styles.outOfStockHeading}>Out of Stock</h3>

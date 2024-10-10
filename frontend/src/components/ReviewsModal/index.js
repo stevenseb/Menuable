@@ -1,3 +1,3 @@
-import ReviewsModal from './ReviewsModal';
+import ReviewsModal from "./ReviewsModal";
 
 export default ReviewsModal;

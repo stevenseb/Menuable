@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserOrders } from '../../store/order';
-import { updateUserInfo } from '../../store/session';
-import './MyAccount.css';
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUserOrders } from "../../store/order";
+import { updateUserInfo } from "../../store/session";
+import "./MyAccount.css";
 
 const MyAccount = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const [view, setView] = useState('orders');
+  const [view, setView] = useState("orders");
   const [expandedOrderId, setExpandedOrderId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [address, setAddress] = useState(user?.address || '');
-  const [phoneNumber, setPhoneNumber] = useState(user?.phone || '');
+  const [address, setAddress] = useState(user?.address || "");
+  const [phoneNumber, setPhoneNumber] = useState(user?.phone || "");
 
   const ordersState = useSelector((state) => state.orders);
   const orders = ordersState?.orders || [];
-  const status = ordersState?.status || 'idle';
+  const status = ordersState?.status || "idle";
   const error = ordersState?.error || null;
 
   useEffect(() => {
@@ -48,56 +48,78 @@ const MyAccount = () => {
   const formatCurrency = (value) => {
     const number = parseFloat(value);
     if (!isNaN(number)) {
-        return number.toFixed(2);
+      return number.toFixed(2);
     }
-    return '0.00';
+    return "0.00";
   };
 
-  if (status === 'loading') {
+  if (status === "loading") {
     return <div>Loading...</div>;
   }
 
-  if (status === 'failed') {
+  if (status === "failed") {
     return <div>Error: {error}</div>;
   }
 
   return (
     <div className="my-account-page">
       <div className="my-account-view-toggle">
-        <button onClick={() => handleToggleView('orders')}>Orders</button>
-        <button onClick={() => handleToggleView('info')}>My Information</button>
+        <button onClick={() => handleToggleView("orders")}>Orders</button>
+        <button onClick={() => handleToggleView("info")}>My Information</button>
       </div>
 
-      {view === 'orders' && (
+      {view === "orders" && (
         <div className="my-account-orders-view">
           {orders.length === 0 ? (
             <p>No orders found.</p>
           ) : (
             orders.map((order) => (
               <div key={order.id} className="my-account-order">
-                <div className="my-account-order-summary" onClick={() => handleToggleOrder(order.id)}>
+                <div
+                  className="my-account-order-summary"
+                  onClick={() => handleToggleOrder(order.id)}
+                >
                   <p>Order ID: {order.id}</p>
-                  <p>Created: {new Date(order.createdAt).toLocaleDateString()}</p>
+                  <p>
+                    Created: {new Date(order.createdAt).toLocaleDateString()}
+                  </p>
                   <p>Total: ${formatCurrency(order.total)}</p>
-                  <button>{expandedOrderId === order.id ? 'Collapse' : 'Expand'}</button>
+                  <button>
+                    {expandedOrderId === order.id ? "Collapse" : "Expand"}
+                  </button>
                 </div>
                 {expandedOrderId === order.id && (
                   <div className="my-account-order-details">
-                    <p>Delivery Date: {order.Route?.deliveryDate ? new Date(order.Route.deliveryDate).toLocaleDateString() : 'Not scheduled'}</p>
+                    <p>
+                      Delivery Date:{" "}
+                      {order.Route?.deliveryDate
+                        ? new Date(
+                            order.Route.deliveryDate
+                          ).toLocaleDateString()
+                        : "Not scheduled"}
+                    </p>
                     <h4>Items:</h4>
-                    {order.Items && order.Items.map((item) => (
-                      <div key={item.id} className="my-account-order-item">
-                        <p className="item-name">{item.name}</p>
-                        <p className="item-price">
-                          ${formatCurrency(item.OrderItems?.pricePerUnit)} x {item.OrderItems.quantity} {item.OrderItems.measure}
-                        </p>
-                        <p className="item-subtotal">
-                          Subtotal: ${formatCurrency((item.OrderItems.pricePerUnit * item.OrderItems.quantity))}
-                        </p>
-                      </div>
-                    ))}
-                    <p className="order-total">Total: ${formatCurrency(order.total)}</p>
-                    <p>Status: {order.status || 'Pending'}</p>
+                    {order.Items &&
+                      order.Items.map((item) => (
+                        <div key={item.id} className="my-account-order-item">
+                          <p className="item-name">{item.name}</p>
+                          <p className="item-price">
+                            ${formatCurrency(item.OrderItems?.pricePerUnit)} x{" "}
+                            {item.OrderItems.quantity} {item.OrderItems.measure}
+                          </p>
+                          <p className="item-subtotal">
+                            Subtotal: $
+                            {formatCurrency(
+                              item.OrderItems.pricePerUnit *
+                                item.OrderItems.quantity
+                            )}
+                          </p>
+                        </div>
+                      ))}
+                    <p className="order-total">
+                      Total: ${formatCurrency(order.total)}
+                    </p>
+                    <p>Status: {order.status || "Pending"}</p>
                   </div>
                 )}
               </div>
@@ -106,7 +128,7 @@ const MyAccount = () => {
         </div>
       )}
 
-      {view === 'info' && (
+      {view === "info" && (
         <div className="my-account-info-view">
           <h3>My Information</h3>
           {isEditing ? (

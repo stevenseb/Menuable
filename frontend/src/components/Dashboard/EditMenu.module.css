@@ -1,73 +1,74 @@
 .container {
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 114px;
-    min-width: 680px;
-    justify-content: center;
-  }
-  
-  .smallText {
-    text-align: center;
-    background-color: #292a2b;
-    border-radius: 5px;
-    color: rgb(243, 240, 240);
-    font-size: 0.85em;
-    font-weight: 600;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  
-  .smallText2 {
-    text-align: center;
-    border-radius: 5px;
-    font-weight:700;
-    color: rgb(243, 240, 240);
-    font-size: 1em;
-    margin-bottom: 6px;
-  }
-  
-  .sectionTitle {
-    margin: 10px;
-    text-align: center;
-    color: rgb(243, 240, 240);
-  }
-  
-  .itemRow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 10px;
-    color: rgb(243, 240, 240);
-    border-bottom: 1px solid #ccc;
-    gap: 10px;
-  }
-  
-  .itemRow button {
-    border-radius: 6px;
-  }
-  
-  .thumbnail {
-    width: 90px;
-    height: auto;
-    margin-right: 12px;
-    padding-bottom: 8px;
-  }
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 114px;
+  min-width: 680px;
+  justify-content: center;
+}
 
-  .name {
-    width: 100%;
-  }
-  
-  .checkbox {
-    margin-left: 50px;
-  }
-  
-  .deleteButton {
-    margin-left: auto;
-  }
-  
-  .onMenuSection, .offMenuSection {
-      padding:10px; 
-      border-radius:10px; 
-      margin-bottom:48px; 
-  }
+.smallText {
+  text-align: center;
+  background-color: #292a2b;
+  border-radius: 5px;
+  color: rgb(243, 240, 240);
+  font-size: 0.85em;
+  font-weight: 600;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.smallText2 {
+  text-align: center;
+  border-radius: 5px;
+  font-weight: 700;
+  color: rgb(243, 240, 240);
+  font-size: 1em;
+  margin-bottom: 6px;
+}
+
+.sectionTitle {
+  margin: 10px;
+  text-align: center;
+  color: rgb(243, 240, 240);
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  color: rgb(243, 240, 240);
+  border-bottom: 1px solid #ccc;
+  gap: 10px;
+}
+
+.itemRow button {
+  border-radius: 6px;
+}
+
+.thumbnail {
+  width: 90px;
+  height: auto;
+  margin-right: 12px;
+  padding-bottom: 8px;
+}
+
+.name {
+  width: 100%;
+}
+
+.checkbox {
+  margin-left: 50px;
+}
+
+.deleteButton {
+  margin-left: auto;
+}
+
+.onMenuSection,
+.offMenuSection {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 48px;
+}

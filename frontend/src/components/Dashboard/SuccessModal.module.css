@@ -1,26 +1,26 @@
 .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modalContent {
-    background-color: rgb(12, 12, 12, 0.85);
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .message {
-    color: rgb(125, 225, 125);
-    font-weight: 500;
-    font-size: 1.2rem;
-    max-width: 150px;
-  }
+.modalContent {
+  background-color: rgb(12, 12, 12, 0.85);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.message {
+  color: rgb(125, 225, 125);
+  font-weight: 500;
+  font-size: 1.2rem;
+  max-width: 150px;
+}

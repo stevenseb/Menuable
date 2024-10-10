@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import styles from './BackToTopButton.module.css';
+import { useState, useEffect } from "react";
+import styles from "./BackToTopButton.module.css";
 
 const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,13 +15,13 @@ const BackToTopButton = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   return (

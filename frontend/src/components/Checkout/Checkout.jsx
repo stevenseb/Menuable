@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateUserInfo } from '../../store/session';
-import { useNavigate } from 'react-router-dom';
-import { createOrder } from '../../store/order';
-import { clearCart } from '../../store/cart';
-import { resetLocalInventory, updateItemQuantity } from '../../store/item';
-import './Checkout.css';
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUserInfo } from "../../store/session";
+import { useNavigate } from "react-router-dom";
+import { createOrder } from "../../store/order";
+import { clearCart } from "../../store/cart";
+import { resetLocalInventory, updateItemQuantity } from "../../store/item";
+import "./Checkout.css";
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
@@ -13,8 +13,8 @@ const CheckoutPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const user = useSelector((state) => state.session.user);
   const [isEditing, setIsEditing] = useState(false);
-  const [address, setAddress] = useState(user?.address || '');
-  const [phoneNumber, setPhoneNumber] = useState(user?.phone || '');
+  const [address, setAddress] = useState(user?.address || "");
+  const [phoneNumber, setPhoneNumber] = useState(user?.phone || "");
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   useEffect(() => {
@@ -23,12 +23,15 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate('/signup');
+      navigate("/signup");
     }
   }, [user, navigate]);
 
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
 
   const handleEdit = () => {
@@ -40,7 +43,7 @@ const CheckoutPage = () => {
       await dispatch(updateUserInfo(user.id, { address, phone: phoneNumber }));
       setIsEditing(false);
     } catch (error) {
-      console.error('Failed to update user information:', error);
+      console.error("Failed to update user information:", error);
     }
   };
 
@@ -53,12 +56,12 @@ const CheckoutPage = () => {
     const total = calculateTotal();
     const orderDate = new Date().toISOString();
 
-    const itemsForOrder = cartItems.map(item => ({
+    const itemsForOrder = cartItems.map((item) => ({
       id: item.id,
       quantity: item.quantity,
     }));
 
-    const itemsToUpdate = cartItems.map(item => ({
+    const itemsToUpdate = cartItems.map((item) => ({
       id: item.id,
       quantityOnHand: item.quantityOnHand - item.quantity,
     }));
@@ -68,15 +71,17 @@ const CheckoutPage = () => {
       await dispatch(updateItemQuantity(itemsToUpdate));
 
       // Then create the order
-      await dispatch(createOrder({ routeId, total, orderDate, items: itemsForOrder }));
+      await dispatch(
+        createOrder({ routeId, total, orderDate, items: itemsForOrder })
+      );
 
       // Clear the cart and reset local inventory
       dispatch(clearCart());
       dispatch(resetLocalInventory());
-      
-      navigate('/my-account');
+
+      navigate("/my-account");
     } catch (error) {
-      console.error('Failed to place order:', error);
+      console.error("Failed to place order:", error);
       // Here you might want to show an error message to the user
     }
   };
@@ -92,8 +97,10 @@ const CheckoutPage = () => {
         {cartItems.map((item) => (
           <div key={item.id} className="cart-item">
             <p className="col1">{item.name}</p>
-            <p className="col2">${item.price} x {item.quantity}</p>
-            <p className="col3">${(item.price * item.quantity)}</p>
+            <p className="col2">
+              ${item.price} x {item.quantity}
+            </p>
+            <p className="col3">${item.price * item.quantity}</p>
           </div>
         ))}
         <p className="total">Total: ${calculateTotal()}</p>
@@ -121,12 +128,22 @@ const CheckoutPage = () => {
             <p className="contact">Address: {user.address}</p>
             <p className="contact">Phone Number: {user.phone}</p>
             {!isConfirmed && <button onClick={handleEdit}>Edit</button>}
-            {!isConfirmed && <p className="update">Please update and/or confirm your information!</p>}
+            {!isConfirmed && (
+              <p className="update">
+                Please update and/or confirm your information!
+              </p>
+            )}
           </>
         )}
       </div>
-      {!isConfirmed && <button onClick={handleConfirm}>Confirm Information</button>}
-      {isConfirmed && <button onClick={handlePlaceOrder} disabled={cartItems.length === 0}>Place Order</button>}
+      {!isConfirmed && (
+        <button onClick={handleConfirm}>Confirm Information</button>
+      )}
+      {isConfirmed && (
+        <button onClick={handlePlaceOrder} disabled={cartItems.length === 0}>
+          Place Order
+        </button>
+      )}
     </div>
   );
 };

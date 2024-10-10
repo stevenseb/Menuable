@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { useModal } from '../../context/Modal';
-import CartModal from '../Cart/CartModal';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { useModal } from "../../context/Modal";
+import CartModal from "../Cart/CartModal";
+import { useNavigate } from "react-router-dom";
 
 const CartIcon = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -12,10 +12,10 @@ const CartIcon = () => {
 
   const handleCartIconClick = () => {
     setModalContent(
-      <CartModal 
+      <CartModal
         onCheckout={(path) => {
           navigate(path);
-        }} 
+        }}
       />
     );
   };

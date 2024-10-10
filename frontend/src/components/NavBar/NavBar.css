@@ -13,13 +13,13 @@
   box-sizing: border-box;
   height: 100px;
 }
-  
+
 .main-header {
-    margin: auto;
-    padding: 50px;
-    text-align: center;
-    margin-left: 15px;
-  }
+  margin: auto;
+  padding: 50px;
+  text-align: center;
+  margin-left: 15px;
+}
 
 .navbar-brand {
   display: flex;
@@ -40,19 +40,19 @@
 }
 
 .owners {
-    width: 172px;
-    height: auto;
-    border-radius: 38px;
-    margin-left: 250px;
-    margin-right: -80px;
-    overflow: hidden;
-    object-fit: cover;
-    transition: transform 0.5s;
+  width: 172px;
+  height: auto;
+  border-radius: 38px;
+  margin-left: 250px;
+  margin-right: -80px;
+  overflow: hidden;
+  object-fit: cover;
+  transition: transform 0.5s;
 }
 
 .owners:hover img {
-    transform: scale(1.5);
-  }
+  transform: scale(1.5);
+}
 
 .cart-icon {
   font-size: 1.4rem;
@@ -65,9 +65,9 @@
 }
 
 .cart-count {
-    color: rgb(31, 228, 31);
-    font-size: 1rem;
-    margin-left: 5px;
+  color: rgb(31, 228, 31);
+  font-size: 1rem;
+  margin-left: 5px;
 }
 .navbar-links {
   display: flex;
@@ -94,29 +94,28 @@
   align-items: center;
 }
 
- 
 .profile-button {
-    height: 100%;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-  }
-  .profileIcon,
-  .hamburger-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-  
-  .hamburger-icon {
-    filter: invert(1);
-  }
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.profileIcon,
+.hamburger-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.hamburger-icon {
+  filter: invert(1);
+}
 
 .dropdown-menu {
   position: absolute;
@@ -194,7 +193,10 @@
 }
 
 /* Ensure all drop-down text remains black in light and dark mode */
-.profile-dropdown, .profile-dropdown-item, .dropdown-item, .profile-info {
+.profile-dropdown,
+.profile-dropdown-item,
+.dropdown-item,
+.profile-info {
   color: black !important;
 }
 
@@ -227,19 +229,19 @@
   .profile-button {
     margin-left: 0;
   }
-  
+
   .user-icon {
     margin-left: -2px;
   }
 
   .cart-icon {
-    font-size: .6rem;
+    font-size: 0.6rem;
     margin-left: 12px;
   }
 
   .cart-count {
-    font-size: .6rem;
-}
+    font-size: 0.6rem;
+  }
 
   .owners {
     width: 40%;

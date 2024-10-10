@@ -1,5 +1,5 @@
 /* Modal content styling */
-  /* .modal-container {
+/* .modal-container {
     position: relative;
     background-color: rgb(56, 54, 54) !important;
     padding: 20px;
@@ -13,7 +13,6 @@
     flex-direction: column;
     align-items: center;
   } */
-
 
 /* Login box styling */
 .login-box {
@@ -45,7 +44,7 @@
 
 /* Label styling */
 .login-form label {
-  width: 100%; 
+  width: 100%;
   margin-bottom: 8px;
   font-weight: 400;
   text-align: left;
@@ -65,7 +64,7 @@
 button[type="submit"],
 button[type="button"] {
   width: 90%;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: beige;
   padding: 10px 20px;
   border: none;
@@ -100,11 +99,11 @@ button[type="submit"]:disabled {
 /* Error message styling */
 
 .error-login {
-    color: red;
-    background-color: silver;
-    border-radius: 5px;
-    font-size: 0.8em;
-    padding: 2px;
-    margin: 5px;
-    width: 120% !important;
-  }
+  color: red;
+  background-color: silver;
+  border-radius: 5px;
+  font-size: 0.8em;
+  padding: 2px;
+  margin: 5px;
+  width: 120% !important;
+}

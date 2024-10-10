@@ -28,110 +28,109 @@
     flex-direction: column;
     align-items: center;
   } */
-  
-  /* Signup box styling */
-  .signup-box {
-    background-color: rgb(91, 91, 91);
-    padding: 10px;
-    border: 1px solid #515050;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 92%;
-    color: beige;
-  }
-  
-  .centered-text {
-    text-align: center;
-    font-size: 1.2rem;
-  }
-  
-  /* Form styling */
-  .signup-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .signup-form button {
-    max-width: 380px;
-    margin: 8px 14px;
+/* Signup box styling */
+.signup-box {
+  background-color: rgb(91, 91, 91);
+  padding: 10px;
+  border: 1px solid #515050;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 92%;
+  color: beige;
+}
 
-  }
-  
-  /* 2-column layout */
-  .form-columns {
-    display: flex;
-    justify-content: space-between;
-    width: 95%;
-  }
-  
-  .form-column {
-    width: 45%;
-  }
-  
-  /* Label styling */
-  label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 14px;
-  }
-  
-  /* Input field styling */
-  input {
-    display: block;
-    width: 100%;
-    height: 60%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 2px;
-  }
-  
-  /* Submit button styling */
-  button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: background-color 0.3s ease;
-    width: 100%;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #45a049;
-  }
-  
-  button[type="submit"]:disabled {
-    background-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  
-  p {
-    color: red;
-    font-weight: bold;
-  }
+.centered-text {
+  text-align: center;
+  font-size: 1.2rem;
+}
 
-  .warning {
-    color: rgb(214, 137, 4);
-    font-size: 0.8em;
-    margin-top: 5px;
-    background-color: rgb(236, 234, 234);
-  }
-  
-  .error {
-    color: rgb(188, 30, 56);
-    background-color: rgb(236, 234, 234);
-    font-size: 1em;
-    margin-top: 5px;
-    width: 30%;
-    margin-left: 40px;
-    text-align: center;
-  }
+/* Form styling */
+.signup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form button {
+  max-width: 380px;
+  margin: 8px 14px;
+}
+
+/* 2-column layout */
+.form-columns {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+}
+
+.form-column {
+  width: 45%;
+}
+
+/* Label styling */
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Input field styling */
+input {
+  display: block;
+  width: 100%;
+  height: 60%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 2px;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+button[type="submit"]:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+p {
+  color: red;
+  font-weight: bold;
+}
+
+.warning {
+  color: rgb(214, 137, 4);
+  font-size: 0.8em;
+  margin-top: 5px;
+  background-color: rgb(236, 234, 234);
+}
+
+.error {
+  color: rgb(188, 30, 56);
+  background-color: rgb(236, 234, 234);
+  font-size: 1em;
+  margin-top: 5px;
+  width: 30%;
+  margin-left: 40px;
+  text-align: center;
+}

@@ -1,29 +1,35 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { validationResult, check } = require('express-validator');
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Item, Order, OrderItem, ItemImage, Route } = require('../../db/models');
-
+//const { validationResult, check } = require("express-validator");
+const { /*setTokenCookie,*/ requireAuth } = require("../../utils/auth");
+const {
+  User,
+  Item,
+  Order,
+  OrderItem,
+  ItemImage,
+  Route,
+} = require("../../db/models");
 
 // GET all orders
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const orders = await Order.findAll({
       include: [
         {
           model: User,
-          attributes: ['firstName', 'lastName', 'phone', 'address']
+          attributes: ["firstName", "lastName", "phone", "address"],
         },
         {
           model: Route,
-          attributes: ['deliveryDate']
-        }
-      ]
+          attributes: ["deliveryDate"],
+        },
+      ],
     });
     res.json({ orders });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
@@ -105,7 +111,7 @@ router.get('/', async (req, res) => {
 // });
 
 // GET all orders by routeId (include user on order with full name, phone, and address)
-router.get('/route/:routeId', async (req, res) => {
+router.get("/route/:routeId", async (req, res) => {
   const { routeId } = req.params;
   try {
     const orders = await Order.findAll({
@@ -113,36 +119,37 @@ router.get('/route/:routeId', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['firstName', 'lastName', 'phone', 'address']
+          attributes: ["firstName", "lastName", "phone", "address"],
         },
         {
           model: Route,
-          attributes: ['deliveryDate']
-        }
-      ]
+          attributes: ["deliveryDate"],
+        },
+      ],
     });
     res.json({ orders });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
 // POST a new order
-router.post('/', requireAuth, async (req, res) => {
-    const { user } = req;
-    const { routeId, total, orderDate, items } = req.body;
-  
-    try {
-      const order = await Order.create({
-        userId: user.id,
-        routeId,
-        total,
-        orderDate
-      });
-  
-      if (items && items.length > 0) {
-        const orderItems = await Promise.all(items.map(async (item) => {
+router.post("/", requireAuth, async (req, res) => {
+  const { user } = req;
+  const { routeId, total, orderDate, items } = req.body;
+
+  try {
+    const order = await Order.create({
+      userId: user.id,
+      routeId,
+      total,
+      orderDate,
+    });
+
+    if (items && items.length > 0) {
+      const orderItems = await Promise.all(
+        items.map(async (item) => {
           const dbItem = await Item.findByPk(item.id);
           if (!dbItem) {
             throw new Error(`Item with id ${item.id} not found`);
@@ -154,22 +161,23 @@ router.post('/', requireAuth, async (req, res) => {
             units: dbItem.units,
             measure: dbItem.measure,
             pricePerUnit: dbItem.price,
-            costPerUnit: dbItem.costPerUnit
+            costPerUnit: dbItem.costPerUnit,
           };
-        }));
-  
-        await OrderItem.bulkCreate(orderItems);
-      }
-  
-      res.status(201).json({ order });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+        })
+      );
+
+      await OrderItem.bulkCreate(orderItems);
     }
-  });
+
+    res.status(201).json({ order });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 // DELETE an order
-router.delete('/:orderId', requireAuth, async (req, res) => {
+router.delete("/:orderId", requireAuth, async (req, res) => {
   const { orderId } = req.params;
   const { user } = req;
 
@@ -177,11 +185,11 @@ router.delete('/:orderId', requireAuth, async (req, res) => {
     const order = await Order.findByPk(orderId);
 
     if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+      return res.status(404).json({ message: "Order not found" });
     }
 
     if (order.userId !== user.id) {
-      return res.status(403).json({ message: 'Forbidden' });
+      return res.status(403).json({ message: "Forbidden" });
     }
 
     await order.destroy();
@@ -189,12 +197,12 @@ router.delete('/:orderId', requireAuth, async (req, res) => {
     res.status(204).end();
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
 // POST edit an order
-router.post('/:orderId', requireAuth, async (req, res) => {
+router.post("/:orderId", requireAuth, async (req, res) => {
   const { orderId } = req.params;
   const { user } = req;
   const { routeId, total, orderDate, items } = req.body;
@@ -203,11 +211,11 @@ router.post('/:orderId', requireAuth, async (req, res) => {
     const order = await Order.findByPk(orderId);
 
     if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+      return res.status(404).json({ message: "Order not found" });
     }
 
     if (order.userId !== user.id) {
-      return res.status(403).json({ message: 'Forbidden' });
+      return res.status(403).json({ message: "Forbidden" });
     }
 
     order.routeId = routeId || order.routeId;
@@ -218,10 +226,10 @@ router.post('/:orderId', requireAuth, async (req, res) => {
 
     if (items && items.length > 0) {
       await OrderItem.destroy({ where: { orderId: order.id } });
-      const orderItems = items.map(item => ({
+      const orderItems = items.map((item) => ({
         orderId: order.id,
         itemId: item.itemId,
-        units: item.units
+        units: item.units,
       }));
 
       await OrderItem.bulkCreate(orderItems);
@@ -230,12 +238,12 @@ router.post('/:orderId', requireAuth, async (req, res) => {
     res.json({ order });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
 // GET all items by orderId
-router.get('/:orderId/items', async (req, res) => {
+router.get("/:orderId/items", async (req, res) => {
   const { orderId } = req.params;
   try {
     const orderItems = await OrderItem.findAll({
@@ -244,36 +252,33 @@ router.get('/:orderId/items', async (req, res) => {
         {
           model: Item,
           attributes: [
-            'name', 
-            'description', 
-            'price', 
-            'units', 
-            'measure', 
-            'numRatings', 
-            'stars', 
-            'avgStars', 
-            'quantityOnHand'
+            "name",
+            "description",
+            "price",
+            "units",
+            "measure",
+            "numRatings",
+            "stars",
+            "avgStars",
+            "quantityOnHand",
           ],
           include: [
             {
               model: ItemImage,
-              attributes: ['url']
-            }
-          ]
-        }
-      ]
+              attributes: ["url"],
+            },
+          ],
+        },
+      ],
     });
 
-    const items = orderItems.map(orderItem => orderItem.Item);
+    const items = orderItems.map((orderItem) => orderItem.Item);
 
     res.json({ items });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
-
-
-
 
 module.exports = router;

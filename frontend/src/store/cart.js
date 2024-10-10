@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 // Helper function to load cart from localStorage
 const loadCartFromStorage = () => {
   try {
-    const savedCart = localStorage.getItem('cart');
+    const savedCart = localStorage.getItem("cart");
     if (savedCart) {
       return JSON.parse(savedCart);
     }
   } catch (error) {
-    console.error('Failed to load cart from localStorage:', error);
+    console.error("Failed to load cart from localStorage:", error);
   }
   return [];
 };
@@ -16,14 +16,14 @@ const loadCartFromStorage = () => {
 // Helper function to save cart to localStorage
 const saveCartToStorage = (items) => {
   try {
-    localStorage.setItem('cart', JSON.stringify(items));
+    localStorage.setItem("cart", JSON.stringify(items));
   } catch (error) {
-    console.error('Failed to save cart to localStorage:', error);
+    console.error("Failed to save cart to localStorage:", error);
   }
 };
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState: {
     items: loadCartFromStorage(),
     tempReservedQuantities: {},
@@ -38,7 +38,8 @@ const cartSlice = createSlice({
         state.items.push({ ...item, quantity: 1 });
       }
       // Update temporary reserved quantity
-      state.tempReservedQuantities[item.id] = (state.tempReservedQuantities[item.id] || 0) + 1;
+      state.tempReservedQuantities[item.id] =
+        (state.tempReservedQuantities[item.id] || 0) + 1;
       saveCartToStorage(state.items);
     },
     removeFromCart: (state, action) => {
@@ -60,7 +61,8 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity += 1;
         // Update temporary reserved quantity
-        state.tempReservedQuantities[item.id] = (state.tempReservedQuantities[item.id] || 0) + 1;
+        state.tempReservedQuantities[item.id] =
+          (state.tempReservedQuantities[item.id] || 0) + 1;
       }
       saveCartToStorage(state.items);
     },
@@ -84,7 +86,7 @@ const cartSlice = createSlice({
       state.items = loadCartFromStorage();
       // Reset temporary reserved quantities
       state.tempReservedQuantities = {};
-      state.items.forEach(item => {
+      state.items.forEach((item) => {
         state.tempReservedQuantities[item.id] = item.quantity;
       });
     },
@@ -99,10 +101,10 @@ const cartSlice = createSlice({
   },
 });
 
-export const { 
-  addToCart, 
-  removeFromCart, 
-  increaseItemQuantity, 
+export const {
+  addToCart,
+  removeFromCart,
+  increaseItemQuantity,
   decreaseItemQuantity,
   loadCart,
   clearCart,

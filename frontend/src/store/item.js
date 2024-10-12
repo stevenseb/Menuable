@@ -15,7 +15,7 @@ export const fetchAllItems = createAsyncThunk(
 export const fetchMenuItems = createAsyncThunk(
   "menu/fetchMenuItems",
   async () => {
-    const response = await fetch("/api/items/menu");
+    const response = await fetch("/api/items");
     const data = await response.json();
     return data.items;
   }
@@ -158,9 +158,16 @@ const itemsSlice = createSlice({
           (item) => item.id === action.payload.id
         );
         if (index !== -1) {
-          state.items[index] = action.payload;
+          state.items[index] = {
+            ...state.items[index],
+            ...action.payload,
+            imageUrl: action.payload.imageFilename
+              ? `https://comideria-russa.b-cdn.net/${action.payload.imageFilename}`
+              : "default-image-url.jpg",
+          };
         }
       })
+
       .addCase(deleteItem.fulfilled, (state, action) => {
         state.items = state.items.filter((item) => item.id !== action.payload);
       })

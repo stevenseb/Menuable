@@ -99,6 +99,8 @@ const DisplayMenu = () => {
     return item ? item.quantityOnHand : 0;
   };
 
+  const onMenuItems = items.filter((item) => item.onMenu);
+
   return (
     <div>
       <div className="siteDescription">
@@ -106,7 +108,7 @@ const DisplayMenu = () => {
         <h3>Delivered to Your Door</h3>
       </div>
       <div className="menu-container">
-        {items.map((item) => {
+        {onMenuItems.map((item) => {
           const averageRating = calculateAverageRating(item.id);
           const quantityInCart = getItemQuantityInCart(item.id);
           const availableQuantity = getAvailableQuantity(item.id);

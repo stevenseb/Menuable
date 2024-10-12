@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllItems, updateItemOnMenu, deleteItem } from "../../store/item";
+import {
+  fetchAllItems,
+  fetchMenuItems,
+  updateItemOnMenu,
+  deleteItem,
+} from "../../store/item";
 import styles from "./EditMenu.module.css";
 import Modal from "./DeleteModal";
 import BackToTopButton from "../UI/BackToTopButton";
@@ -17,7 +22,8 @@ const EditMenu = () => {
   }, [dispatch]);
 
   const handleCheckboxChange = async (id, currentStatus) => {
-    await dispatch(updateItemOnMenu({ id, onMenu: !currentStatus }));
+    dispatch(updateItemOnMenu({ id, onMenu: !currentStatus }));
+    dispatch(fetchMenuItems());
   };
 
   const openDeleteModal = (id) => {

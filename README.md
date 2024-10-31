@@ -31,6 +31,18 @@ Once the checkout button is selected, the user is redirected to their my account
 
 ![{F8DA0BEF-AF0A-4257-9B4E-E1F48CEFBBFB}](https://github.com/user-attachments/assets/e4b0817b-1086-4b51-97e2-23ae597d72f5)
 
+# Owner's Dashboard
+## Setting and Modifying the Menu
+
+
+## Adding New Menu Items
+
+## Checking or Adjusting Inventory
+
+## Delivery Route Management
+
+
+
 ## My Account
 Here the user will see previous orders and their contact information. Orders are rendered in a collapsed view and can be expanded to view and then collapsed again.
 

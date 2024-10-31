@@ -35,11 +35,23 @@ Once the checkout button is selected, the user is redirected to their my account
 ## Setting and Modifying the Menu
 
 
+![{648A3039-3BB5-400C-81AB-CF5B0DB82975}](https://github.com/user-attachments/assets/43ff07cc-0db7-41a0-9fb8-987e94154785)
+
+
 ## Adding New Menu Items
+
+![{A74F73E4-1412-4C64-AAB6-04676F4EE7F7}](https://github.com/user-attachments/assets/db9bf4b7-06ce-4b87-bc8d-7b296fc59fe9)
+
 
 ## Checking or Adjusting Inventory
 
+
+![{B0BB114F-1777-4C89-903A-67FFAEF6C22F}](https://github.com/user-attachments/assets/b6458702-ee3f-42f9-89c9-d33a12d8ffc4)
+
 ## Delivery Route Management
+
+
+![{C389AC2A-2C9E-4A44-A0CB-DA3B4FA14B8A}](https://github.com/user-attachments/assets/91f5bf71-b50f-479c-a748-f1b3c1f93b4c)
 
 
 

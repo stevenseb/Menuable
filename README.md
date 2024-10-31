@@ -10,5 +10,12 @@ Built with the power of React.js and Node.js: Menuable is a brandable app for sm
 ## Order Selection
 Here we can see that as the customer adds items to the cart, the number of unique items in the cart is indicated with the cart icon, the quantity available is managed first with state and reduces the quantity available dynamically as the customer adds items (once order is processed this quantity is updated from state to the database) and each item card displays the total quantity of each unique item in the cart.
 
-![{5CF60979-8944-49D1-8D09-05A35DFFE74D}](https://github.com/user-attachments/assets/b3b72be3-7963-45c9-b705-0df25d39b97b)
 
+
+![Menuable-ordering](https://github.com/user-attachments/assets/a3e6c136-59e7-44f8-871b-44d5e42af9f8)
+
+
+## Cart Modal
+The cart modal is accessible by the user at any time by clicking the cart icon. Once opened, the user can make changes to the quantity of items in their order, remove items completely and finally, checkout once signed in to complete the order. The modals in the app are managed by creating a modal context with the use of React Context API that is accessible throughout the pages and components.
+
+![{76F69933-900F-4FED-9363-7F2EFAA8C241}](https://github.com/user-attachments/assets/7a19839d-f0d8-4242-a170-0ecbdbbfecde)

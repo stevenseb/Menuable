@@ -31,6 +31,11 @@ Once the checkout button is selected, the user is redirected to their my account
 
 ![{F8DA0BEF-AF0A-4257-9B4E-E1F48CEFBBFB}](https://github.com/user-attachments/assets/e4b0817b-1086-4b51-97e2-23ae597d72f5)
 
+## My Account
+Here the user will see previous orders and their contact information. Orders are rendered in a collapsed view and can be expanded to view and then collapsed again.
+
+![{547E2250-E34B-4EE1-9322-592FB7372212}](https://github.com/user-attachments/assets/fa0bb264-260d-4049-8e50-63d8e1249dbc)
+
 # Owner's Dashboard
 ## Setting and Modifying the Menu
 
@@ -54,10 +59,5 @@ Once the checkout button is selected, the user is redirected to their my account
 ![{C389AC2A-2C9E-4A44-A0CB-DA3B4FA14B8A}](https://github.com/user-attachments/assets/91f5bf71-b50f-479c-a748-f1b3c1f93b4c)
 
 
-
-## My Account
-Here the user will see previous orders and their contact information. Orders are rendered in a collapsed view and can be expanded to view and then collapsed again.
-
-![{547E2250-E34B-4EE1-9322-592FB7372212}](https://github.com/user-attachments/assets/fa0bb264-260d-4049-8e50-63d8e1249dbc)
 
 

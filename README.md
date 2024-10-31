@@ -18,4 +18,5 @@ Here we can see that as the customer adds items to the cart, the number of uniqu
 ## Cart Modal
 The cart modal is accessible by the user at any time by clicking the cart icon. Once opened, the user can make changes to the quantity of items in their order, remove items completely and finally, checkout once signed in to complete the order. The modals in the app are managed by creating a modal context with the use of React Context API that is accessible throughout the pages and components.
 
-![{76F69933-900F-4FED-9363-7F2EFAA8C241}](https://github.com/user-attachments/assets/7a19839d-f0d8-4242-a170-0ecbdbbfecde)
+![Menuable-cart](https://github.com/user-attachments/assets/e9b160a4-2f05-40f5-9e0e-0d57ff6e17df)
+
